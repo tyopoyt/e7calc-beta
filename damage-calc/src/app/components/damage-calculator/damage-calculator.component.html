@@ -331,14 +331,14 @@
                             </ng-container>
                             <span *ngIf="savedBuildsCount" class="count-badge">{{savedBuildsCount}}</span>
                         </button>
-                        <button type="button" class="color-orange button-line" (click)="toggleGraph()" mat-flat-button>
+                        <button type="button" class="color-orange button-line button-line-right" (click)="toggleGraph()" mat-flat-button>
                             <img class="svg-icon white" [class.tiny-margin-right]="!screenService.mediumScreen.value" src="assets/icons/line-chart.svg" alt="graph">
                             <ng-container *ngIf="!screenService.mediumScreen.value">{{ (showGraph ? 'hideGraph' : 'showGraph') | translate:'ui':languageService.language.value}}</ng-container>
                         </button>
-                        <button type="button" class="color-green button-line-right" mat-flat-button>
+                        <!-- <button type="button" class="color-green button-line-right" mat-flat-button>
                             <img class="svg-icon white" [class.tiny-margin-right]="!screenService.mediumScreen.value" src="assets/icons/share-nodes-solid.svg" alt="share">
                             <ng-container *ngIf="!screenService.mediumScreen.value">{{'share' | translate:'ui':languageService.language.value}}</ng-container>
-                        </button>
+                        </button> -->
                     </div>
                     <div class="neat-container flex-row extra-large-margin-right">
                         <div *ngIf="!!artifactDamage && !collapsed" class="neat-container small-padding-top medium-text">

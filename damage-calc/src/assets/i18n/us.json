@@ -332,6 +332,7 @@
     "elyha_knife": "Elyha's Knife",
     "exorcist_tonfa": "Exorcist's Tonfa",
     "golden_rose": "Golden Rose",
+    "fairy_tale_for_a_nightmare": "Fairytale For a Nightmare",
     "frame_of_light": "Frame of Light",
     "hell_cutter": "Hell Cutter",
     "ignition_cloth_gloves": "Ignition Cloth Gloves",
@@ -780,7 +781,18 @@
     "linkCopied": "Link Copied!",
     "share": "Share",
     "currentStats": "Current Stats",
-    "oneshot": "Oneshot"
+    "oneshot": "Oneshot",
+    "skillModifiers": "Skill Modifiers",
+    "attackRate": "Attack Rate",
+    "pow": "Power",
+    "flat": "Flat Modifier",
+    "mult": "Multiplier Mod",
+    "exclusiveEquipment": "EE Modifier",
+    "critDamageBoost": "Crit Damage Boost",
+    "fixed": "Fixed Damage",
+    "aftermath": "Aftermath",
+    "detonation": "Detonation",
+    "pentration": "Penetration"
   },
   "defensePreset": {
     "default": "Default",

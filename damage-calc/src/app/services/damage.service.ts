@@ -122,7 +122,7 @@ export class DamageService {
       fixedTip: this.languageService.getSkillModTip(skill.fixedTip(skill.fixed(HitType.crit, this.damageForm), this.damageForm)),
       flat: Math.round(skill.flat(soulburn, this.damageForm, this.currentArtifact)),
       flatTip: this.languageService.getSkillModTip(skill.flatTip(soulburn)),
-      pen: (skill.penetrate(soulburn, this.damageForm, this.currentArtifact, this.currentHero.getAttack(this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), skill)) * 100),
+      pen: (skill.penetrate(soulburn, this.damageForm, this.currentArtifact, this.currentHero.getAttack(this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), skill)) * 100).toFixed(2),
       penTip: this.languageService.getSkillModTip(skill.penetrateTip(soulburn)),
     };
   }

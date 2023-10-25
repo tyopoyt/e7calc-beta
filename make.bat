@@ -1,1 +1,1 @@
-ng build --baseHref="https://beta.e7calc.xyz" & XCOPY ..\CNAME .\docs & XCOPY .\docs\index.html ".\docs\404.html*"
+ng build & XCOPY ..\..\CNAME ..\docs & XCOPY ..\docs\index.html "..\docs\404.html*"

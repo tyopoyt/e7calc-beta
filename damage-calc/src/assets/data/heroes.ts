@@ -4264,7 +4264,6 @@ export const Heroes: Record<string, Hero> = {
         name: 's1_extra_attack',
         rate: () => 1.1,
         pow: () => 1,
-        enhanceFrom: 's1',
         isExtra: true,
         isSingle: () => true,
       }),

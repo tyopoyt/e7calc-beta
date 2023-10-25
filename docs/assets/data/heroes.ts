@@ -50,7 +50,7 @@ export const Heroes: Record<string, Hero> = {
     baseAtk: 830,
     baseHP: 6619,
     baseDef: 713,
-    // info: infoLabel('unreleased_hero'),
+    // info: 'unreleased_hero'),
     heroSpecific: ['casterDefense', 'casterHasTrauma'],
     attackIncrease: (inputValues: DamageFormData) => {
       let boost = 1;
@@ -85,8 +85,7 @@ export const Heroes: Record<string, Hero> = {
         soulburn: true
       }),
       s1_bis: new Skill({
-        // TODO: translate includes these
-        // name: infoLabel('abyssal_yufine_unbridled_outburst'),
+        name: 'abyssal_yufine_unbridled_outburst',
         id: 's1_bis',
         rate: () => 0.8,
         pow: () => 0.9,
@@ -95,7 +94,7 @@ export const Heroes: Record<string, Hero> = {
         isSingle: () => true,
       }),
       s1_bis_soulburn: new Skill({
-        // name: infoLabel('abyssal_yufine_unbridled_outburst', true),
+        name: 'abyssal_yufine_unbridled_outburst_soulburn',
         id: 's1_bis_soulburn',
         rate: () => 1.25,
         pow: () => 0.9,
@@ -451,8 +450,9 @@ export const Heroes: Record<string, Hero> = {
       }),
       s2: new Skill({
         id: 's2',
+        name: 'alencia_trample',
         hpScaling: true,
-            rate: () => 0.5,
+        rate: () => 0.5,
         pow: () => 1,
         flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.11,
         flatTip: () => ({casterMaxHP: 11}),
@@ -490,7 +490,8 @@ export const Heroes: Record<string, Hero> = {
       }),
       s1_extra: new Skill({
         id: 's1_extra',
-            rate: () => 0.75,
+        name: 's1_extra_attack',
+        rate: () => 0.75,
         pow: () => 1,
         isSingle: () => true,
       }),
@@ -893,6 +894,7 @@ export const Heroes: Record<string, Hero> = {
       }),
       s1_bis: new Skill({
         id: 's1_bis',
+        name: 'arunka_expose',
         rate: () => 1.3,
         pow: () => 1.3,
         // enhanceFrom: 's1', Presumed not to inherit from s1 mola since the pow is so high already
@@ -1299,6 +1301,7 @@ export const Heroes: Record<string, Hero> = {
       }),
       s1_bis: new Skill({
         id: 's1_bis',
+        name: 'beehoo_incinerate',
         rate: () => 1.2,
         pow: () => 0.9,
         enhanceFrom: 's1',
@@ -4258,6 +4261,7 @@ export const Heroes: Record<string, Hero> = {
       }),
       s1_extra: new Skill({
         id: 's1_extra',
+        name: 's1_extra_attack',
         rate: () => 1.1,
         pow: () => 1,
         enhanceFrom: 's1',
@@ -4431,7 +4435,7 @@ export const Heroes: Record<string, Hero> = {
     baseAtk: 1359,
     baseHP: 5542,
     baseDef: 585,
-    // info: infoLabel('unreleased_hero'),
+    // info: 'unreleased_hero'),
     heroSpecific: ['casterEnraged', 'targetNumberOfDebuffs'],
     dot: [DoT.bleed],
     skills: {
@@ -4443,7 +4447,7 @@ export const Heroes: Record<string, Hero> = {
         isSingle: () => true,
       }),
       s1_bis: new Skill({
-        // name: infoLabel('kane_rock_smash'),
+        name: 'kane_rock_smash',
         id: 's1_bis',
         rate: () => 0.5,
         pow: () => 1.3,
@@ -5101,8 +5105,9 @@ export const Heroes: Record<string, Hero> = {
       }),
       s2: new Skill({
         id: 's2',
+        name: 'lethe_call_of_the_abyss',
         hpScaling: true,
-            rate: () => 0.3,
+        rate: () => 0.3,
         pow: () => 1.3,
         flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.22,
         flatTip: () => ({casterMaxHP: 22}),
@@ -5303,6 +5308,7 @@ export const Heroes: Record<string, Hero> = {
       }),
       s3_splash: new Skill({
         id: 's3_splash',
+        name: 'lqc_s3_splash',
         rate: () => 0,
         pow: () => 0,
         afterMath: (hitType: HitType, inputValues: DamageFormData) => inputValues.elementalAdvantage ? new AftermathSkill({ attackPercent: 1.2 }) : null,
@@ -5851,6 +5857,7 @@ export const Heroes: Record<string, Hero> = {
       }),
       s2_bis: new Skill({
         id: 's2_bis',
+        name: 's2_wave_2',
         isExtra: true,
         rate: () => 0.35,
         pow: () => 0.9,
@@ -6282,7 +6289,8 @@ export const Heroes: Record<string, Hero> = {
       }),
       s2: new Skill({
         id: 's2',
-            rate: () => 0.8,
+        name: 'navy_captain_landy_salvo_fire',
+        rate: () => 0.8,
         pow: () => 1.3,
         isExtra: true,
         isAOE: () => true,
@@ -6697,8 +6705,9 @@ export const Heroes: Record<string, Hero> = {
       }),
       s2: new Skill({
         id: 's2',
+        name: 's2_counter',
         hpScaling: true,
-            rate: () => 0.7,
+        rate: () => 0.7,
         pow: () => 1,
         flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.05,
         flatTip: () => ({ casterMaxHP: 5 }),
@@ -6766,7 +6775,7 @@ export const Heroes: Record<string, Hero> = {
         isSingle: () => true
       }),
       s1_soulburn: new Skill({
-        // name: infoLabel('s1_soulburn'),
+        name: 's1_soulburn',
         rate: () => 1,
         pow: () => 1,
         enhanceFrom: 's1',
@@ -7751,6 +7760,7 @@ export const Heroes: Record<string, Hero> = {
       }),
       s1_bis: new Skill({
         id: 's1_bis',
+        name: 'sez_encroach',
         rate: () => 0.5,
         pow: () => 1,
         mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + (100 - inputValues.targetCurrentHPPercent) * 0.003,
@@ -7770,6 +7780,7 @@ export const Heroes: Record<string, Hero> = {
       }),
       explosion: new Skill({ // TODO: change this to be aftermath on s3 with an input for enemy killed? or not if it's aoe
         id: 'explosion',
+        name: 'sez_explosion',
         rate: () => 0,
         pow: () => 0,
         afterMath: () => new AftermathSkill({ attackPercent: 1.5 }),
@@ -7892,8 +7903,10 @@ export const Heroes: Record<string, Hero> = {
         enhance: [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.1],
         isSingle: () => true,
       }),
-      s1_bis: new Skill({
-        id: 's1_bis',
+      // TODO: set this back to s1_bis and fix mola
+      s2: new Skill({
+        id: 's2',
+        name: 'silk_automatic_fire',
         s1Benefits: true,
         speedScaling: true,
         rate: () => 1.2,
@@ -7931,7 +7944,8 @@ export const Heroes: Record<string, Hero> = {
       }),
       s1_extra: new Skill({
         id: 's1_extra',
-            rate: () => 0.5,
+        name: 's1_extra_attack',
+        rate: () => 0.5,
         pow: () => 1.3,
         enhanceFrom: 's1',
         isAOE: () => true,
@@ -8018,7 +8032,8 @@ export const Heroes: Record<string, Hero> = {
       }),
       s1_extra: new Skill({
         id: 's1_extra',
-            rate: () => 0.8,
+        name: 's1_extra_attack',
+        rate: () => 0.8,
         pow: () => 1.3,
         isAOE: () => true,
       }),
@@ -8135,7 +8150,8 @@ export const Heroes: Record<string, Hero> = {
       }),
       s1_bis: new Skill({
         id: 's1_bis',
-            rate: () => 1.3,
+        name: 'ml_celine_nimble_sword',
+        rate: () => 1.3,
         pow: () => 0.9,
         penetrate: () => 0.35,
         enhanceFrom: 's1',
@@ -8236,7 +8252,8 @@ export const Heroes: Record<string, Hero> = {
       }),
       s1_extra: new Skill({
         id: 's1_extra',
-            rate: () => 0.75,
+        name: 's1_extra_attack',
+        rate: () => 0.75,
         pow: () => 1,
         isSingle: () => true,
       }),
@@ -8391,7 +8408,8 @@ export const Heroes: Record<string, Hero> = {
       }),
       s1_extra: new Skill({
         id: 's1_extra',
-            rate: () => 0.7,
+        name: 's1_extra_attack',
+        rate: () => 0.7,
         pow: () => 1,
         enhanceFrom: 's1',
         mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + (100 - inputValues.casterCurrentHPPercent) * 0.003,
@@ -8430,6 +8448,7 @@ export const Heroes: Record<string, Hero> = {
       // Separate skill because it goes AOE
       s1_soulburn: new Skill({
         id: 's1_soulburn',
+        name: 's1_soulburn',
         rate: () => 1,
         pow: () => 1,
         enhanceFrom: 's1',
@@ -8466,7 +8485,8 @@ export const Heroes: Record<string, Hero> = {
       s1_extra: new Skill({
         id: 's1_extra',
         speedScaling: true,
-            rate: () => 1.2,
+        name: 's1_extra_attack',
+        rate: () => 1.2,
         pow: () => 1.3,
         mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + inputValues.casterFinalSpeed() * 0.00075,
         multTip: () => ({ casterSpeed: 0.075 }),
@@ -8760,7 +8780,7 @@ export const Heroes: Record<string, Hero> = {
         soulburn: true
       }),
       s1_bis: new Skill({
-        // name: infoLabel('ml_kayron_flash_slash'),
+        name: 'ml_kayron_flash_slash',
         id: 's1_bis',
         rate: () => 0.85,
         pow: () => 1,
@@ -8799,6 +8819,7 @@ export const Heroes: Record<string, Hero> = {
       }),
       s1_bis: new Skill({
         id: 's1_bis',
+        name: 'ml_kayron_flash_slash',
         rate: () => 0.85,
         pow: () => 1,
         enhanceFrom: 's1',
@@ -9112,6 +9133,7 @@ export const Heroes: Record<string, Hero> = {
       }),
       s2_wave_2: new Skill({
         id: 's2_wave_2',
+        name: 's2_wave_2',
         rate: () => 0.55,
         pow: () => 0.9,
         enhanceFrom: 's2',
@@ -9119,6 +9141,7 @@ export const Heroes: Record<string, Hero> = {
       }),
       s2_wave_3: new Skill({
         id: 's2_wave_3',
+        name: 's2_wave_3',
         rate: () => 0.3,
         pow: () => 0.9,
         enhanceFrom: 's2',
@@ -9228,7 +9251,8 @@ export const Heroes: Record<string, Hero> = {
       }),
       s1_bis: new Skill({
         id: 's1_bis',
-            rate: () => 0.5,
+        name: 'yoonryoung_slash',
+        rate: () => 0.5,
         pow: () => 1,
         enhanceFrom: 's1',
         isSingle: () => true,
@@ -9516,7 +9540,8 @@ export const Heroes: Record<string, Hero> = {
       s1_bis: new Skill({
         id: 's1_bis',
         isExtra: true,
-            rate: () => 1,
+        name: 'zio_disappear',
+        rate: () => 1,
         pow: () => 1,
         penetrate: () => 0.5,
         enhanceFrom: 's1',

@@ -55,6 +55,7 @@ export class Skill {
     isSingle: Function;
     mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => number;
     multTip: Function;
+    name: string | null;
     penetrate: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact, casterAttack: number) => number;
     penetrateTip: Function;
     pow: (soulburn: boolean, inputValues: DamageFormData) => number;
@@ -94,6 +95,7 @@ export class Skill {
         this.isExtra = _.get(data, 'isExtra', false);
         this.isSingle = _.get(data, 'isSingle', () => false);
         this.mult = _.get(data, 'mult', () => 1);
+        this.name = _.get(data, 'name', null);
         this.multTip = _.get(data, 'multTip', () => null);
         this.penetrate = _.get(data, 'penetrate', () => 0);
         this.penetrateTip = _.get(data, 'penetrateTip', () => null);

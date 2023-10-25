@@ -193,7 +193,7 @@ export class DamageService {
         + (this.damageForm.casterPerception ? BattleConstants.perception : 0);
 
     return {
-      skill: skill.id + (soulburn ? '_soulburn' : (isExtra ? '_extra' : '')),
+      skill: (skill.name || skill.id) + (soulburn ? '_soulburn' : (isExtra ? '_extra' : '')),
       crit: skill.noCrit || skill.onlyMiss ? null : Math.round(hit * critDmg + (skill.fixed !== undefined ? skill.fixed(HitType.crit, this.damageForm) : 0) + this.getAfterMathDamage(skill, HitType.crit)),
       crush: skill.noCrit || skill.onlyCrit(soulburn) || skill.onlyMiss ? null : Math.round(hit * 1.3 + (skill.fixed !== undefined ? skill.fixed(HitType.crush, this.damageForm) : 0) + this.getAfterMathDamage(skill, HitType.crush)),
       normal: skill.onlyCrit(soulburn) || skill.onlyMiss ? null : Math.round(hit + (skill.fixed !== undefined ? skill.fixed(HitType.normal, this.damageForm) : 0) + this.getAfterMathDamage(skill, HitType.normal)),

@@ -4,6 +4,7 @@ import { CompareSaveComponent } from '../compare-save/compare-save.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { ScreenService } from 'src/app/services/screen.service';
 import { LanguageService } from 'src/app/services/language.service';
+import { DataService } from 'src/app/services/data.service';
 
 export interface CompareData {
   buildName?: string;
@@ -23,7 +24,7 @@ export interface CompareDamageRow {
 })
 export class CompareComponent {
 
-  displayedColumns: string[] = ['buildName'];
+  displayedColumns: string[] = ['delete', 'buildName'];
   skills: string[] = [];
   damageData = new MatTableDataSource<CompareData>();
 
@@ -31,7 +32,8 @@ export class CompareComponent {
     public dialogRef: MatDialogRef<CompareSaveComponent>,
     @Inject(MAT_DIALOG_DATA) public data: CompareData,
     public screenService: ScreenService,
-    public languageService: LanguageService
+    public languageService: LanguageService,
+    private dataService: DataService
   ) {
     const buildArray: CompareData[] = [];
     for (const entry of Object.entries(data)) {
@@ -60,5 +62,17 @@ export class CompareComponent {
 
   removeAllBuilds() {
     this.dialogRef.close(true);
+  }
+
+  removeBuild(build: CompareData) {  
+    const builds = localStorage.getItem('heroes');
+    const allSets = builds ? JSON.parse(builds as string) : {};
+
+    delete allSets[this.dataService.currentHeroID.value][build.buildName as string]
+    this.damageData.data = this.damageData.data.filter(dataBuild => {
+      return dataBuild.buildName !== build.buildName
+    })
+
+    localStorage.setItem('heroes', JSON.stringify(allSets));
   }
 }

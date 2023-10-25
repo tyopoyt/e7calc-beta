@@ -290,6 +290,12 @@ html, body {
       background-color: $e7-buff-darker-color !important;
       opacity: 0.2;
     }
+
+    &.mobile-width-slider {
+      width: 80%;
+      align-self: flex-start;
+      margin-left: $gutter;
+    }
   }
 
   ngx-mat-select-search {

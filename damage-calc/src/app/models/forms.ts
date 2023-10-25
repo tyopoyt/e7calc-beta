@@ -330,8 +330,10 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
     highestAllyAttackDown: {
         icon: 'debuffs/attack-debuff.png'
     },
-    s3OnCooldown: {
-        default: true
+    S3OnCooldown: {
+        default: true,
+        icon: 'icons/battery-low.svg',
+        svgIcon: true
     },
     skill3Stack: {
         max: 3,

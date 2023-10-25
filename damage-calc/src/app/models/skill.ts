@@ -52,7 +52,7 @@ export class Skill {
     ignoreDamageTransfer: Function;
     isAOE: Function;
     isExtra: boolean;
-    isSingle: Function;
+    isSingle: (inputValues: DamageFormData) => boolean;
     mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => number;
     multTip: Function;
     name: string | null;

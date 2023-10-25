@@ -22,7 +22,7 @@ export const Artifacts: Record<string, Artifact> = {
     type: ArtifactDamageType.damage,
     exclusive: HeroClass.warrior,
     // artifactSpecific:[target_has_barrier],
-    applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(),
+    applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(inputValues),
     value: (artiScale: number, inputValues: DamageFormData) => artiScale / (inputValues.targetHasBarrier ? 1 : 2),
   }),
   a_symbol_of_unity: new Artifact({
@@ -37,7 +37,7 @@ export const Artifacts: Record<string, Artifact> = {
     scale: [0.1, 0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2],
     type: ArtifactDamageType.penetrate,
     exclusive: HeroClass.ranger,
-    applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(),
+    applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(inputValues),
   }),
   ambrote: new Artifact({
     id: 'ambrote',
@@ -169,7 +169,7 @@ export const Artifacts: Record<string, Artifact> = {
     scale: [0.08, 0.088, 0.096, 0.104, 0.112, 0.12, 0.128, 0.136, 0.144, 0.152, 0.16],
     type: ArtifactDamageType.damage,
     exclusive: HeroClass.mage,
-    applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(),
+    applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(inputValues),
   }),
   golden_rose: new Artifact({
     id: 'golden_rose',
@@ -207,7 +207,7 @@ export const Artifacts: Record<string, Artifact> = {
     scale: [0.12, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2, 0.21, 0.22, 0.24],
     type: ArtifactDamageType.damage,
     exclusive: HeroClass.warrior,
-    applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(),
+    applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(inputValues),
   }),
   junkyard_dog: new Artifact({
     id: 'junkyard_dog',
@@ -244,7 +244,7 @@ export const Artifacts: Record<string, Artifact> = {
     scale: [0.08, 0.088, 0.096, 0.104, 0.112, 0.12, 0.128, 0.136, 0.144, 0.152, 0.16],
     type: ArtifactDamageType.damage,
     exclusive: HeroClass.warrior,
-    applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(),
+    applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(inputValues),
   }),
   portrait_of_the_saviors: new Artifact({
     id: 'portrait_of_the_saviors',
@@ -317,7 +317,7 @@ export const Artifacts: Record<string, Artifact> = {
     defensePercent: 1.0,
     penetrate: 0.7,
     exclusive: HeroClass.knight,
-    applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(),
+    applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(inputValues),
   }),
   samsara_prayer_beads: new Artifact({
     id: 'samsara_prayer_beads',
@@ -325,7 +325,7 @@ export const Artifacts: Record<string, Artifact> = {
     value: () => 0.1,
     type: ArtifactDamageType.damage,
     exclusive: HeroClass.warrior,
-    applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(),
+    applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(inputValues),
   }),
   scroll_of_shadows: new Artifact({
     id: 'scroll_of_shadows',
@@ -463,7 +463,7 @@ export const Artifacts: Record<string, Artifact> = {
     attackPercent: 0.45,
     penetrate: 0.7,
     exclusive: HeroClass.warrior,
-    applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(),
+    applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(inputValues),
   }),
   victorious_flag: new Artifact({
     id: 'victorious_flag',

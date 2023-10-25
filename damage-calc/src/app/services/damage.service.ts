@@ -83,10 +83,10 @@ export class DamageService {
       mult += (this.damageForm.defensePreset?.extraDamageMultiplier || 1) - 1;
     }
 
-    if (skill.isSingle() && this.damageForm.defensePreset?.singleAttackMultiplier) {
+    if (skill.isSingle(this.damageForm) && this.damageForm.defensePreset?.singleAttackMultiplier) {
       mult += this.damageForm.defensePreset.singleAttackMultiplier - 1;
     }
-    if (!skill.isSingle() && this.damageForm.defensePreset?.nonSingleAttackMultiplier) {
+    if (!skill.isSingle(this.damageForm) && this.damageForm.defensePreset?.nonSingleAttackMultiplier) {
       mult += this.damageForm.defensePreset.nonSingleAttackMultiplier - 1;
     }
 

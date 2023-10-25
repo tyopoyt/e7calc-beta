@@ -13,7 +13,7 @@ export class Target {
     getPenetration(skill: Skill, inputValues: DamageFormData, artifact: Artifact, soulburn: boolean, casterAttack: number) {
       const base = skill.penetrate(soulburn, inputValues, artifact, casterAttack);
       const artifactPenetration = artifact.getDefensePenetration(inputValues.artifactLevel, inputValues, skill);
-      const set = (skill.isSingle()) && inputValues.penetrationSet ? BattleConstants.penetrationSet : 0;
+      const set = (skill.isSingle(inputValues)) && inputValues.penetrationSet ? BattleConstants.penetrationSet : 0;
       return Math.min(1, (1 - base) * (1 - set) * (1 - artifactPenetration));
     }
   

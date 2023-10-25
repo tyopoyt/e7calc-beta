@@ -1009,7 +1009,6 @@ export const Heroes: Record<string, Hero> = {
     baseAttack: 1079,
     baseHP: 5502,
     baseDefense: 564,
-    // TODO: Star's blessing
     heroSpecific: ['targetHasDebuff', 'casterHasStarsBlessing'],
     skills: {
       s1: new Skill({
@@ -8101,7 +8100,6 @@ export const Heroes: Record<string, Hero> = {
     baseAttack: 1197,
     baseHP: 4572,
     baseDefense: 683,
-    // TODO: image for s3 on cooldown and fix pen set on s1 based on that value
     heroSpecific: ['targetNumberOfDebuffs', 'numberOfDeaths', 'S3OnCooldown'],
     attackIncrease: (inputValues: DamageFormData) => {
       let buff = 0.07;
@@ -8116,7 +8114,7 @@ export const Heroes: Record<string, Hero> = {
         rate: () => 1.2,
         pow: () => 1,
         enhance: [0.05, 0, 0.05, 0, 0.05, 0.15],
-        single: (inputValues: DamageFormData) => !inputValues.S3OnCooldown,
+        isSingle: (inputValues: DamageFormData) => !inputValues.S3OnCooldown,
       }),
       s2: new Skill({
         id: 's2',
@@ -8164,7 +8162,6 @@ export const Heroes: Record<string, Hero> = {
     baseAttack: 1228,
     baseHP: 5784,
     baseDefense: 553,
-    // TODO: fix s3 penetration on target highest hp
     heroSpecific: ['numberOfTargets', 'targetIsHighestMaxHP', 'targetAttack'],
     skills: {
       s1: new Skill({
@@ -8194,7 +8191,7 @@ export const Heroes: Record<string, Hero> = {
         id: 's3',
         rate: () => 0.95,
         pow: () => 1,
-        penetrate: (inputValues: DamageFormData, heroAttack: number) => {
+        penetrate: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact, heroAttack: number) => {
           if (!inputValues.targetIsHighestMaxHP) return 0;
 
           const targetAtk = inputValues.targetFinalAttack();
@@ -8469,7 +8466,6 @@ export const Heroes: Record<string, Hero> = {
     baseAttack: 1039,
     baseHP: 5340,
     baseDefense: 617,
-    // TODO: Check taeyou's rage scaling, is new or old calc correct?
     heroSpecific: ['casterSpeed', 'casterEnraged'],
     skills: {
       s1: new Skill({

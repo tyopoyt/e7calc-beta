@@ -1396,15 +1396,15 @@ body {
 }
 
 .page-container {
-  padding: 0 3vw 0.5rem;
+  padding: 0 3dvw 0.5rem;
   align-self: center;
-  width: 94vw; // 100vw - the side padding
-  height: calc(100vh - #{$navbar-height} - 0.5rem);
+  width: 94dvw; // 100vw - the side padding
+  height: calc(100dvh - #{$navbar-height} - 0.5rem);
   overflow: auto;
 
   &.sticky-bottom {
     padding-bottom: 0;
-    height: calc(100vh - #{$navbar-height});
+    height: calc(100dvh - #{$navbar-height});
   }
 
   display: flex;

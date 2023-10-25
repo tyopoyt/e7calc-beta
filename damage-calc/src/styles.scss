@@ -1148,6 +1148,7 @@ html, body {
 
     .mat-mdc-checkbox .mdc-form-field {
       background-color: $ui-lighter-color;
+      box-shadow: var(--mdc-elevated-card-container-elevation) !important;
     }
 
     .mat-mdc-menu-item:not([disabled]):hover, .mat-mdc-option:not([disabled]):hover {
@@ -1398,7 +1399,7 @@ body {
 }
 
 .bold-text {
-  font-weight: bold !important;
+  font-weight: 600 !important;
 }
 
 .page-container {

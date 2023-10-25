@@ -7044,7 +7044,6 @@ export const Heroes: Record<string, Hero> = {
       })
     }
   }),
-  // TODO: here
   righteous_thief_roozid: new Hero({
     element: HeroElement.earth,
     class: HeroClass.thief,
@@ -8103,7 +8102,8 @@ export const Heroes: Record<string, Hero> = {
     baseAttack: 1197,
     baseHP: 4572,
     baseDefense: 683,
-    heroSpecific: ['targetNumberOfDebuffs', 'numberOfDeaths', 's3OnCooldown'],
+    // TODO: image for s3 on cooldown and fix pen set on s1 based on that value
+    heroSpecific: ['targetNumberOfDebuffs', 'numberOfDeaths', 'S3OnCooldown'],
     attackIncrease: (inputValues: DamageFormData) => {
       let buff = 0.07;
       for (let i = 0; i < inputValues.molagoras2; i++) {
@@ -8165,6 +8165,7 @@ export const Heroes: Record<string, Hero> = {
     baseAttack: 1228,
     baseHP: 5784,
     baseDefense: 553,
+    // TODO: fix s3 penetration on target highest hp
     heroSpecific: ['numberOfTargets', 'targetIsHighestMaxHP', 'targetAttack'],
     skills: {
       s1: new Skill({
@@ -8391,6 +8392,7 @@ export const Heroes: Record<string, Hero> = {
       })
     }
   }),
+  // TODO: here
   sven: new Hero({
     element: HeroElement.dark,
     class: HeroClass.thief,

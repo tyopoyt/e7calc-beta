@@ -813,7 +813,8 @@
     "aftermath": "Aftermath",
     "detonation": "Detonation",
     "pentration": "Penetration",
-    "build": "Build"
+    "build": "Build",
+    "contributeTranslation": "Contribute a Translation"
   },
   "defensePreset": {
     "default": "Default",

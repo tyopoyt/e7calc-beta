@@ -5911,6 +5911,40 @@ export const Heroes: Record<string, Hero> = {
       })
     }
   }),
+  midnight_gala_lilias: new Hero({
+    name: 'Midnight Gala Lilias',
+    element: HeroElement.earth,
+    class: HeroClass.thief,
+    baseAtk: 1208,
+    baseHP: 5178,
+    baseDef: 508,
+    heroSpecific: ['casterMaxHP', 'targetMaxHP'],
+    skills: {
+      s1: new Skill({
+        onlyCrit: () => true,
+        rate: () => 1.1,
+        pow: () => 1,
+        enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
+        isSingle: () => true,
+      }),
+      s3: new Skill({
+        onlyCrit: () => true,
+        hpScaling: true,
+        rate: () => 0.5,
+        pow: () => 1,
+        penetrate: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => {
+          const casterHP = inputValues.casterFinalMaxHP(artifact)
+          const targetHP =inputValues.targetFinalMaxHP()
+          return (casterHP < targetHP)
+                 ? Math.min((targetHP - casterHP) * 0.0000625, 1)
+                 : 0
+        },
+        penetrateTip: () => ({ caster_vs_target_hp_diff: 6.25 }),
+        enhance: [0.05, 0.05, 0, 0.1, 0.1],
+        isSingle: () => true,
+      }),
+    }
+  }),
   mighty_scout: new Hero({
     element: HeroElement.earth,
     class: HeroClass.thief,

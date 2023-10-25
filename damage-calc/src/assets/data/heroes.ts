@@ -46,7 +46,7 @@ export const Heroes: Record<string, Hero> = {
   abyssal_yufine: new Hero({
     name: 'Abyssal Yufine',
     element: HeroElement.dark,
-    classType: HeroClass.knight,
+    class: HeroClass.knight,
     baseAtk: 830,
     baseHP: 6619,
     baseDef: 713,
@@ -4431,7 +4431,7 @@ export const Heroes: Record<string, Hero> = {
   kane: new Hero({
     name: 'Kane',
     element: HeroElement.fire,
-    classType: HeroClass.warrior,
+    class: HeroClass.warrior,
     baseAtk: 1359,
     baseHP: 5542,
     baseDef: 585,
@@ -6240,7 +6240,7 @@ export const Heroes: Record<string, Hero> = {
   nahkwol: new Hero({
     name: 'Nahkwol',
     element: HeroElement.fire,
-    classType: HeroClass.ranger,
+    class: HeroClass.ranger,
     baseAtk: 1003,
     baseHP: 5704,
     baseDef: 585,
@@ -8392,7 +8392,6 @@ export const Heroes: Record<string, Hero> = {
       })
     }
   }),
-  // TODO: here
   sven: new Hero({
     element: HeroElement.dark,
     class: HeroClass.thief,
@@ -8471,6 +8470,7 @@ export const Heroes: Record<string, Hero> = {
     baseAttack: 1039,
     baseHP: 5340,
     baseDefense: 617,
+    // TODO: Check taeyou's rage scaling, is new or old calc correct?
     heroSpecific: ['casterSpeed', 'casterEnraged'],
     skills: {
       s1: new Skill({
@@ -9465,7 +9465,7 @@ export const Heroes: Record<string, Hero> = {
       s3: new Skill({
         id: 's3',
         hpScaling: true,
-        ate: 0.5,
+        rate: 0.5,
         pow: () => 1,
         flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.12,
         flatTip: () => ({ casterMaxHP: 12 }),

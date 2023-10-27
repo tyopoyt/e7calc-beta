@@ -104,7 +104,7 @@ export class CompareComponent {
       this.displayedMultiCompareColumns = ['delete', 'hero', 'buildName'].concat([...new Set(this.multiCompareSkills)].filter(skill => this.normalSkills.includes(skill)).sort());
       this.multiCompareSkills = [...new Set(this.multiCompareSkills)].sort();
   
-      if (this.multiCompareSkills.length > 3) {
+      if (this.multiCompareSkills.includes('extraSkill')) {
         this.displayedMultiCompareColumns.push('extraSkill');
       }
       

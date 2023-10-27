@@ -104,13 +104,13 @@ export class CompareComponent {
       }
   
       this.displayedMultiCompareColumns = ['delete', 'hero', 'buildName'].concat([...new Set(this.multiCompareSkills)].filter(skill => this.normalSkills.includes(skill)).sort());
-      this.multiCompareSkills = [...new Set(this.multiCompareSkills)].sort();
+      this.multiCompareSkills = [...new Set(this.multiCompareSkills)];
   
       if (this.multiCompareSkills.includes('extraSkill')) {
         this.displayedMultiCompareColumns.push('extraSkill');
       }
       
-      this.multiCompareDamageData.data = multiBuildArray;
+      this.multiCompareDamageData.data = multiBuildArray.sort((a: MultiCompareData, b: MultiCompareData) => a.hero?.localeCompare(b.hero || '') || 0);
     }
     
   }

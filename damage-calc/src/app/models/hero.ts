@@ -70,6 +70,7 @@ export class Hero {
     return [...(this.dot || []), ...artifact.getDoT()];
   }
 
+  // Get damage multiplier from skill enhancements
   getSkillEnhanceMult(skill: Skill, inputValues: DamageFormData) {
     let mult = 1.0;
 
@@ -90,10 +91,11 @@ export class Hero {
     return mult;
   }
 
+  // Get the hero's attack if it's modified
   getAttack(artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number, skill: Skill, isExtra = false): number {
     let atk = skill?.atk(inputValues) || inputValues.casterFinalAttack;
 
-    // TODO: check if this is innateAttackIncrease val is added twice?
+    // TODO: check if this is innateAttackIncrease val is added twice? doesn't seem to be though
     if (this.innateAttackIncrease !== undefined) {
       atk = atk / (1 + this.innateAttackIncrease(inputValues));
     }
@@ -112,6 +114,7 @@ export class Hero {
     return (atk + atkImprint) * atkMod;
   }
 
+  // Get the hero's aftermath (additional) damage
   getAfterMathSkillDamage(skill: Skill, hitType: HitType, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number, defenseMultiplier: number, target: Target, isExtra = false) {
     let skillDamage = 0;
     const skillMultipliers = skill.afterMath(hitType, inputValues);
@@ -130,7 +133,7 @@ export class Hero {
     return skillDamage;
   }
 
-  // this belongs to hero because it calls getAtk and getDef
+  // Get aftermath damage from the artifact. This belongs to hero because it calls hero's getAtk and getDef
   getAfterMathArtifactDamage(skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number, defenseMultiplier: number, target: Target, isExtra = false) {
     const artiMultipliers = artifact.getAfterMathMultipliers(skill, inputValues, isExtra);
     const attack = this.getAttack(artifact, inputValues, attackMultiplier, skill, isExtra)

@@ -22,8 +22,10 @@ export interface DamageRow {
 })
 export class DamageService {
 
+  // Skill damages subject
   damages: BehaviorSubject<DamageRow[]> = new BehaviorSubject([] as DamageRow[]);
 
+  // Getters
   get damageForm() {
     return this.dataService.damageInputValues;
   }
@@ -36,7 +38,6 @@ export class DamageService {
     return this.dataService.currentHero.value;
   }
   
-  // TODO: add comments to functions
   constructor(private dataService: DataService, private languageService: LanguageService) {
     this.dataService.damageInputChanged.subscribe(() => {
       this.updateDamages();
@@ -47,6 +48,7 @@ export class DamageService {
     })
   }
 
+  // Calculate the target's defense multiplier
   getGlobalDefenseMult(): number {
     let mult = 1.0;
     
@@ -62,6 +64,7 @@ export class DamageService {
     return mult;
   }
 
+  // Calculate the caster's attack multiplier
   getGlobalAttackMult(): number {
     let mult = 0.0;
   
@@ -72,12 +75,14 @@ export class DamageService {
     return mult + (this.damageForm.attackIncreasePercent / 100);
   }
 
+  // Calculate the global damage multiplier
   getGlobalDamageMult(skill: Skill): number {
     let mult = 0.0;
     this.dataService.damageMultSets.forEach((set) => {
       mult += (this.damageForm[set as keyof DamageFormData] || !!this.damageForm[`${set}Stack` as keyof DamageFormData]) ? _.get(BattleConstants, set) * (_.get(this.damageForm, `${set}Stack`, 1) as number) : 0.0;
     });
 
+    // For expedition mainly
     this.damageForm.defensePreset;
     if (this.currentHero.element === this.damageForm.defensePreset?.extraDamageElement) {
       mult += (this.damageForm.defensePreset?.extraDamageMultiplier || 1) - 1;
@@ -93,9 +98,9 @@ export class DamageService {
     return mult;
   }
 
-  // TODO: Does this need to know about hit type?
-  // TODO: is this even used anymore?
+  // Get skill multiplier info for the popup
   getModifiers(skill: Skill, soulburn = false) {
+    // Handle aftermath damage
     const aftermathFormula = skill.afterMath(HitType.crit, this.damageForm);
     const formattedAftermathFormula: Record<string, number> = {}
 
@@ -106,6 +111,7 @@ export class DamageService {
         }
       }
     }
+
     return {
       rate: skill.rate(soulburn, this.damageForm),
       pow: skill.pow(soulburn, this.damageForm),
@@ -127,6 +133,7 @@ export class DamageService {
     };
   }
 
+  // Calculate caster's base damage
   offensivePower(skill: Skill, soulburn = false, isExtra = false) {
     const rate = skill.rate(soulburn, this.damageForm);
     const flatMod = skill.flat(soulburn, this.damageForm, this.currentArtifact);
@@ -162,6 +169,7 @@ export class DamageService {
     }
   }
 
+  // Get detonation damage for relevant DoTs
   getDetonateDamage(skill: Skill) {
     let damage = 0;
 
@@ -172,6 +180,7 @@ export class DamageService {
     return damage;
   }
 
+  // Calculate aftermath (additional) damage
   getAfterMathDamage(skill: Skill, hitType: HitType) {
     const detonation = this.getDetonateDamage(skill);
     const artiDamage: number = this.currentHero.getAfterMathArtifactDamage(skill, this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), this.getGlobalDefenseMult(), this.dataService.currentTarget) || 0;
@@ -179,6 +188,7 @@ export class DamageService {
     return detonation + artiDamage + skillDamage;
   }
 
+  // Get the final damage numbers to be displayed in the table
   // TODO: ensure this is called only once per skill when something changes (hero, input, etc.)
   getDamage(skill: Skill, soulburn = false, isExtra = false, inputOverrides: Record<string, number> | null = null): DamageRow {
     this.damageForm.inputOverrides = inputOverrides ? inputOverrides : {};
@@ -201,6 +211,7 @@ export class DamageService {
     };
   }
 
+  // Recalculate the damages
   // TODO: ensure this isn't called more than needed.  Once per skill per input change, and only once on page load (or maybe twice with queryparams)
   updateDamages() {
     const newDamages: DamageRow[] = []
@@ -220,6 +231,7 @@ export class DamageService {
     this.damages.next(newDamages);
   }
 
+  // Get caster's barrier strengths
   getBarriers(): {label: string, value: number}[] {
     const barriers = [];
     if (this.currentHero.barrier) {
@@ -246,6 +258,7 @@ export class DamageService {
     return barriers;
   }
 
+  // Get damage from the artifact
   getArtifactDamage(): number {
     return Math.round(this.currentHero.getAfterMathArtifactDamage(new Skill({id: 's1', isAOE: () => true, isSingle: () => true}), this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), this.getGlobalDefenseMult(), this.dataService.currentTarget) || 0);
   }

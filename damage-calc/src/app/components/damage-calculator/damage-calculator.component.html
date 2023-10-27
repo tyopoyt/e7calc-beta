@@ -2,6 +2,7 @@
 <div class="page-container sticky-bottom">
     <span class="page-body">
         <app-dismissible [content]="'damageCalculatorUpdates' | translate:'info':languageService.language.value" [color]="DismissibleColorOption.info"></app-dismissible>
+        <!-- Hero/arti/preset selector row -->
         <div class="filter-select-container full-width neat-container" [ngClass]="!screenService.mediumSmallScreen.value ? 'column-3' : 'flex-column'">
             <mat-form-field class="neat-container has-icons">
                 <img class="png-icon medium tiny-margin-right select-icon" src="assets/elements/{{hero.element}}.png" alt="{{hero.element}}">
@@ -37,6 +38,7 @@
                 </mat-select>
             </mat-form-field>
         </div>
+        <!-- Hero form inputs -->
         <div class="neat-container full-width">
             <app-slide-input #slideInput
                 [label]="'attack' | translate:'form':languageService.language.value"
@@ -144,6 +146,7 @@
                 </div>
             </div>
         </div>
+        <!-- Artifact form inputs -->
         <div *ngIf="artifact.id !== 'noProc' && (artifact.scale || artifactSpecificNumberInputs.length || artifactSpecificBooleanInputs.length)" class="artifact-block header-block">
             <h1>{{'artifact' | translate:'ui':languageService.language.value}}</h1>
             <div class="neat-container full-width">
@@ -175,6 +178,7 @@
                 </div>
             </div>
         </div>
+        <!-- Target form inputs -->
         <div class="target-block header-block" [class.single-column]="screenService.mediumSmallScreen.value">
             <div class="filter-select-container full-width neat-container jumbo-margin-top" [ngClass]="!screenService.mediumSmallScreen.value ? 'column-3' : 'flex-column'">
                 <h1 class="line-title">{{'target' | translate:'ui':languageService.language.value}}</h1>
@@ -271,6 +275,7 @@
                 </mat-checkbox>
             </div>
         </div>
+        <!-- Hero-specific inputs form -->
         <div *ngIf="hero.heroSpecific.length" class="hero-specific-block header-block">
             <!-- TODO: translate -->
             <h1>{{'heroSpecific' | translate:'ui':languageService.language.value}}</h1>
@@ -310,6 +315,7 @@
                 </div>
             </div>
         </div>
+        <!-- Sticky damage block at bottom of screen -->
         <div class="damage-block">
             <!-- TODO: multiplier fxn breakdown button -->
             <!-- TODO: Add healing? -->
@@ -369,6 +375,7 @@
                     </div>
                     <img class="svg-icon large filter pointer collapse-icon" (click)="toggleTable()" src="{{collapsed ? 'assets/icons/chevron-up.svg' : 'assets/icons/chevron-down.svg'}}" alt="collapse">
                 </div>
+                <!-- Damage table -->
                 <table [@collapseAnimation] *ngIf="!collapsed" [class.tiny-padding]="screenService.mediumSmallScreen.value" mat-table [dataSource]="damageData">
                     <ng-container matColumnDef="skill">
                       <th mat-header-cell *matHeaderCellDef> {{"skill" | translate:'ui':languageService.language.value}} </th>
@@ -397,12 +404,12 @@
                         <td mat-cell *matCellDef="let element"> {{element.miss != null ? element.miss : 'nonApplicable' | translate:'skills':languageService.language.value}} </td>
                     </ng-container>
                     <!-- eslint-enable -->
-                  
                     <tr mat-header-row *matHeaderRowDef="displayedColumns" [class.large-text]="!screenService.smallScreen.value"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.large-text]="!screenService.smallScreen.value"></tr>
                   </table>
             </mat-card>
         </div>
+        <!-- Credits below damage block when scrolled to bottom of page -->
         <div class="credits-block">
             <mat-card class="left" [class.content-height]="!screenService.largeScreen.value">
                 <div class="full-height" [ngClass]="screenService.largeScreen.value ? 'column-3' : 'column'">
@@ -436,6 +443,7 @@
 </div>
 
 <!-- TEMPLATES -->
+<!-- Template for skill modifiers popup -->
 <ng-template let-i #modifierTooltip>
     <h3 class="no-margin bold-text left-align">{{'skillModifiers' | translate:'ui':languageService.language.value}}</h3>
     <span class="flex-aligned flex-between">

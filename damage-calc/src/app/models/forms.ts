@@ -4,7 +4,7 @@ import { BattleConstants } from 'src/assets/data/constants';
 import { Artifact } from './artifact';
 
 // The | null here is to suppress a warning when using ?. in the html to check for a value in FormDefaults
-// TODO: actually use the default: true
+// TODO: this should probably be moved out of here since it's just a large amount data
 export const FormDefaults: Record<string, {max?: number, min?: number, defaultValue?: number, default?: boolean, step?: number, hint?: string, icon?: string, svgIcon?: boolean} | null> = {
     casterMaxHP: {
         max: 50000,
@@ -361,6 +361,7 @@ export const TargetAttackModifiers = [
 ]
 
 export class DamageFormData {
+    // Make sure to periodically comment the next line to ensure functions are being passed the right params
     [key: string]: string | number | boolean | DefensePreset | ReductionPreset | undefined | ((artifact: Artifact) => number) | Record<string, number>,
     AOEStack: number;
     artifactLevel: number;
@@ -477,6 +478,7 @@ export class DamageFormData {
 
     inputOverrides: Record<string, number>;
 
+    // These two functions are mostly used for the damage graph
     get casterFinalAttack() {
         return this.inputOverrides['attack'] ? this.inputOverrides['attack'] : this.attack;
     }
@@ -601,18 +603,21 @@ export class DamageFormData {
         this.inputOverrides = _.get(data, 'inputOverrides', {});
     }
 
+    // Get the caster's final speed after modifiers
     casterFinalSpeed = () => {
         return Math.floor((this.inputOverrides['casterSpeed'] ? this.inputOverrides['casterSpeed'] : this.casterSpeed) * (1 + (this.casterSpeedUp ? BattleConstants.spdUp - 1 : 0)
            + (this.casterSpeedDown ? 1 - BattleConstants.spdUp : 0)
            + (this.casterEnraged ? BattleConstants.casterEnraged - 1 : 0)));
     }
 
+    // Get the target's final speed after modifiers
     targetFinalSpeed = () => {
         return Math.floor(this.targetSpeed * (1 + (this.targetSpeedUp ? BattleConstants.spdUp - 1 : 0)
            + (this.targetSpeedDown ? 1 - BattleConstants.spdUp : 0)
            + (this.targetEnraged ? BattleConstants.targetEnraged - 1 : 0)));
     }
 
+    // Get the caster's final defense after modifiers
     // TODO: Make sure the targetdefense... get replaced when constants are renamed
     casterFinalDefense = () => {
         let defenseMultiplier = (1 + (this.casterDefenseUp ? BattleConstants.targetDefenseUp : 0)
@@ -628,7 +633,9 @@ export class DamageFormData {
         
         return Math.floor((this.inputOverrides['casterDefense'] ? this.inputOverrides['casterDefense'] : this.casterDefense) * defenseMultiplier);
     }
-    // TODO: add indomitable for peacemaker
+
+    // Get the target's final speed after modifiers
+    // TODO: add indomitable for peacemaker. Also just fix peacemaker lol
     targetFinalDefense = () => {
         let defenseMultiplier = (1 + (this.targetDefenseUp ? BattleConstants.targetDefenseUp : 0)
         + (this.targetDefenseDown ? BattleConstants.targetDefenseDown : 0)
@@ -644,14 +651,17 @@ export class DamageFormData {
         return Math.floor(this.targetDefense * defenseMultiplier);
     }
 
+    // Get the caster's final max HP after modifiers
     casterFinalMaxHP = (artifact: Artifact) => {
         return (this.inputOverrides['casterMaxHP'] ? this.inputOverrides['casterMaxHP'] : this.casterMaxHP) * (this.inBattleHP ? 1: artifact.maxHP);
     }
 
+    // Get the target's final max HP after modifiers
     targetFinalMaxHP = () => {
         return (this.inputOverrides['targetMaxHP'] ? this.inputOverrides['targetMaxHP'] : this.targetMaxHP * (this.defensePreset?.hpDamageMultiplier ? this.defensePreset.hpDamageMultiplier : 1));
     }
 
+    // Get the target's final attack after modifiers
     targetFinalAttack = () => {
         let targetAttackModifier = 1
         TargetAttackModifiers.forEach((mod) => {

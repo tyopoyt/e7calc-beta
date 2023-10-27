@@ -35,6 +35,8 @@ export class CompareComponent {
     public languageService: LanguageService,
     private dataService: DataService
   ) {
+    // TODO: Convert to indexedDB?
+    // Load build data from localstorage
     const buildArray: CompareData[] = [];
     for (const entry of Object.entries(data)) {
       const buildRow: CompareData = {};
@@ -56,14 +58,17 @@ export class CompareComponent {
     this.damageData.data = buildArray;
   }
 
+  // Close the compare dialog
   close(): void {
     this.dialogRef.close();
   }
 
+  // When closed with true, damage calc component will delete all builds for the selected hero
   removeAllBuilds() {
     this.dialogRef.close(true);
   }
 
+  // Remove an individual build when its trash icon is clicked
   removeBuild(build: CompareData) {  
     const builds = localStorage.getItem('heroes');
     const allSets = builds ? JSON.parse(builds as string) : {};

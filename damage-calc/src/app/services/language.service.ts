@@ -17,6 +17,7 @@ export const CustomLanguage = {
 // TODO: add pt translations for: abyssal yufine, unbridled outburst, kan, tyrant's ascent
 // TODO: add jp translations for: Suthan, ML Choux, fairy tale artifact, rocket punch, samsara prayer beads
 // TODO: check if elementalAdvantage under skills can be removed in each lang file.
+// TODO: translate amiki, claudia, ezra
 @Injectable({
   providedIn: 'root'
 })

@@ -132,6 +132,10 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
         icon: 'icons/half-hp.png',
         default: true
     },
+    casterBelow30PercentHP: {
+        icon: 'icons/30-hp.png',
+        default: false
+    },
     casterHasImmensePower: {
         icon: 'buffs/immense-power-buff.png',
         default: true
@@ -367,6 +371,7 @@ export class DamageFormData {
     damageIncrease: number;
     decreasedAttack: boolean;
     casterAboveHalfHP: boolean;
+    casterBelow30PercentHP: boolean;
     casterAttackedStack: number;
     casterCurrentHP: number;
     casterCurrentHPPercent: number;
@@ -490,6 +495,7 @@ export class DamageFormData {
         this.damageIncrease = _.get(data, 'damageIncrease', 0);
         this.decreasedAttack = _.get(data, 'decreasedAttack', false);
         this.casterAboveHalfHP = _.get(data, 'casterAboveHalfHP', true);
+        this.casterBelow30PercentHP = _.get(data, 'casterBelow30PercentHP', false);
         this.casterAttackedStack = _.get(data, 'casterAttackedStack', 0);
         this.casterCurrentHP = _.get(data, 'casterCurrentHP', 10000);
         this.casterCurrentHPPercent = _.get(data, 'casterCurrentHPPercent', 100);

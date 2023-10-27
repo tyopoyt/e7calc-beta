@@ -584,6 +584,36 @@ export const Heroes: Record<string, Hero> = {
       }),
     }
   }),
+  amiki: new Hero({
+    element: HeroElement.ice,
+    class: HeroClass.warrior,
+    baseAttack: 1019,
+    baseHP: 5738,
+    baseDefense: 571,
+    heroSpecific: ['casterBelow30PercentHP'],
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 0.6,
+        pow: () => 1,
+        enhance: [0.05, 0.05, 0, 0.05, 0, 0.15],
+        noCrit: true,
+        isSingle: () => true,
+        penetrate: () => 0.3,
+        canExtra: true
+      }),
+      s3: new Skill({
+        id: 's3',
+        soulburn: true,
+        rate: (soulburn: boolean) => soulburn ? 1.5 : 1.1,
+        pow: () => 0.95,
+        enhance: [0.05, 0.05, 0.05, 0, 0.1, 0.1],
+        noCrit: true,
+        isSingle: () => true,
+        penetrate: (soulburn: boolean, inputValues: DamageFormData) => inputValues.casterBelow30PercentHP ? 0.7 : 0.3
+      })
+    }
+  }),
   angel_of_light_angelica: new Hero({
     element: HeroElement.light,
     class: HeroClass.mage,
@@ -880,7 +910,7 @@ export const Heroes: Record<string, Hero> = {
     baseAttack: 1570,
     baseHP: 6488,
     baseDefense: 616,
-    heroSpecific: ['targetHasBarrier'],
+    heroSpecific: ['exclusiveEquipment2', 'targetHasBarrier'],
     dot: [DoT.bleed],
     innateAttackIncrease: () => 0.30,
     skills: {
@@ -910,6 +940,7 @@ export const Heroes: Record<string, Hero> = {
         mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.targetHasBarrier ? 3.4 : 1,
         multTip: () => ({ targetHasBarrier: 240 }),
         enhance: [0.05, 0.05, 0, 0.1, 0.1],
+        exclusiveEquipmentMultiplier: (inputValues: DamageFormData) => inputValues.exclusiveEquipment2 ? 0.1 : 0,
         isSingle: () => true,
         noCrit: true,
       }),
@@ -1335,6 +1366,7 @@ export const Heroes: Record<string, Hero> = {
       }),
       s1_extra: new Skill({
         id: 's1_extra',
+        name: 'belianIncursion',
         hpScaling: true,
         rate: () => 0.6,
         pow: () => 1.3,
@@ -1574,7 +1606,6 @@ export const Heroes: Record<string, Hero> = {
       })
     }
   }),
-
   brieg: new Hero({
     element: HeroElement.ice,
     class: HeroClass.knight,
@@ -2129,7 +2160,6 @@ export const Heroes: Record<string, Hero> = {
       })
     }
   }),
-  
   charles: new Hero({
     element: HeroElement.earth,
     class: HeroClass.knight,
@@ -2402,6 +2432,30 @@ export const Heroes: Record<string, Hero> = {
         exclusiveEquipmentMultiplier: (inputValues: DamageFormData) => inputValues.exclusiveEquipment3 ? 0.1 : 0,
         enhance: [0.05, 0.05, 0, 0.1, 0.1],
         isAOE: () => true,
+      })
+    }
+  }),
+  claudia: new Hero({
+    element: HeroElement.fire,
+    class: HeroClass.knight,
+    baseAttack: 703,
+    baseHP: 5914,
+    baseDefense: 596,
+    heroSpecific: ['casterMaxHP'],
+    barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => inputValues.casterFinalMaxHP(artifact) * 0.2,
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 1,
+        pow: () => 1,
+        enhance: [0.05, 0.05, 0, 0.05, 0, 0.05, 0.1],
+        isSingle: () => true,
+      }),
+      s2: new Skill({
+        id: 's2',
+        rate: () => 1,
+        pow: () => 1.3,
+        isSingle: () => true,
       })
     }
   }),
@@ -3325,6 +3379,35 @@ export const Heroes: Record<string, Hero> = {
         multTip: () => ({caster_vs_target_hp_diff: 10}),
         enhance: [0.05, 0.05, 0, 0.1, 0.1],
         isSingle: () => true,
+      })
+    }
+  }),
+  ezra: new Hero({
+    element: HeroElement.earth,
+    class: HeroClass.thief,
+    baseAttack: 921,
+    baseHP: 4945,
+    baseDefense: 462,
+    heroSpecific: ['targetNumberOfDebuffs'],
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 1,
+        pow: () => 1,
+        enhance: [0.05, 0, 0.1, 0, 0.15],
+        // TODO: fix this mod tip saying 1000%
+        fixed: (hitType: HitType, inputValues: DamageFormData) => (hitType !== HitType.miss) ? inputValues.targetNumberOfDebuffs * 1000 : 0,
+        fixedTip: (fixedDamage: number, inputValues: DamageFormData) => ({ per_target_debuff: 1000 }),
+        isSingle: () => true,
+      }),
+      s2: new Skill({
+        id: 's2',
+        rate: () => 1,
+        pow: () => 1,
+        enhance: [0.05, 0, 0.1, 0, 0.15],
+        fixed: (hitType: HitType, inputValues: DamageFormData) => (hitType !== HitType.miss) ? inputValues.targetNumberOfDebuffs * 1500 : 0,
+        fixedTip: (fixedDamage: number, inputValues: DamageFormData) => ({ per_target_debuff: 1500 }),
+        isAOE: () => true,
       })
     }
   }),

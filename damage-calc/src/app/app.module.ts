@@ -17,6 +17,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -85,7 +86,8 @@ import { CompareSaveComponent } from './components/compare-save/compare-save.com
     NgChartsModule,
     MatRadioModule,
     MtxTooltipModule,
-    FormsModule
+    FormsModule,
+    MatTabsModule
   ],
   exports: [
     TranslationPipe

@@ -147,6 +147,40 @@ html, body {
     }
   }
 
+  .mat-mdc-tab.mdc-tab .mdc-tab__text-label {
+    color: $font-light-color;
+  }
+
+  .mat-mdc-tab.mdc-tab--active, .mat-mdc-tab.mdc-tab--active:hover {
+    .mdc-tab__text-label {
+      color: $e7-buff-medium-color;
+    }
+
+    .mdc-tab-indicator__content--underline {
+      border-color: $e7-buff-medium-color;
+    }
+
+    &:hover {
+      .mdc-tab__text-label {
+        color: $e7-buff-contrast-color;
+      }
+  
+      .mdc-tab-indicator__content--underline {
+        border-color: $e7-buff-contrast-color;
+      }
+    }
+  }
+
+  .mat-mdc-tab.mdc-tab--active.cdk-focused {
+    .mdc-tab__text-label {
+      color: $e7-buff-contrast-color;
+    }
+
+    .mdc-tab-indicator__content--underline {
+      border-color: $e7-buff-contrast-color;
+    }
+  }
+
   .sticky-top {
     position: sticky;
     top: $gutter;
@@ -333,7 +367,7 @@ html, body {
       mat-form-field {
         border-radius: 0;
       }
-    }
+    }    
   
     .has-icons {
       &.mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper .mat-mdc-select-value-text {
@@ -819,6 +853,40 @@ html, body {
     color: $font-dark-color;
     background-color: whitesmoke !important;
 
+    .mat-mdc-tab.mdc-tab .mdc-tab__text-label {
+      color: $font-dark-color;
+    }
+  
+    .mat-mdc-tab.mdc-tab--active, .mat-mdc-tab.mdc-tab--active:hover {
+      .mdc-tab__text-label {
+        color: $e7-buff-medium-color;
+      }
+  
+      .mdc-tab-indicator__content--underline {
+        border-color: $e7-buff-medium-color;
+      }
+  
+      &:hover {
+        .mdc-tab__text-label {
+          color: $e7-buff-contrast-color;
+        }
+    
+        .mdc-tab-indicator__content--underline {
+          border-color: $e7-buff-contrast-color;
+        }
+      }
+    }
+  
+    .mat-mdc-tab.mdc-tab--active.cdk-focused {
+      .mdc-tab__text-label {
+        color: $e7-buff-contrast-color;
+      }
+  
+      .mdc-tab-indicator__content--underline {
+        border-color: $e7-buff-contrast-color;
+      }
+    }
+
     .text-color {
       color: $font-dark-color !important;
     }
@@ -1245,8 +1313,8 @@ body {
 
 .flex-between {
   display: flex;
-  justify-content: space-between;
-  align-items: space-between;
+  // Important because some components have a lot of overrides for this
+  justify-content: space-between !important;
 }
 
 .flex-column {
@@ -1317,6 +1385,16 @@ body {
   margin-right: 1.75rem;
 }
 
+.large-margin-left {
+  margin-left: 1.5rem;
+}
+
+.medium-large-margin-left {
+  margin-left: 1rem;
+}
+
+.mediumol
+
 .margin-top {
   margin-top: 1rem;
 }
@@ -1326,11 +1404,11 @@ body {
 }
 
 .small-margin-top {
-  margin-top: 0.5rem;
+  margin-top: 0.5rem !important;
 }
 
 .large-margin-top {
-  margin-top: 1.5rem;
+  margin-top: 1.5rem !important;
 }
 
 .jumbo-margin-top {

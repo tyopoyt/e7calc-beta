@@ -478,6 +478,7 @@
     "afterMathFormula": "Aftermath",
     "afterMathDmg": "Aftermath Dmg",
     "extraDmg": "Extra Dmg",
+    "extraSkill": "Extra",
     "fixed": "Fixed Dmg",
     "abyssal_yufine_unbridled_outburst": "Unbridled Outburst",
     "abyssal_yufine_unbridled_outburst_soulburn": "Unbridled Outburst Soulburn",
@@ -831,7 +832,13 @@
     "noBuilds": "No builds have been saved for this hero.",
     "close": "Close",
     "removeAllBuilds": "Remove All Builds",
-    "compareTip": "This is comparing critical hit damage, or normal hit if a skill cannot trigger a critical hit."
+    "removeMultiCompareBuilds": "Remove Multi-Compare Builds",
+    "compareTip": "This is comparing critical hit damage, or normal hit if a skill cannot trigger a critical hit.",
+    "multiCompareAdd": "Add to Multi-Hero Compare",
+    "noMultiBuilds": "No builds have been saved for Multi-Compare.",
+    "multiCompare": "Multi-Compare",
+    "hero": "Hero",
+    "extraSkillHint": "The hero's first additional skill or extra attack.  Examples: Alencia's Trample, Mercedes S2 Wave 2"
   },
   "defensePreset": {
     "default": "Default",

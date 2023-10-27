@@ -4510,7 +4510,6 @@ export const Heroes: Record<string, Hero> = {
     }
   }),
   kane: new Hero({
-    name: 'Kane',
     element: HeroElement.fire,
     class: HeroClass.warrior,
     baseAtk: 1359,

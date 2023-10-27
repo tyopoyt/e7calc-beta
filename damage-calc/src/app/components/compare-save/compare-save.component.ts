@@ -20,6 +20,7 @@ export interface BuildSaveData {
 export class CompareSaveComponent {
 
   Theme = Theme;
+  multiCompare = false;
 
   constructor(
     public dialogRef: MatDialogRef<CompareSaveComponent>,

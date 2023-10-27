@@ -6,10 +6,19 @@
   </mat-form-field>
   <i class="text-color">{{'saveBuildTip' | translate:'ui':languageService.language.value}}</i>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="close()">{{'cancel' | translate:'ui':languageService.language.value}}</button>
-  <button mat-button class="color-blue light-text" [mat-dialog-close]="data.buildName">
-    <img class="svg-icon medium filter white-filter tiny-margin-right" src="assets/icons/save.svg" alt="save">
-    {{'save' | translate:'ui':languageService.language.value}}
-  </button>
+<div mat-dialog-actions class="flex-aligned flex-between">
+  <div class="medium-large-margin-left">
+    <mat-checkbox [checked]="multiCompare" (change)="multiCompare = !multiCompare">
+      <span class="neat-container">
+          {{'multiCompareAdd' | translate:'ui':languageService.language.value}}
+      </span>
+    </mat-checkbox>
+  </div>
+  <div>
+    <button mat-button (click)="close()">{{'cancel' | translate:'ui':languageService.language.value}}</button>
+    <button mat-button class="color-blue light-text" [mat-dialog-close]="{buildName: data.buildName, multiCompare: multiCompare}">
+      <img class="svg-icon medium filter white-filter tiny-margin-right" src="assets/icons/save.svg" alt="save">
+      {{'save' | translate:'ui':languageService.language.value}}
+    </button>
+  </div>
 </div>

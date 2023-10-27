@@ -22,7 +22,7 @@ import { DoT, Skill } from 'src/app/models/skill';
 import { MatDialog } from '@angular/material/dialog';
 import { CompareSaveComponent } from '../compare-save/compare-save.component';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { CompareComponent } from '../compare/compare.component';
+import { CompareComponent, MultiCompareData } from '../compare/compare.component';
 import { DamageGraphComponent } from '../damage-graph/damage-graph.component';
 import { debounce } from 'src/app/utils/utils';
 import { DefensePreset, ReductionPreset, TargetPresetGroups, TargetReductionPresetGroups } from 'src/app/models/target-presets';
@@ -711,7 +711,8 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
 
     // Save the build to localStorage on dialog close
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+      if (result?.buildName) {
+
         const builds = localStorage.getItem('heroes');
         const allSets = builds ? JSON.parse(builds as string) : {};
         const heroSets = allSets[this.heroControl.value as string] || {};
@@ -719,13 +720,33 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
         for (const damage of this.damageData.data) {
           saveData[damage.skill as string] = {'crit': damage.crit || 0, 'normal': damage.normal || 0, 'miss': damage.miss || 0}
         }
-        heroSets[result] = saveData;
+        heroSets[result.buildName] = saveData;
         allSets[this.heroControl.value as string] = heroSets;
         localStorage.setItem('heroes', JSON.stringify(allSets));
         this.gtmService.pushTag({
           'event': 'save_hero',
           'hero': this.heroControl.value
         });
+
+        if (result.multiCompare) {
+          const multiHeroBuilds = localStorage.getItem('multiHeroCompare');
+          const allHeroSets = multiHeroBuilds ? JSON.parse(multiHeroBuilds as string) : {builds: []};
+
+          const multiBuildSaveData: Record<string, string | Record<string, Record<string, number>>> = {hero: this.heroID, buildName: result.buildName, damages: saveData};
+          const existingBuild = allHeroSets.builds.filter((build: MultiCompareData) => build.hero === multiBuildSaveData.hero && build.buildName === multiBuildSaveData.buildName)[0];
+          if (existingBuild) {
+            allHeroSets.builds[allHeroSets.builds.indexOf(existingBuild)] = multiBuildSaveData;
+          } else {
+            allHeroSets.builds.push(multiBuildSaveData);
+          }
+
+          localStorage.setItem('multiHeroCompare', JSON.stringify(allHeroSets));
+
+          this.gtmService.pushTag({
+            'event': 'save_hero_multi',
+            'hero': this.heroControl.value
+          });
+        }
       }
       this.refreshCompareBadge();
     });
@@ -738,7 +759,7 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
     const heroSets = allSets[this.heroControl.value as string] || {};
   
     const dialogRef = this.dialog.open(CompareComponent, {
-      width: '50rem',
+      width: '70rem',
       data: heroSets
     })
 
@@ -749,10 +770,12 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
 
     // Remove all builds for hero if requested
     dialogRef.afterClosed().subscribe(removeBuilds => {
-      if (removeBuilds) {
+      if (removeBuilds?.remove === 'hero') {
         delete allSets[this.heroControl.value as string];
         localStorage.setItem('heroes', JSON.stringify(allSets));
-      }
+      } else if (removeBuilds?.remove === 'multi') {
+        localStorage.setItem('multiHeroCompare', JSON.stringify({builds: []}));
+      } 
       this.refreshCompareBadge();
     });
   }

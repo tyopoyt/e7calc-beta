@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ScreenService } from 'src/app/services/screen.service';
 import { LanguageService } from 'src/app/services/language.service';
 import { DataService } from 'src/app/services/data.service';
+import { GoogleTagManagerService } from 'angular-google-tag-manager';
 
 export interface CompareData {
   buildName?: string;
@@ -48,7 +49,8 @@ export class CompareComponent {
     @Inject(MAT_DIALOG_DATA) public data: CompareData,
     public screenService: ScreenService,
     public languageService: LanguageService,
-    public dataService: DataService
+    public dataService: DataService,
+    private gtmService: GoogleTagManagerService
   ) {
     // TODO: Convert to indexedDB?
     // Load build data from localstorage
@@ -154,5 +156,10 @@ export class CompareComponent {
   // Handle tab switching
   tabChange(tabIndex: number) {
     this.tabIndex = tabIndex;
+    if (tabIndex === 1) {
+      this.gtmService.pushTag({
+        'event': 'view_multi_compare'
+      });
+    }
   }
 }

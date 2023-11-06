@@ -6003,6 +6003,7 @@ export const Heroes: Record<string, Hero> = {
     heroSpecific: ['casterMaxHP', 'targetMaxHP'],
     skills: {
       s1: new Skill({
+        id: 's1',
         onlyCrit: () => true,
         rate: () => 1.1,
         pow: () => 1,
@@ -6010,6 +6011,7 @@ export const Heroes: Record<string, Hero> = {
         isSingle: () => true,
       }),
       s3: new Skill({
+        id: 's3',
         onlyCrit: () => true,
         hpScaling: true,
         rate: () => 0.5,

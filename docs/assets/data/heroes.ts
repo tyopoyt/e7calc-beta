@@ -7055,7 +7055,7 @@ export const Heroes: Record<string, Hero> = {
     skills: {
       s1: new Skill({
         id: 's1',
-        rate: () => 0.95,
+        rate: () => 0.9,
         pow: () => 1,
         enhance: [0.05, 0, 0.1, 0, 0.15],
         canExtra: true,
@@ -7063,8 +7063,8 @@ export const Heroes: Record<string, Hero> = {
       }),
       s2: new Skill({
         id: 's2',
-        rate: () => 0.5, 
-        pow: () => 1,
+        rate: () => 0.8, 
+        pow: () => 1.3,
         isAOE: () => true
       }),
       s3: new Skill({

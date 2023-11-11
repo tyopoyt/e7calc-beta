@@ -124,6 +124,7 @@
     "fighter_maya": "Fighter Maya",
     "flan": "Flan",
     "free_spirit_tieria": "Free Spirit Tieria",
+    "fumyr": "Fumyr",
     "furious": "Furious",
     "general_purrgis": "General Purrgis",
     "glenn": "Glenn",
@@ -679,6 +680,7 @@
     "casterHasStealth": "Caster Has Stealth",
     "casterHasTrauma": "Trauma",
     "casterHasStarsBlessing": "Caster has Star's Blessing",
+    "casterElementalWisdomStack": "Elemental Wisdom Stack",
     "casterInvincible": "Caster Invincible",
     "casterMaxHP": "Caster's Max HP",
     "casterNumberOfBuffs": "Buffs on Caster",
@@ -770,7 +772,7 @@
     "yoonryoung_slash": "Dazzling Slash",
     "zio_disappear": "Disappear",
     "speed_tuner_instructions": "To use the speed tuner, input the current speed of your slower and/or faster unit, as well as any Combat Readiness increase that will be applied.\nThe tuner will calculate how the units' speeds need to be adjusted to guarantee turn order.\n\nIn Faster Unit Pushes mode, set the speed of the slower and/or faster unit and the CR push to calculate the speed needed for the slower unit to move next.",
-    "damageCalculatorUpdates": "Oct 27 2023 Update: Multi-Hero comparison added.  Check the box 'Add to Multi-Hero Compare' when saving a build to add, then view the comparison from the compare screen of any hero.\n\nOct 25 2023 Update: E7Calc 2.0 Beta released! Everything should work pretty much the same as it always has with a refreshed UI and some new features here and there.  Please reach out to me if you find any bugs! @tyopoyt on Discord or Reddit."
+    "damageCalculatorUpdates": "Nov 11 2023 Update: Added Fumyr and fixed bug where Pyllis and SC Pyllis's attacked stack defense increase was not applied to artifact damage (Rocket Punch)\n\nOct 27 2023 Update: Multi-Hero comparison added.  Check the box 'Add to Multi-Hero Compare' when saving a build to add, then view the comparison from the compare screen of any hero.\n\nOct 25 2023 Update: E7Calc 2.0 Beta released! Everything should work pretty much the same as it always has with a refreshed UI and some new features here and there.  Please reach out to me if you find any bugs! @tyopoyt on Discord or Reddit."
   },
   "titles": {
     "app_title": "E7Calc",

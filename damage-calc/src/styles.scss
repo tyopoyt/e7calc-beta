@@ -493,7 +493,7 @@ html, body {
   }
 
   .mat-mdc-card {
-    padding: 0.25rem 0.75rem;
+    padding: $gutter 0.75rem;
     background-color: $ui-dark-color;
     margin: 0.5rem 0 0 0.5rem;
 

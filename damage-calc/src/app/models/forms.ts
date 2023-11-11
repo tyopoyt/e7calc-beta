@@ -270,6 +270,12 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
         defaultValue: 0,
         step: 5
     },
+    casterElementalWisdomStack: {
+        max: 3,
+        min: 0,
+        defaultValue: 0,
+        step: 1
+    },
     criticalHitStack: {
         max: 50,
         min: 0,
@@ -362,7 +368,7 @@ export const TargetAttackModifiers = [
 
 export class DamageFormData {
     // Make sure to periodically comment the next line to ensure functions are being passed the right params
-    [key: string]: string | number | boolean | DefensePreset | ReductionPreset | undefined | ((artifact: Artifact) => number) | Record<string, number>,
+    [key: string]: string | number | boolean | DefensePreset | ReductionPreset | undefined | ((artifact: Artifact) => number) | ((heroMultiplier: number) => number) | Record<string, number>,
     AOEStack: number;
     artifactLevel: number;
     attack: number;
@@ -380,6 +386,7 @@ export class DamageFormData {
     casterDefense: number;
     casterDefenseUp: boolean;
     casterDefenseDown: boolean;
+    casterElementalWisdomStack: number;
     casterEnraged: boolean;
     casterFocus: number;
     casterFullFightingSpirit: boolean;
@@ -506,6 +513,7 @@ export class DamageFormData {
         this.casterDefenseUp = _.get(data, 'casterDefenseUp', false);
         this.casterDefenseDown = _.get(data, 'casterDefenseDown', false);
         this.casterEnraged = _.get(data, 'casterEnraged', false);
+        this.casterElementalWisdomStack = _.get(data, 'casterElementalWisdomStack', 0);
         this.casterFocus = _.get(data, 'casterFocus', 0);
         this.casterFullFightingSpirit = _.get(data, 'casterFullFightingSpirit', false);
         this.casterFightingSpirit = _.get(data, 'casterFightingSpirit', 0);
@@ -619,12 +627,13 @@ export class DamageFormData {
 
     // Get the caster's final defense after modifiers
     // TODO: Make sure the targetdefense... get replaced when constants are renamed
-    casterFinalDefense = () => {
+    casterFinalDefense = (heroMultiplier = 1) => {
         let defenseMultiplier = (1 + (this.casterDefenseUp ? BattleConstants.targetDefenseUp : 0)
         + (this.casterDefenseDown ? BattleConstants.targetDefenseDown : 0)
         + (this.casterHasTrauma ? BattleConstants.trauma : 0)
         + (this.casterVigor ? BattleConstants.casterVigor - 1 : 0)
-        + (this.casterFury ? BattleConstants['caster-fury'] - 1 : 0));
+        + (this.casterFury ? BattleConstants['caster-fury'] - 1 : 0)
+        + heroMultiplier);
 
         if (this.casterHasTrauma && this.casterDefenseDown) {
             defenseMultiplier -= BattleConstants.trauma;

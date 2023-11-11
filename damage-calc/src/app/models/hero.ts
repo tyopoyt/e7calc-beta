@@ -25,6 +25,7 @@ export enum HeroClass {
 //TODO: refactor atk to attack and crit to critDamage
 export class Hero {
     attackIncrease: (inputValues: DamageFormData) => number;
+    defenseIncrease: (inputValues: DamageFormData) => number;
     barrier?: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => number;
     barrier2?: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => number;
     barrier2Enhance?: string;
@@ -48,6 +49,7 @@ export class Hero {
     )
   {
     this.attackIncrease = _.get(heroValues, 'attackIncrease', () => 1);
+    this.defenseIncrease = _.get(heroValues, 'defenseIncrease', () => 1);
     this.barrier = _.get(heroValues, 'barrier', null);
     this.barrier2 = _.get(heroValues, 'barrier2', null);
     this.barrier2Enhance = _.get(heroValues, 'barrier2Enhance', '');
@@ -141,7 +143,7 @@ export class Hero {
       if (artiMultipliers.attackPercent) {
         return this.getAttack(artifact, inputValues, attackMultiplier, skill, isExtra) * artiMultipliers.attackPercent * BattleConstants.damageConstant * target.defensivePower(new Skill({ penetrate: () => artiMultipliers.penetrate }), inputValues, defenseMultiplier, artifact, false, attack, true);
       } else if (artiMultipliers.defensePercent) {
-        return inputValues.casterFinalDefense() * artiMultipliers.defensePercent * BattleConstants.damageConstant * target.defensivePower(new Skill({ penetrate: () => artiMultipliers.penetrate }), inputValues, defenseMultiplier, artifact, false, attack, true);
+        return inputValues.casterFinalDefense(this.defenseIncrease(inputValues)) * artiMultipliers.defensePercent * BattleConstants.damageConstant * target.defensivePower(new Skill({ penetrate: () => artiMultipliers.penetrate }), inputValues, defenseMultiplier, artifact, false, attack, true);
       } else if (artiMultipliers.fixedDamage) {
         return artiMultipliers.fixedDamage
       }

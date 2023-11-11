@@ -3611,6 +3611,31 @@ export const Heroes: Record<string, Hero> = {
       })
     }
   }),
+  fumyr: new Hero({
+    element: HeroElement.ice,
+    class: HeroClass.mage,
+    baseAttack: 1039,
+    baseHP: 5299,
+    baseDefense: 673,
+    heroSpecific: ['casterElementalWisdomStack'],
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 0.9,
+        pow: () => 1,
+        enhance: [0.05, 0.05, 0.0, 0.05, 0.15],
+        isSingle: () => true,
+      }),
+      s3: new Skill({
+        id: 's3',
+        rate: () => 1.5,
+        pow: () => 1,
+        fixed: (hitType: HitType, inputValues: DamageFormData) => inputValues.casterElementalWisdomStack * 3000,
+        enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
+        isSingle: () => true,
+      })
+    }
+  }),
   furious: new Hero({
     element: HeroElement.ice,
     class: HeroClass.ranger,
@@ -6851,14 +6876,17 @@ export const Heroes: Record<string, Hero> = {
     baseHP: 6403,
     heroSpecific: ['casterDefense', 'casterAttackedStack'],
     heroSpecificMaximums: {'casterAttackedStack': 3},
-    barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => inputValues.casterFinalDefense() * (1 + inputValues.casterAttackedStack * 0.1) * 0.6,
+    barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => inputValues.casterFinalDefense(Heroes.pyllis.defenseIncrease(inputValues)) * 0.6,
+    defenseIncrease: (inputValues: DamageFormData) => {
+      return inputValues.casterAttackedStack * 0.1;
+    },
     skills: {
       s1: new Skill({
         id: 's1',
         defenseScaling: true,
         rate: () => 0.7,
         pow: () => 1,
-        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalDefense() * (1 + inputValues.casterAttackedStack * 0.1) * 0.5,
+        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalDefense(Heroes.pyllis.defenseIncrease(inputValues)) * 0.5,
         flatTip: () => ({ casterDefense: 50, per_stack: 10 }),
         enhance: [0.05, 0, 0.1, 0, 0.15],
         isSingle: () => true,
@@ -6868,7 +6896,7 @@ export const Heroes: Record<string, Hero> = {
         defenseScaling: true,
         rate: () => 1.3,
         pow: () => 0.95,
-        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalDefense() * (1 + inputValues.casterAttackedStack * 0.1) * 0.7,
+        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalDefense(Heroes.pyllis.defenseIncrease(inputValues)) * 0.7,
         flatTip: () => ({ casterDefense: 70, per_stack: 10 }),
         enhance: [0.05, 0.05, 0, 0.1, 0.15],
         isSingle: () => true,
@@ -7666,14 +7694,17 @@ export const Heroes: Record<string, Hero> = {
     baseHP: 6403,
     heroSpecific: ['casterDefense', 'casterAttackedStack'],
     heroSpecificMaximums: {'casterAttackedStack': 3},
-    barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => inputValues.casterFinalDefense() * (1 + inputValues.casterAttackedStack * 0.1) * 0.6,
+    barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => inputValues.casterFinalDefense(Heroes.shadow_knight_pyllis.defenseIncrease(inputValues)) * 0.6,
+    defenseIncrease: (inputValues: DamageFormData) => {
+      return inputValues.casterAttackedStack * 0.1;
+    },
     skills: {
       s1: new Skill({
         id: 's1',
         defenseScaling: true,
         rate: () => 0.7,
         pow: () => 1,
-        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalDefense() * (1 + inputValues.casterAttackedStack * 0.1) * 0.5,
+        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalDefense(Heroes.shadow_knight_pyllis.defenseIncrease(inputValues)) * 0.5,
         flatTip: () => ({ casterDefense: 50, per_stack: 10 }),
         enhance: [0.05, 0, 0.1, 0, 0.15],
         isSingle: () => true,
@@ -7683,7 +7714,7 @@ export const Heroes: Record<string, Hero> = {
         defenseScaling: true,
         rate: () => 1.3,
         pow: () => 0.95,
-        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalDefense() * (1 + inputValues.casterAttackedStack * 0.1) * 0.7,
+        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalDefense(Heroes.shadow_knight_pyllis.defenseIncrease(inputValues)) * 0.7,
         flatTip: () => ({ casterDefense: 70, per_stack: 10 }),
         enhance: [0.05, 0.05, 0, 0.1, 0.15],
         isSingle: () => true,

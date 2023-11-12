@@ -13,7 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MtxTooltipModule } from '@ng-matero/extensions/tooltip';
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -39,6 +39,7 @@ import { CompareComponent } from './components/compare/compare.component';
 import { NgChartsModule } from 'ng2-charts';
 import { DamageGraphComponent } from './components/damage-graph/damage-graph.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,13 @@ import { MatRadioModule } from '@angular/material/radio';
     ReactiveFormsModule,
     NgChartsModule,
     MatRadioModule,
-    MtxTooltipModule
+    MtxTooltipModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   exports: [
     TranslationPipe

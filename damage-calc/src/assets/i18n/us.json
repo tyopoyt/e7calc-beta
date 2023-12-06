@@ -1,10 +1,8 @@
 {
   "heroes": {
-    "eligos_old": "Eligos (Pre-Balance)",
-    "inferno_khawazu_old": "Inferno Khawazu (Pre-Balance)",
-    "martial_artist_ken_old": "Martial Artist Ken (Pre-Balance)",
-    "moon_bunny_dominiel_old": "Moon Bunny Dominiel (Pre-Balance)",
-    "twisted_eidolon_kayron_old": "Twisted Eidolon Kayron (Pre-Balance)",
+    "lone_crescent_bellona_old": "Lone Crescent Bellona (Pre-Balance)",
+    "serila_old": "Serila (Pre-Balance)",
+    "death_dealer_ray_old": "Death Dealer Ray (Pre-Balance)",
 
     "abigail": "Abigail",
     "abyssal_yufine": "Abyssal Yufine",
@@ -116,6 +114,7 @@
     "emilia": "Emilia",
     "enott": "Enott",
     "ervalen": "Ervalen",
+    "eternal_wanderer_ludwig": "Eternal Wanderer Ludwig",
     "ezra": "Ezra",
     "fairytale_tenebria": "Fairytale Tenebria",
     "faithless_lidica": "Faithless Lidica",
@@ -772,7 +771,7 @@
     "yoonryoung_slash": "Dazzling Slash",
     "zio_disappear": "Disappear",
     "speed_tuner_instructions": "To use the speed tuner, input the current speed of your slower and/or faster unit, as well as any Combat Readiness increase that will be applied.\nThe tuner will calculate how the units' speeds need to be adjusted to guarantee turn order.\n\nIn Faster Unit Pushes mode, set the speed of the slower and/or faster unit and the CR push to calculate the speed needed for the slower unit to move next.",
-    "damageCalculatorUpdates": "Nov 11 2023 Update: Added Fumyr and fixed bug where Pyllis and SC Pyllis's attacked stack defense increase was not applied to artifact damage (Rocket Punch)\n\nOct 27 2023 Update: Multi-Hero comparison added.  Check the box 'Add to Multi-Hero Compare' when saving a build to add, then view the comparison from the compare screen of any hero.\n\nOct 25 2023 Update: E7Calc 2.0 Beta released! Everything should work pretty much the same as it always has with a refreshed UI and some new features here and there.  Please reach out to me if you find any bugs! @tyopoyt on Discord or Reddit."
+    "damageCalculatorUpdates": "Dec 6 2023 Update: Added Eternal Wanderer Ludwig and balance patch changes. Took a while to get these changes made on the beta site as it's been a bit hectic but they're here now.\n\nOct 27 2023 Update: Multi-Hero comparison added.  Check the box 'Add to Multi-Hero Compare' when saving a build to add, then view the comparison from the compare screen of any hero.\n\nOct 25 2023 Update: E7Calc 2.0 Beta released! Everything should work pretty much the same as it always has with a refreshed UI and some new features here and there.  Please reach out to me if you find any bugs! @tyopoyt on Discord or Reddit."
   },
   "titles": {
     "app_title": "E7Calc",

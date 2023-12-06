@@ -359,7 +359,12 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
         default: false,
         hint: 'inBattleHPHint',
         icon: 'icons/full-hp.png'
-    }
+    },
+    soulburnStack: {
+        max: 2,
+        min: 0,
+        defaultValue: 0
+    },
 }
 
 export const TargetAttackModifiers = [
@@ -449,6 +454,7 @@ export class DamageFormData {
     singleAttackStack: number;
     skill3Stack: number;
     skillTreeCompleted: boolean;
+    soulburnStack: number;
     targetAsleep: boolean;
     targetAttack: number;
     targetBleedDetonate: number;
@@ -575,6 +581,7 @@ export class DamageFormData {
         this.singleAttackStack = _.get(data, 'singleAttackStack', 0);
         this.skill3Stack = _.get(data, 'skill3Stack', 0);
         this.skillTreeCompleted = _.get(data, 'skillTreeCompleted', true);
+        this.soulburnStack = _.get(data, 'soulburnStack', 0);
         this.targetAsleep = _.get(data, 'targetAsleep', false);
         this.targetAttack = _.get(data, 'targetAttack', 2500);
         this.targetBleedDetonate = _.get(data, 'targetBleedDetonate', 0);

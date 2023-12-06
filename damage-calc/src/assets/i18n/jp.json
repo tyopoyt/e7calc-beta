@@ -1,10 +1,8 @@
 {
     "heroes": {
-      "eligos_old": "エリコス (前のバージョン)",
-      "inferno_khawazu_old": "狂炎のカワズ (前のバージョン)",
-      "martial_artist_ken_old": "覇者 ケン (前のバージョン)",
-      "moon_bunny_dominiel_old": "月うさぎ ドミニエル (前のバージョン)",
-      "twisted_eidolon_kayron_old": "歪みし亡霊 カイロン (前のバージョン)",
+      "lone_crescent_bellona_old": "孤月のヴェローナ (前のバージョン)",
+      "serila_old": "セリラ (前のバージョン)",
+      "death_dealer_ray_old": "死の探究者 レイ (前のバージョン)",
 
       "abigail": "アビゲイル",
       "abyssal_yufine": "深淵のユピネ",
@@ -110,6 +108,7 @@
       "emilia": "エミリア",
       "enott": "エノット",
       "ervalen": "エルバレン",
+      "eternal_wanderer_ludwig": "永劫の漂流者 ルートヴィヒ",
       "fairytale_tenebria": "メルヘン テネブレア",
       "faithless_lidica": "不信者 リディカ",
       "falconer_kluri": "鷹狩のクルリ",

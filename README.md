@@ -8,6 +8,12 @@ To test your translation locally, there is a hidden option to load a custom tran
 
 ## Changelog
 
+### <strong>Dec 6 2023 Update:</strong>
+- Added Eternal Wanderer Ludwig and balance patch changes.
+### <strong>Nov 11 2023 Update:</strong>
+- Added Fumyr and fixed bug where Pyllis and SC Pyllis's attacked stack defense increase was not applied to artifact damage (Rocket Punch)
+### <strong>Nov 11 2023 Update:</strong>
+- Multi-Hero comparison added.  Check the box 'Add to Multi-Hero Compare' when saving a build to add, then view the comparison from the compare screen of any hero.
 ### <strong>Oct 25 2023 Update:</strong>
 - E7Calc 2.0 Beta released.
 ### <strong>Oct 12 2023 Update:</strong>

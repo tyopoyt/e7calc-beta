@@ -8,6 +8,8 @@ To test your translation locally, there is a hidden option to load a custom tran
 
 ## Changelog
 
+### <strong>Dec 7 2023 Update:</strong>
+- Added Byblis.
 ### <strong>Dec 6 2023 Update:</strong>
 - Added Eternal Wanderer Ludwig and balance patch changes.
 ### <strong>Nov 11 2023 Update:</strong>

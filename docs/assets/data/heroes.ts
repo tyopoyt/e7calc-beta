@@ -1684,6 +1684,36 @@ export const Heroes: Record<string, Hero> = {
       }),
     }
   }),
+  byblis: new Hero({
+    element: HeroElement.ice,
+    class: HeroClass.ranger,
+    baseAttack: 993,
+    baseHP: 6002,
+    baseDefense: 611,
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 1,
+        pow: () => 1,
+        enhance: [0.05, 0, 0.1, 0, 0.15],
+        isSingle: () => true,
+      }),
+      s2: new Skill({
+        id: 's2',
+        rate: () => 0.8,
+        pow: () => 1.3,
+        isExtra: true,
+        isAOE: () => true,
+      }),
+      s3: new Skill({
+        id: 's3',
+        rate: () => 1,
+        pow: () => 1,
+        enhance: [0.05, 0.05, 0, 0.05, 0.15],
+        isAOE: () => true,
+      }),
+    }
+  }),
   camilla: new Hero({
     element: HeroElement.light,
     class: HeroClass.warrior,

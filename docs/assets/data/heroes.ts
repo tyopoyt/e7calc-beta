@@ -1627,6 +1627,7 @@ export const Heroes: Record<string, Hero> = {
         },
         penetrateTip: () => ({caster_target_spd_diff: 0.0059}),
         isSingle: () => true,
+        noCrit: true,
       })
     }
   }),

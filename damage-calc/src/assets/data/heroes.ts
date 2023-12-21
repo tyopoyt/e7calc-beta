@@ -1583,7 +1583,7 @@ export const Heroes: Record<string, Hero> = {
   blooming_lidica: new Hero({
     element: HeroElement.earth,
     class: HeroClass.thief,
-    heroSpecific: ['casterSpeed', 'enemyNumberOfDebuffs', 'targetSpeed'],
+    heroSpecific: ['casterSpeed', 'casterMaxHP', 'enemyNumberOfDebuffs', 'targetSpeed'],
     baseAttack: 1057,
     baseHP: 5542,
     baseDefense: 532,

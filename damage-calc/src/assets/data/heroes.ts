@@ -1580,6 +1580,56 @@ export const Heroes: Record<string, Hero> = {
       }),
     }
   }),
+  blooming_lidica: new Hero({
+    element: HeroElement.earth,
+    class: HeroClass.thief,
+    heroSpecific: ['casterSpeed', 'enemyNumberOfDebuffs', 'targetSpeed'],
+    baseAttack: 1057,
+    baseHP: 5542,
+    baseDefense: 532,
+    speedIncrease: (inputValues: DamageFormData) => 1 + Math.min(inputValues.enemyNumberOfDebuffs, 10) * 0.07,
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        hpScaling: true,
+        rate: () => 0.5,
+        pow: () => 1,
+        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.12,
+        flatTip: () => ({ casterMaxHP: 12 }),
+        enhance: [0.05, 0.05, 0, 0.1, 0.1],
+        isSingle: () => true,
+      }),
+      s2: new Skill({
+        id: 's2',
+        // name: 'belianIncursion',
+        hpScaling: true,
+        rate: () => 0.5,
+        pow: () => 1,
+        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.07,
+        flatTip: () => ({ casterMaxHP: 7 }),
+        isExtra: true,
+        isAOE: () => true,
+      }),
+      s3: new Skill({
+        id: 's3',
+        hpScaling: true,
+        rate: () => 0.5,
+        pow: () => 1,
+        enhance: [0.05, 0.05, 0, 0.1, 0.1],
+        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.3,
+        flatTip: () => ({ casterMaxHP: 30 }),
+        penetrate: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact, casterAttack: number, casterSpeed: number) => {
+          const targetSpeed = inputValues.targetFinalSpeed();
+
+          const penDiff = (casterSpeed - targetSpeed) * 0.0059;
+
+          return Math.min(Math.max(0, penDiff), 1);
+        },
+        penetrateTip: () => ({caster_target_spd_diff: 0.0059}),
+        isSingle: () => true,
+      })
+    }
+  }),
   briar_witch_iseria: new Hero({
     element: HeroElement.dark,
     class: HeroClass.ranger,

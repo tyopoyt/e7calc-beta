@@ -56,7 +56,7 @@ export class Skill {
     mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => number;
     multTip: Function;
     name: string | null;
-    penetrate: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact, casterAttack: number) => number;
+    penetrate: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact, casterAttack: number, casterSpeed: number) => number;
     penetrateTip: Function;
     pow: (soulburn: boolean, inputValues: DamageFormData) => number;
     rate: (soulburn: boolean, inputValues: DamageFormData) => number;

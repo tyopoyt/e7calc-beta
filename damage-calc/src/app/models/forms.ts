@@ -201,6 +201,11 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
         min: 0,
         defaultValue: 0
     },
+    enemyNumberOfDebuffs: {
+        max: 10,
+        min: 0,
+        defaultValue: 0
+    },
     targetNumberOfBleeds: {
         max: 10,
         min: 0,
@@ -426,6 +431,7 @@ export class DamageFormData {
     dualAttackStack: number;
     elementalAdvantage: boolean;
     enemyCounterStack: number;
+    enemyNumberOfDebuffs: number;
     enemyDefeated: boolean;
     exclusiveEquipment1: boolean;
     exclusiveEquipment2: boolean;
@@ -553,6 +559,7 @@ export class DamageFormData {
         this.dualAttackStack = _.get(data, 'dualAttackStack', 0)
         this.elementalAdvantage = _.get(data, 'elementalAdvantage', false);
         this.enemyCounterStack = _.get(data, 'enemyCounterStack', 0)
+        this.enemyNumberOfDebuffs = _.get(data, 'enemyNumberOfDebuffs', 0);
         this.enemyDefeated = _.get(data, 'enemyDefeated', false);
         this.exclusiveEquipment1 = _.get(data, 'exclusiveEquipment1', false);
         this.exclusiveEquipment2 = _.get(data, 'exclusiveEquipment2', false);

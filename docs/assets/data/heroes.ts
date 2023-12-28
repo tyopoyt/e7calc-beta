@@ -1605,6 +1605,7 @@ export const Heroes: Record<string, Hero> = {
         hpScaling: true,
         rate: () => 0.5,
         pow: () => 1,
+        enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
         flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.07,
         flatTip: () => ({ casterMaxHP: 7 }),
         isExtra: true,

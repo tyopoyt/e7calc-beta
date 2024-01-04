@@ -3133,6 +3133,29 @@ export const Heroes: Record<string, Hero> = {
       })
     }
   }),
+  dragon_king_sharun: new Hero({
+    element: HeroElement.light,
+    class: HeroClass.soul_weaver,
+    baseAttack: 640,
+    baseHP: 5340,
+    baseDefense: 720,
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 1,
+        pow: () => 1,
+        enhance: [0.05, 0, 0.1, 0, 0.15],
+        isSingle: () => true,
+      }),
+      s3: new Skill({
+        id: 's3',
+        rate: () => 1.1,
+        pow: () => 0.5,
+        enhance: [0.1, 0, 0, 0, 0.15],
+        isAOE: () => true,
+      })
+    }
+  }),
   eaton: new Hero({
     element: HeroElement.light,
     class: HeroClass.knight,
@@ -3358,6 +3381,43 @@ export const Heroes: Record<string, Hero> = {
         pow: () => 0.9,
         enhance: [0.05, 0.05, 0.05, 0, 0, 0.1, 0.15],
         isAOE: () => true,
+      })
+    }
+  }),
+  elvira: new Hero({
+    element: HeroElement.ice,
+    class: HeroClass.thief,
+    heroSpecific: ['targetCurrentHP'],
+    baseAttack: 1057,
+    baseHP: 5542,
+    baseDefense: 532,
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 1,
+        pow: () => 1,
+        enhance: [0.05, 0, 0.1, 0, 0.15],
+        isSingle: () => true,
+        noCrit: true,
+      }),
+      s1_extra: new Skill({
+        id: 's1_extra',
+        name: 'elviraExterminate',
+        rate: () => 0.5,
+        pow: () => 1.3,
+        isAOE: () => true,
+        noCrit: true,
+      }),
+      s3: new Skill({
+        id: 's3',
+        rate: () => 0.2,
+        pow: () => 1,
+        flat: (soulburn: boolean, inputValues: DamageFormData) => inputValues.targetCurrentHP * 0.16,
+        flatTip: () => ({ targetCurrentHP: 16 }),
+        penetrate: () => 1,
+        enhance: [0.05, 0.05, 0, 0.05, 0.15],
+        isSingle: () => true,
+        noCrit: true,
       })
     }
   }),
@@ -5200,7 +5260,34 @@ export const Heroes: Record<string, Hero> = {
       })
     }
   }),
-
+  leah: new Hero({
+    element: HeroElement.earth,
+    class: HeroClass.ranger,
+    heroSpecific: ['casterSpeed'],
+    baseAttack: 1081,
+    baseHP: 4450,
+    baseDefense: 504,
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 0.9,
+        pow: () => 0.95,
+        enhance: [0.05, 0.05, 0.05, 0.05, 0.05, 0.1],
+        isSingle: () => true,
+      }),
+      s2: new Skill({
+        id: 's2',
+        name: 'leahExplosiveFire',
+        speedScaling: true,
+        rate: () => 1.2,
+        pow: () => 0.95,
+        mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + inputValues.casterFinalSpeed() * 0.001,
+        multTip: () => ({ casterSpeed: 0.1 }),
+        enhanceFrom: 's1',
+        isSingle: () => true,
+      }),
+    }
+  }),
   lena: new Hero({
     element: HeroElement.ice,
     class: HeroClass.warrior,

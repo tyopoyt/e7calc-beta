@@ -151,6 +151,10 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
         icon: 'buffs/bzzt-buff.png',
         default: true
     },
+    casterHasCascade: {
+        icon: 'buffs/cascade-buff.png',
+        default: false
+    },
     numberOfTargets: {
         max: 9,
         min: 1,
@@ -405,6 +409,7 @@ export class DamageFormData {
     casterFury: boolean;
     casterBuffed: boolean;
     casterHasBzzt: boolean;
+    casterHasCascade: boolean;
     casterHasFlameAlchemist: boolean;
     casterHasImmensePower: boolean;
     casterHasMultilayerBarrier: boolean;
@@ -533,6 +538,7 @@ export class DamageFormData {
         this.casterFury = _.get(data, 'casterFury', false);
         this.casterBuffed = _.get(data, 'casterBuffed', false);
         this.casterHasBzzt = _.get(data, 'casterHasBzzt', false);
+        this.casterHasCascade = _.get(data, 'casterHasCascade', false);
         this.casterHasFlameAlchemist = _.get(data, 'casterHasFlameAlchemist', false);
         this.casterHasImmensePower = _.get(data, 'casterHasImmensePower', false);
         this.casterHasMultilayerBarrier = _.get(data, 'casterHasMultilayerBarrier', false);

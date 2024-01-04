@@ -186,7 +186,7 @@ export class DamageService {
     const detonation = this.getDetonateDamage(skill);
     const artiDamage: number = this.currentHero.getAfterMathArtifactDamage(skill, this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), this.getGlobalDefenseMult(), this.dataService.currentTarget) || 0;
     const skillDamage = this.currentHero.getAfterMathSkillDamage(skill, hitType, this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), this.getGlobalDefenseMult(), this.dataService.currentTarget);
-    return detonation + artiDamage + skillDamage;
+    return detonation + artiDamage + skillDamage + (this.damageForm.casterHasCascade ? 2500 : 0);
   }
 
   // Get the final damage numbers to be displayed in the table

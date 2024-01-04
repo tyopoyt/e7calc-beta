@@ -113,6 +113,12 @@
                     {{'vigor' | translate:'form':languageService.language.value}}
                 </span>
             </mat-checkbox>
+            <mat-checkbox class="small-margin-top" [checked]="inputValues.casterHasCascade" (change)="inputChange('casterHasCascade', $event.checked)">
+                <span class="neat-container">
+                    <img class="png-icon medium tiny-margin-right" src="assets/buffs/cascade-buff.png" alt="cascade buff">
+                    {{'cascade' | translate:'form':languageService.language.value}}
+                </span>
+            </mat-checkbox>
             <!-- TODO: edit set pngs to have no margin -->
             <mat-checkbox class="small-margin-top" [checked]="inputValues.rageSet" (change)="inputChange('rageSet', $event.checked)">
                 <span class="neat-container">

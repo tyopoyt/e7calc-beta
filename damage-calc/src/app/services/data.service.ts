@@ -35,7 +35,7 @@ export class DataService {
   ];
 
   attackModifiers = [
-    'decreasedAttack', 'attackUp', 'attackUpGreat', 'casterVigor', 'casterEnraged', 'casterHasStarsBlessing'
+    'decreasedAttack', 'attackUp', 'attackUpGreat', 'casterVigor', 'casterEnraged', 'casterHasStarsBlessing', 'casterHasPossession'
   ]
   
   damageMultSets = [

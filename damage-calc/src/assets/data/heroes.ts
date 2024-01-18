@@ -3403,6 +3403,43 @@ export const Heroes: Record<string, Hero> = {
       s1_extra: new Skill({
         id: 's1_extra',
         name: 'elviraExterminate',
+        rate: () => 1,
+        pow: () => 1.3,
+        isAOE: () => true,
+        noCrit: true,
+      }),
+      s3: new Skill({
+        id: 's3',
+        rate: () => 0.2,
+        pow: () => 1,
+        flat: (soulburn: boolean, inputValues: DamageFormData) => inputValues.targetCurrentHP * 0.16,
+        flatTip: () => ({ targetCurrentHP: 16 }),
+        penetrate: () => 1,
+        enhance: [0.05, 0.05, 0, 0.05, 0.15],
+        isSingle: () => true,
+        noCrit: true,
+      })
+    }
+  }),
+  elvira_old: new Hero({
+    element: HeroElement.ice,
+    class: HeroClass.thief,
+    heroSpecific: ['targetCurrentHP'],
+    baseAttack: 1057,
+    baseHP: 5542,
+    baseDefense: 532,
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 1,
+        pow: () => 1,
+        enhance: [0.05, 0, 0.1, 0, 0.15],
+        isSingle: () => true,
+        noCrit: true,
+      }),
+      s1_extra: new Skill({
+        id: 's1_extra',
+        name: 'elviraExterminate',
         rate: () => 0.5,
         pow: () => 1.3,
         isAOE: () => true,
@@ -4280,9 +4317,43 @@ export const Heroes: Record<string, Hero> = {
   hwayoung: new Hero({
     element: HeroElement.fire,
     class: HeroClass.warrior,
-    // info: "<strong>Notice:</strong> Hwayoung's S1 additional damage penetration has been set back to 0.7 in the calculator.  It was presumed" +
-    //       " to have been removed because it did not show up when the skill data spreadsheet datamined.  However, as of now it is presumed all" +
-    //       " additional damage of this kind has 0.7 def pen due to other heroes' additional damage penetration similarly being absent in datamines.",
+    baseAttack: 1119,
+    baseHP: 6226,
+    baseDefense: 627,
+    heroSpecific: ['targetAttack'],
+    barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => hero.getAttack(artifact, inputValues, attackMultiplier, skill) * 0.8,
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: (soulburn: boolean) => soulburn ? 1.2 : 0.8,
+        pow: () => 1,
+        afterMath: (hitType: HitType, inputValues: DamageFormData, soulburn: boolean) => hitType !== HitType.miss ? (soulburn ? new AftermathSkill({ attackPercent: 0.7 }) : new AftermathSkill({ attackPercent: 0.35 })) : null,
+        enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
+        isSingle: () => true,
+        noCrit: true,
+        soulburn: true
+      }),
+      s3: new Skill({
+        id: 's3',
+        rate: () => 1.1,
+        pow: () => 1,
+        penetrate: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact, casterAttack: number) => {
+          const targetAtk = inputValues.targetFinalAttack();
+
+          const penDiff = (casterAttack - targetAtk) * 0.000196;
+
+          return Math.min(Math.max(0, penDiff), 1);
+        },
+        penetrateTip: () => ({caster_target_atk_diff: 0.0196}),
+        enhance: [0.05, 0.05, 0, 0.1, 0.1],
+        isSingle: () => true,
+        noCrit: true,
+      }),
+    }
+  }),
+  hwayoung_old: new Hero({
+    element: HeroElement.fire,
+    class: HeroClass.warrior,
     baseAttack: 1119,
     baseHP: 6226,
     baseDefense: 627,
@@ -4291,7 +4362,7 @@ export const Heroes: Record<string, Hero> = {
     innateAttackIncrease: (inputValues: DamageFormData) => {
       let boost = 0.20;
       for (let i = 0; i < inputValues.molagoras2; i++) {
-        boost += Heroes.hwayoung.skills.s2.enhance[i];
+        boost += Heroes.hwayoung_old.skills.s2.enhance[i];
       }
       return boost;
     },
@@ -4326,7 +4397,6 @@ export const Heroes: Record<string, Hero> = {
       }),
     }
   }),
-
   ian: new Hero({
     element: HeroElement.ice,
     class: HeroClass.ranger,
@@ -4586,8 +4656,41 @@ export const Heroes: Record<string, Hero> = {
       })
     }
   }),
-
   judge_kise: new Hero({
+    element: HeroElement.light,
+    class: HeroClass.warrior,
+    baseAttack: 1039,
+    baseHP: 5340,
+    baseDefense: 617,
+    heroSpecific: ['numberOfTargets'],
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 1,
+        pow: () => 1,
+        enhance: [0.05, 0.05, 0.1, 0.1],
+        penetrate: () => 0.2,
+        isSingle: () => true,
+      }),
+      s2: new Skill({
+        id: 's2',
+        rate: () => 1,
+        pow: () => 1,
+        enhance: [0.15, 0, 0, 0.15],
+        isAOE: () => true,
+      }),
+      s3: new Skill({
+        id: 's3',
+        rate: () => 1.1,
+        pow: () => 0.95,
+        mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + (inputValues.numberOfTargets - 1) * 0.1,
+        multTip: () => ({ per_target: 10 }),
+        enhance: [0.05, 0.05, 0.05, 0, 0.05, 0.05, 0.1],
+        isAOE: () => true,
+      })
+    }
+  }),
+  judge_kise_old: new Hero({
     element: HeroElement.light,
     class: HeroClass.warrior,
     baseAttack: 1039,
@@ -7545,6 +7648,36 @@ export const Heroes: Record<string, Hero> = {
     baseAttack: 1109,
     baseHP: 4329,
     baseDefense: 655,
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 1,
+        pow: () => 1,
+        enhance: [0.05, 0.05, 0, 0.1, 0.1],
+        isSingle: () => true,
+      }),
+      s2: new Skill({
+        id: 's2',
+        rate: () => 0.7,
+        pow: () => 1,
+        enhance: [0.05, 0, 0, 0.1, 0.15],
+        isAOE: () => true,
+      }),
+      s3: new Skill({
+        id: 's3',
+        rate: () => 0.9,
+        pow: () => 0.85,
+        enhance: [0.05, 0.1, 0, 0.15, 0.15],
+        isAOE: () => true,
+      }),
+    }
+  }),
+  romann_old: new Hero({
+    element: HeroElement.ice,
+    class: HeroClass.mage,
+    baseAttack: 1109,
+    baseHP: 4329,
+    baseDefense: 655,
     heroSpecific: ['targetHasBuff'],
     skills: {
       s1: new Skill({
@@ -8437,6 +8570,32 @@ export const Heroes: Record<string, Hero> = {
     }
   }),
   spirit_eye_celine: new Hero({
+    element: HeroElement.light,
+    class: HeroClass.thief,
+    baseAttack: 1158,
+    baseHP: 5016,
+    baseDefense: 532,
+    heroSpecific: ['casterHasPossession'],
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 1,
+        pow: () => 0.9,
+        enhance: [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.1],
+        isSingle: () => true,
+      }),
+      s1_bis: new Skill({
+        id: 's1_bis',
+        name: 'ml_celine_nimble_sword',
+        rate: () => 1,
+        pow: () => 0.9,
+        penetrate: () => 0.5,
+        enhanceFrom: 's1',
+        isSingle: () => true,
+      }),
+    }
+  }),
+  spirit_eye_celine_old: new Hero({
     element: HeroElement.light,
     class: HeroClass.thief,
     baseAttack: 1158,

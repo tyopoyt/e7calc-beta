@@ -101,7 +101,7 @@ export class DamageService {
   // Get skill multiplier info for the popup
   getModifiers(skill: Skill, soulburn = false) {
     // Handle aftermath damage
-    const aftermathFormula = skill.afterMath(HitType.crit, this.damageForm);
+    const aftermathFormula = skill.afterMath(HitType.crit, this.damageForm, soulburn);
     const formattedAftermathFormula: Record<string, number> = {}
 
     if (aftermathFormula) {
@@ -117,7 +117,7 @@ export class DamageService {
       pow: skill.pow(soulburn, this.damageForm),
       mult: Math.round(((skill.mult(soulburn, this.damageForm, this.currentArtifact) - 1) * 100)), // TODO: change anything checking for this to be null to check for -1
       multTip: this.languageService.getSkillModTip(skill.multTip(soulburn)),
-      afterMathDmg: Math.round(this.currentHero.getAfterMathSkillDamage(skill, HitType.crit, this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), this.getGlobalDefenseMult(), this.dataService.currentTarget)),
+      afterMathDmg: Math.round(this.currentHero.getAfterMathSkillDamage(skill, HitType.crit, soulburn, this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), this.getGlobalDefenseMult(), this.dataService.currentTarget)),
       afterMathFormula: Object.keys(formattedAftermathFormula).length ? this.languageService.getSkillModTip(formattedAftermathFormula) : '',
       critBoost: (skill.critDmgBoost(soulburn) * 100),
       critBoostTip: this.languageService.getSkillModTip(skill.critDmgBoostTip(soulburn)),
@@ -182,10 +182,10 @@ export class DamageService {
   }
 
   // Calculate aftermath (additional) damage
-  getAfterMathDamage(skill: Skill, hitType: HitType) {
+  getAfterMathDamage(skill: Skill, hitType: HitType, soulburn: boolean) {
     const detonation = this.getDetonateDamage(skill);
     const artiDamage: number = this.currentHero.getAfterMathArtifactDamage(skill, this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), this.getGlobalDefenseMult(), this.dataService.currentTarget) || 0;
-    const skillDamage = this.currentHero.getAfterMathSkillDamage(skill, hitType, this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), this.getGlobalDefenseMult(), this.dataService.currentTarget);
+    const skillDamage = this.currentHero.getAfterMathSkillDamage(skill, hitType, soulburn, this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), this.getGlobalDefenseMult(), this.dataService.currentTarget);
     return detonation + artiDamage + skillDamage + (this.damageForm.casterHasCascade ? 2500 : 0);
   }
 
@@ -206,10 +206,10 @@ export class DamageService {
 
     return {
       skill: (skill.name || skill.id) + (soulburn ? '_soulburn' : (isExtra ? '_extra' : '')),
-      crit: skill.noCrit || skill.onlyMiss ? null : Math.round(hit * critDmg + (skill.fixed !== undefined ? skill.fixed(HitType.crit, this.damageForm) : 0) + this.getAfterMathDamage(skill, HitType.crit)),
-      crush: skill.noCrit || skill.onlyCrit(soulburn) || skill.onlyMiss ? null : Math.round(hit * 1.3 + (skill.fixed !== undefined ? skill.fixed(HitType.crush, this.damageForm) : 0) + this.getAfterMathDamage(skill, HitType.crush)),
-      normal: skill.onlyCrit(soulburn) || skill.onlyMiss ? null : Math.round(hit + (skill.fixed !== undefined ? skill.fixed(HitType.normal, this.damageForm) : 0) + this.getAfterMathDamage(skill, HitType.normal)),
-      miss: skill.noMiss ? null : Math.round(hit * 0.75 + (skill.fixed !== undefined ? skill.fixed(HitType.miss, this.damageForm) : 0) + this.getAfterMathDamage(skill, HitType.miss))
+      crit: skill.noCrit || skill.onlyMiss ? null : Math.round(hit * critDmg + (skill.fixed !== undefined ? skill.fixed(HitType.crit, this.damageForm) : 0) + this.getAfterMathDamage(skill, HitType.crit, soulburn)),
+      crush: skill.noCrit || skill.onlyCrit(soulburn) || skill.onlyMiss ? null : Math.round(hit * 1.3 + (skill.fixed !== undefined ? skill.fixed(HitType.crush, this.damageForm) : 0) + this.getAfterMathDamage(skill, HitType.crush, soulburn)),
+      normal: skill.onlyCrit(soulburn) || skill.onlyMiss ? null : Math.round(hit + (skill.fixed !== undefined ? skill.fixed(HitType.normal, this.damageForm) : 0) + this.getAfterMathDamage(skill, HitType.normal, soulburn)),
+      miss: skill.noMiss ? null : Math.round(hit * 0.75 + (skill.fixed !== undefined ? skill.fixed(HitType.miss, this.damageForm) : 0) + this.getAfterMathDamage(skill, HitType.miss, soulburn))
     };
   }
 
@@ -218,7 +218,7 @@ export class DamageService {
   updateDamages() {
     const newDamages: DamageRow[] = []
     for (const skill of Object.values(this.currentHero.skills)) {
-      if (skill.rate(false, this.damageForm) || skill.pow(false, this.damageForm) || skill.afterMath(HitType.crit, this.damageForm)) {
+      if (skill.rate(false, this.damageForm) || skill.pow(false, this.damageForm) || skill.afterMath(HitType.crit, this.damageForm, false)) {
         newDamages.push(this.getDamage(skill, false, false));
 
         if (skill.soulburn) {

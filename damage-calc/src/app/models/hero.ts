@@ -124,9 +124,9 @@ export class Hero {
   }
 
   // Get the hero's aftermath (additional) damage
-  getAfterMathSkillDamage(skill: Skill, hitType: HitType, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number, defenseMultiplier: number, target: Target, isExtra = false) {
+  getAfterMathSkillDamage(skill: Skill, hitType: HitType, soulburn: boolean, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number, defenseMultiplier: number, target: Target, isExtra = false) {
     let skillDamage = 0;
-    const skillMultipliers = skill.afterMath(hitType, inputValues);
+    const skillMultipliers = skill.afterMath(hitType, inputValues, soulburn);
     const attack = this.getAttack(artifact, inputValues, attackMultiplier, skill, isExtra)
     const speed = this.getSpeed(inputValues)
     if (skillMultipliers !== null) {

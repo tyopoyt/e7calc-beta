@@ -20,6 +20,9 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
     casterHasStarsBlessing: {
         icon: 'buffs/stars-blessing-buff.png'
     },
+    casterHasPossession: {
+        icon: 'buffs/possession-buff.png'
+    },
     casterHasTrauma: {
         icon: 'debuffs/trauma-debuff.png'
     },
@@ -417,6 +420,7 @@ export class DamageFormData {
     casterHasStealth: boolean;
     casterHasTrauma: boolean;
     casterHasStarsBlessing: boolean;
+    casterHasPossession: boolean;
     casterInvincible: boolean;
     casterMaxHP: number;
     casterNumberOfBuffs: number;
@@ -546,6 +550,7 @@ export class DamageFormData {
         this.casterHasStealth = _.get(data, 'casterHasStealth', false);
         this.casterHasTrauma = _.get(data, 'casterHasTrauma', false);
         this.casterHasStarsBlessing = _.get(data, 'casterHasStarsBlessing', false);
+        this.casterHasPossession = _.get(data, 'casterHasPossession', false);
         this.casterInvincible = _.get(data, 'casterInvincible', false);
         this.casterMaxHP = _.get(data, 'casterMaxHP', 10000);
         this.casterNumberOfBuffs = _.get(data, 'casterNumberOfBuffs', 0)

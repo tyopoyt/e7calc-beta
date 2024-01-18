@@ -35,7 +35,7 @@ export class Skill {
     id: string;
     // TODO: refactor this name
     atk: (inputValues: DamageFormData) => number;
-    afterMath: (hitType: HitType, inputValues: DamageFormData) => AftermathSkill;
+    afterMath: (hitType: HitType, inputValues: DamageFormData, soulburn: boolean) => AftermathSkill;
     canExtra: boolean;
     critDmgBoost: Function;
     critDmgBoostTip: Function;

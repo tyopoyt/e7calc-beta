@@ -2898,33 +2898,6 @@ export const Heroes: Record<string, Hero> = {
       })
     }
   }),
-  death_dealer_ray_old: new Hero({
-    element: HeroElement.dark,
-    class: HeroClass.soul_weaver,
-    baseAttack: 621,
-    baseHP: 6034,
-    baseDefense: 775,
-    heroSpecific: ['targetInjuries'],
-    skills: {
-      s1: new Skill({
-        id: 's1',
-        //TODO: add venom detonate
-        rate: () => 1,
-        pow: () => 1,
-        enhance: [0.05, 0.05, 0, 0.1, 0.1],
-        isSingle: () => true,
-      }),
-      s3: new Skill({
-        id: 's3',
-        noCrit: true,
-        noMiss: true,
-        rate: () => 0,
-        pow: () => 0,
-        afterMath: () => new AftermathSkill({ injuryPercent: 0.8 }), // TODO: check if this still works, does it penetrate correctly?
-        isAOE: () => true,
-      })
-    }
-  }),
   desert_jewel_basar: new Hero({
     element: HeroElement.light,
     class: HeroClass.soul_weaver,
@@ -5714,45 +5687,6 @@ export const Heroes: Record<string, Hero> = {
       })
     }
   }),
-  lone_crescent_bellona_old: new Hero({
-    element: HeroElement.dark,
-    class: HeroClass.warrior,
-    heroSpecific: ['casterBuffed', 'attackSkillStack'],
-    heroSpecificMaximums: {'attackSkillStack': 5},
-    baseAttack: 1208,
-    baseHP: 6488,
-    baseDefense: 616,
-    attackIncrease: (inputValues: DamageFormData) => 1 + inputValues.attackSkillStack * 0.1,
-    skills: {
-      s1: new Skill({
-        id: 's1',
-        onlyCrit: () => true,
-        rate: () => 0.9,
-        pow: () => 0.95,
-        enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
-        isSingle: () => true,
-      }),
-      s2: new Skill({
-        id: 's2',
-        onlyCrit: () => true,
-        rate: () => 0.6,
-        pow: () => 1,
-        enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
-        isExtra: true,
-        isAOE: () => true,
-      }),
-      s3: new Skill({
-        id: 's3',
-        onlyCrit: () => true,
-        rate: () => 1.5,
-        pow: () => 1,
-        mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + (inputValues.casterBuffed ? 0.3 : 0),
-        multTip: () => ({ casterBuffed: 30 }),
-        enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
-        isSingle: () => true,
-      })
-    }
-  }),
   lorina: new Hero({
     element: HeroElement.dark,
     class: HeroClass.warrior,
@@ -8133,38 +8067,6 @@ export const Heroes: Record<string, Hero> = {
         id: 's2',
         soulburn: true,
         rate: (soulburn: boolean) => soulburn ? 2.2 : 1.7,
-        pow: () => 1.05,
-        enhance: [0.1, 0, 0, 0, 0.15],
-        isSingle: () => true,
-      }),
-      s3: new Skill({
-        id: 's3',
-        rate: () => 1.8,
-        pow: () => 1.05,
-        enhance: [0.1, 0, 0, 0, 0.15],
-        isSingle: () => true,
-      })
-    }
-  }),
-  serila_old: new Hero({
-    element: HeroElement.fire,
-    class: HeroClass.mage,
-    baseAttack: 1218,
-    baseHP: 4521,
-    baseDefense: 683,
-    dot: [DoT.burn],
-    skills: {
-      s1: new Skill({
-        id: 's1',
-        rate: () => 1,
-        pow: () => 1,
-        enhance: [0.05, 0, 0.1, 0, 0.15],
-        isSingle: () => true,
-      }),
-      s2: new Skill({
-        id: 's2',
-        soulburn: true,
-        rate: (soulburn: boolean) => soulburn ? 2 : 1.5,
         pow: () => 1.05,
         enhance: [0.1, 0, 0, 0, 0.15],
         isSingle: () => true,

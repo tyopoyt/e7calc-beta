@@ -1,7 +1,7 @@
 import * as _ from 'lodash-es'
 import { DefensePreset, ReductionPreset } from './target-presets';
 import { BattleConstants } from 'src/assets/data/constants';
-import { Artifact } from './artifact';
+import { Artifact, ArtifactDamageType } from './artifact';
 
 // The | null here is to suppress a warning when using ?. in the html to check for a value in FormDefaults
 // TODO: this should probably be moved out of here since it's just a large amount data
@@ -687,7 +687,8 @@ export class DamageFormData {
 
     // Get the caster's final max HP after modifiers
     casterFinalMaxHP = (artifact: Artifact) => {
-        return (this.inputOverrides['casterMaxHP'] ? this.inputOverrides['casterMaxHP'] : this.casterMaxHP) * (this.inBattleHP ? 1: artifact.maxHP);
+        const artifactHP = (artifact.type === ArtifactDamageType.health_only && artifact.scale?.length) ? artifact.scale[Math.floor(this.artifactLevel/3)] : artifact.maxHP;
+        return (this.inputOverrides['casterMaxHP'] ? this.inputOverrides['casterMaxHP'] : this.casterMaxHP) * (this.inBattleHP ? 1 : artifactHP);
     }
 
     // Get the target's final max HP after modifiers

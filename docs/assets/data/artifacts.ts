@@ -388,7 +388,7 @@ export const Artifacts: Record<string, Artifact> = {
   sweet_miracle: new Artifact({
     id: 'sweet_miracle',
     name: 'Sweet Miracle',
-    maxHP: 1.1,
+    scale: [1.05, 1.055, 1.06, 1.065, 1.07, 1.075, 1.08, 1.085, 1.09, 1.095, 1.1],
     exclusive: HeroClass.warrior,
     type: ArtifactDamageType.health_only
   }),

@@ -404,6 +404,7 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
     })    
 
     // This one is only used for Prayer of solitude for now
+    // TODO: can this logic just check the max hp field on the artifact?
     if (this.heroSpecificNumberInputs.includes('casterMaxHP') && this.dataService.HPIncreaseArtifacts.includes(this.dataService.currentArtifactID.value)) {
       this.heroSpecificBooleanInputs.push('inBattleHP');
     }

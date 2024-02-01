@@ -51,7 +51,8 @@ export class DataService {
   ]
 
   HPIncreaseArtifacts = [
-    'prayer_of_solitude'
+    'prayer_of_solitude',
+    'sweet_miracle'
   ]
 
   advantageousElementMap = {

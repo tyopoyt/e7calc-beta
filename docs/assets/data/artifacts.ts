@@ -385,6 +385,13 @@ export const Artifacts: Record<string, Artifact> = {
     dot: [DoT.bomb],
     exclusive: HeroClass.ranger
   }),
+  sweet_miracle: new Artifact({
+    id: 'sweet_miracle',
+    name: 'Sweet Miracle',
+    maxHP: 1.1,
+    exclusive: HeroClass.warrior,
+    type: ArtifactDamageType.health_only
+  }),
   sword_of_cycling_seasons: new Artifact({
     id: 'sword_of_cycling_seasons',
     name: 'Sword of Cycling Seasons',

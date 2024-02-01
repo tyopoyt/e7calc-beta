@@ -12,7 +12,8 @@ export enum ArtifactDamageType {
     critDamageBoost = 'critDamageBoost',
     fixedDamage = 'fixedDamage',
     flat = 'flat',
-    dot = 'dot'
+    dot = 'dot',
+    health_only = 'health_only'
 }
 
 export class Artifact {

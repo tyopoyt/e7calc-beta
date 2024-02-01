@@ -5218,6 +5218,38 @@ export const Heroes: Record<string, Hero> = {
       })
     }
   }),
+  laia: new Hero({
+    element: HeroElement.earth,
+    class: HeroClass.warrior,
+    baseAttack: 984,
+    baseHP: 6266,
+    baseDefense: 637,
+    heroSpecific: ['casterMaxHP'],
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        hpScaling: true,
+        rate: () => 0.7,
+        pow: () => 1,
+        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 0.01 * inputValues.casterFinalMaxHP(artifact),
+        flatTip: () => ({ casterMaxHP: 10 }),
+        enhance: [0.05, 0, 0.1, 0, 0.15],
+        isSingle: () => true,
+      }),
+      s3: new Skill({
+        id: 's3',
+        hpScaling: true,
+        noCrit: true,
+        soulburn: true,
+        rate: () => 0.3,
+        pow: () => 1,
+        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => (soulburn ? 0.32 : 0.2) * inputValues.casterFinalMaxHP(artifact),
+        flatTip: (soulburn: boolean) => ({ casterMaxHP: soulburn ? 32 : 20 }),
+        penetrate: () => 1.0,
+        isSingle: () => true,
+      })
+    }
+  }),
   landy: new Hero({
     element: HeroElement.earth,
     class: HeroClass.ranger,

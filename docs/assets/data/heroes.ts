@@ -1307,7 +1307,7 @@ export const Heroes: Record<string, Hero> = {
   beehoo: new Hero({
     element: HeroElement.fire,
     class: HeroClass.ranger,
-    heroSpecific: ['targetBurnDetonate'],
+    heroSpecific: ['targetBurnDetonate', 'exclusiveEquipment3'],
     baseAttack: 1203,
     baseHP: 5704,
     baseDefense: 702,
@@ -1316,7 +1316,7 @@ export const Heroes: Record<string, Hero> = {
       for (let i = 0; i < inputValues.molagoras2; i++) {
         boost += Heroes.beehoo.skills.s2.enhance[i];
       }
-      return boost;
+      return boost + (inputValues.exclusiveEquipment3 ? 0.05 : 0);
     },
     dot: [DoT.burn],
     skills: {

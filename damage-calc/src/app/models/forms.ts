@@ -652,7 +652,7 @@ export class DamageFormData {
 
     // Get the caster's final defense after modifiers
     // TODO: Make sure the targetdefense... get replaced when constants are renamed
-    casterFinalDefense = (heroMultiplier = 1) => {
+    casterFinalDefense = (heroMultiplier = 0) => {
         let defenseMultiplier = (1 + (this.casterDefenseUp ? BattleConstants.targetDefenseUp : 0)
         + (this.casterDefenseDown ? BattleConstants.targetDefenseDown : 0)
         + (this.casterHasTrauma ? BattleConstants.trauma : 0)
@@ -664,8 +664,12 @@ export class DamageFormData {
             defenseMultiplier -= BattleConstants.trauma;
             defenseMultiplier *= BattleConstants.trauma * -1;
         }
+
+        const retval = Math.floor((this.inputOverrides['casterDefense'] ? this.inputOverrides['casterDefense'] : this.casterDefense) * defenseMultiplier);
+        console.log(heroMultiplier)
+        return retval
         
-        return Math.floor((this.inputOverrides['casterDefense'] ? this.inputOverrides['casterDefense'] : this.casterDefense) * defenseMultiplier);
+        // return Math.floor((this.inputOverrides['casterDefense'] ? this.inputOverrides['casterDefense'] : this.casterDefense) * defenseMultiplier);
     }
 
     // Get the target's final speed after modifiers

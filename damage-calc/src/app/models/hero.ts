@@ -50,7 +50,7 @@ export class Hero {
     )
   {
     this.attackIncrease = _.get(heroValues, 'attackIncrease', () => 1);
-    this.defenseIncrease = _.get(heroValues, 'defenseIncrease', () => 1);
+    this.defenseIncrease = _.get(heroValues, 'defenseIncrease', () => 0);
     this.speedIncrease = _.get(heroValues, 'speedIncrease', () => 1);
     this.barrier = _.get(heroValues, 'barrier', null);
     this.barrier2 = _.get(heroValues, 'barrier2', null);

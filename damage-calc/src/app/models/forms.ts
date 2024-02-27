@@ -665,9 +665,7 @@ export class DamageFormData {
             defenseMultiplier *= BattleConstants.trauma * -1;
         }
 
-        const retval = Math.floor((this.inputOverrides['casterDefense'] ? this.inputOverrides['casterDefense'] : this.casterDefense) * defenseMultiplier);
-        console.log(heroMultiplier)
-        return retval
+        return Math.floor((this.inputOverrides['casterDefense'] ? this.inputOverrides['casterDefense'] : this.casterDefense) * defenseMultiplier);
         
         // return Math.floor((this.inputOverrides['casterDefense'] ? this.inputOverrides['casterDefense'] : this.casterDefense) * defenseMultiplier);
     }

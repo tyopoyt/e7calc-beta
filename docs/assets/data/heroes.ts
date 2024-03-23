@@ -9056,6 +9056,7 @@ export const Heroes: Record<string, Hero> = {
         isSingle: () => true,
       }),
       s2: new Skill({
+        id: 's2',
         enhance: [0.05, 0.1, 0, 0.1, 0.15],
       }),
       s3: new Skill({

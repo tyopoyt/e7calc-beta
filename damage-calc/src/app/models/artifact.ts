@@ -64,7 +64,7 @@ export class Artifact {
     }
 
     getDefensePenetration(level: number, inputValues: DamageFormData, skill: Skill, isExtra = false): number {
-      if (!(this.id && this.applies(skill, inputValues) && this.type === ArtifactDamageType.penetrate)) {
+      if (!(this.id && this.type === ArtifactDamageType.penetrate && this.applies(skill, inputValues))) {
         return 0;
       }
       return this.value(this.getScale(level), inputValues, skill, isExtra);

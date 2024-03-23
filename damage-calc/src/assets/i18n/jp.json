@@ -1,8 +1,6 @@
 {
     "heroes": {
-      "lone_crescent_bellona_old": "孤月のヴェローナ (前のバージョン)",
-      "serila_old": "セリラ (前のバージョン)",
-      "death_dealer_ray_old": "死の探究者 レイ (前のバージョン)",
+      "pre_balance": "前のバージョン",
 
       "abigail": "アビゲイル",
       "abyssal_yufine": "深淵のユピネ",
@@ -640,7 +638,7 @@
       "silk_automatic_fire": "バーストショット",
       "kane_rock_smash": "ロックスマッシュ",
       "lethe_call_of_the_abyss": "深淵の呼び声",
-      "lqc_s3_splash": "S3 スプラッシュダメージ",
+      "s3_splash": "S3 スプラッシュダメージ",
       "ml_celine_nimble_sword": "快剣",
       "navy_captain_landy_salvo_fire": "一斉射擊",
       "s1_extra_attack": "S1 追加攻撃",

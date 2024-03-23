@@ -8,6 +8,8 @@ To test your translation locally, there is a hidden option to load a custom tran
 
 ## Changelog
 
+### <strong>Mar 23 2024 Update:</strong>
+Added Jenua and Dark Blood Keeper.  Updated Heroes and Artifacts included in 3/14 balance patch.
 ### <strong>Feb 26 2024 Update:</strong>
 Added Beehoo EE.
 ### <strong>Feb 1 2024 Update:</strong>

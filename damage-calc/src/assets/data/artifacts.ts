@@ -83,6 +83,12 @@ export const Artifacts: Record<string, Artifact> = {
     type: ArtifactDamageType.penetrate,
     exclusive: HeroClass.knight
   }),
+  dark_blood_keeper: new Artifact({
+    id: 'dark_blood_keeper',
+    type: ArtifactDamageType.attack,
+    exclusive: HeroClass.thief,
+    value: () => 0.15
+  }),
   daydream_joker: new Artifact({
     id: 'daydream_joker',
     name: 'Daydream Joker',
@@ -480,9 +486,8 @@ export const Artifacts: Record<string, Artifact> = {
     // info: infoLabel('victorious_flag'),
     applies: (skill: Skill, inputValues: DamageFormData) => {
       const hero = Heroes[inputValues.heroID];
-      if (hero.element === HeroElement.dark || hero.element === HeroElement.light) return false;
 
-      return (inputValues.elementalAdvantage || skill.elementalAdvantage(inputValues));
+      return !(hero.element === HeroElement.dark || hero.element === HeroElement.light);
     }
   }),
   violet_talisman: new Artifact({

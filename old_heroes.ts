@@ -1035,3 +1035,177 @@
   //     })
   //   }
   // }),
+  // elvira_old: new Hero({
+  //   element: HeroElement.ice,
+  //   class: HeroClass.thief,
+  //   heroSpecific: ['targetCurrentHP'],
+  //   baseAttack: 1057,
+  //   baseHP: 5542,
+  //   baseDefense: 532,
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0, 0.1, 0, 0.15],
+  //       isSingle: () => true,
+  //       noCrit: true,
+  //     }),
+  //     s1_extra: new Skill({
+  //       id: 's1_extra',
+  //       name: 'elviraExterminate',
+  //       rate: () => 0.5,
+  //       pow: () => 1.3,
+  //       isAOE: () => true,
+  //       noCrit: true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       rate: () => 0.2,
+  //       pow: () => 1,
+  //       flat: (soulburn: boolean, inputValues: DamageFormData) => inputValues.targetCurrentHP * 0.16,
+  //       flatTip: () => ({ targetCurrentHP: 16 }),
+  //       penetrate: () => 1,
+  //       enhance: [0.05, 0.05, 0, 0.05, 0.15],
+  //       isSingle: () => true,
+  //       noCrit: true,
+  //     })
+  //   }
+  // }),
+    // hwayoung_old: new Hero({
+  //   element: HeroElement.fire,
+  //   class: HeroClass.warrior,
+  //   baseAttack: 1119,
+  //   baseHP: 6226,
+  //   baseDefense: 627,
+  //   heroSpecific: ['casterBuffed', 'casterMaxHP', 'targetMaxHP'],
+  //   barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => hero.getAttack(artifact, inputValues, attackMultiplier, skill) * 0.45,
+  //   innateAttackIncrease: (inputValues: DamageFormData) => {
+  //     let boost = 0.20;
+  //     for (let i = 0; i < inputValues.molagoras2; i++) {
+  //       boost += Heroes.hwayoung_old.skills.s2.enhance[i];
+  //     }
+  //     return boost;
+  //   },
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 0.8,
+  //       pow: () => 1,
+  //       afterMath: (hitType: HitType, inputValues: DamageFormData) => inputValues.casterBuffed && hitType !== HitType.miss ? new AftermathSkill({ attackPercent: 0.25 }) : null,
+  //       enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
+  //       isSingle: () => true,
+  //       noCrit: true,
+  //     }),
+  //     s2: new Skill({
+  //       id: 's2',
+  //       enhance: [0.01, 0.02, 0.02, 0.02, 0.03],
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       hpScaling: true,
+  //       rate: () => 1.25,
+  //       pow: () => 1,
+  //       penetrate: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => {
+  //         return inputValues.casterFinalMaxHP(artifact) < inputValues.targetFinalMaxHP()
+  //                ? Math.min((inputValues.targetFinalMaxHP() - inputValues.casterFinalMaxHP(artifact)) * 0.000091, 1)
+  //                : 0;
+  //       },
+  //       penetrateTip: () => ({ caster_vs_target_hp_diff: 9.1 }),
+  //       enhance: [0.05, 0.05, 0, 0.1, 0.1],
+  //       isSingle: () => true,
+  //       noCrit: true,
+  //     }),
+  //   }
+  // }),
+    // judge_kise_old: new Hero({
+  //   element: HeroElement.light,
+  //   class: HeroClass.warrior,
+  //   baseAttack: 1039,
+  //   baseHP: 5340,
+  //   baseDefense: 617,
+  //   heroSpecific: ['numberOfTargets'],
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       enhance: [0.15, 0, 0, 0.15],
+  //       isSingle: () => true,
+  //     }),
+  //     s2: new Skill({
+  //       id: 's2',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0.05, 0.1, 0.1],
+  //       isAOE: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + (inputValues.numberOfTargets - 1) * 0.1,
+  //       multTip: () => ({ per_target: 10 }),
+  //       enhance: [0.05, 0, 0.05, 0, 0, 0.1, 0.1],
+  //       isAOE: () => true,
+  //     })
+  //   }
+  // }),
+    // romann_old: new Hero({
+  //   element: HeroElement.ice,
+  //   class: HeroClass.mage,
+  //   baseAttack: 1109,
+  //   baseHP: 4329,
+  //   baseDefense: 655,
+  //   heroSpecific: ['targetHasBuff'],
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0.05, 0, 0.1, 0.1],
+  //       isSingle: () => true,
+  //     }),
+  //     s2: new Skill({
+  //       id: 's2',
+  //       rate: () => 0.7,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0, 0, 0.1, 0.15],
+  //       isAOE: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       rate: () => 0.9,
+  //       pow: () => 0.85,
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.targetHasBuff ? 1.3 : 1,
+  //       multTip: () => ({ targetHasBuff: 30 }),
+  //       enhance: [0.05, 0.1, 0, 0.15, 0.15],
+  //       isAOE: () => true,
+  //     }),
+  //   }
+  // }),
+    // spirit_eye_celine_old: new Hero({
+  //   element: HeroElement.light,
+  //   class: HeroClass.thief,
+  //   baseAttack: 1158,
+  //   baseHP: 5016,
+  //   baseDefense: 532,
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 0.9,
+  //       enhance: [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.1],
+  //       isSingle: () => true,
+  //     }),
+  //     s1_bis: new Skill({
+  //       id: 's1_bis',
+  //       name: 'ml_celine_nimble_sword',
+  //       rate: () => 1.3,
+  //       pow: () => 0.9,
+  //       penetrate: () => 0.35,
+  //       enhanceFrom: 's1',
+  //       isSingle: () => true,
+  //     }),
+  //   }
+  // }),

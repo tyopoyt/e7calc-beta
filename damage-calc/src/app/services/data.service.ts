@@ -76,6 +76,9 @@ export class DataService {
     this.currentHeroID.next(hero);
     this.currentHero.next(Heroes[hero]);
 
+    this.damageInputValues.heroID = this.currentHeroID.value;
+
+    // TODO: Handle Adin's artifact
     if (this.currentArtifact.value.exclusive !== HeroClass.common && this.currentArtifact.value.exclusive !== this.currentHero.value.class) {
       this.updateSelectedArtifact(Artifacts.noProc.id)
     }

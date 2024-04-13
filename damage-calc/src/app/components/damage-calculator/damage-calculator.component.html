@@ -113,6 +113,12 @@
                     {{'vigor' | translate:'form':languageService.language.value}}
                 </span>
             </mat-checkbox>
+            <mat-checkbox class="small-margin-top" [checked]="inputValues.casterVigor" (change)="inputChange('casterEnraged', $event.checked)">
+                <span class="neat-container">
+                    <img class="png-icon medium tiny-margin-right" src="assets/buffs/rage-buff.png" alt="rage buff">
+                    {{'rage' | translate:'form':languageService.language.value}}
+                </span>
+            </mat-checkbox>
             <mat-checkbox class="small-margin-top" [checked]="inputValues.casterHasCascade" (change)="inputChange('casterHasCascade', $event.checked)">
                 <span class="neat-container">
                     <img class="png-icon medium tiny-margin-right" src="assets/buffs/cascade-buff.png" alt="cascade buff">

@@ -8,6 +8,16 @@ import { ArtifactDamageType } from "src/app/models/artifact"
 //TODO: add ftene artifact
 export const Artifacts: Record<string, Artifact> = {
   noProc: new Artifact({}),
+  three_f: new Artifact({
+    id: 'three_f',
+    name: '3F',
+    type: ArtifactDamageType.aftermath,
+    artifactSpecific:['casterMaxHP'],
+    hpScaling: true,
+    hpPercent: 0.09,
+    penetrate: 0.7,
+    exclusive: HeroClass.knight,
+  }),
   air_to_surface_missile_misha: new Artifact({
     id: 'air_to_surface_missile_misha',
     name: 'Air-to-Surface Missile: MISHA',

@@ -17,6 +17,7 @@ export enum HitType {
 
 export class AftermathSkill {
     defensePercent?: number
+    hpPercent?: number
     attackPercent?: number
     injuryPercent?: number
     targetMaxHPPercent?: number
@@ -24,6 +25,7 @@ export class AftermathSkill {
     
     constructor(data: any) {
         this.defensePercent = data.defensePercent;
+        this.hpPercent = data.hpPercent;
         this.attackPercent = data.attackPercent;
         this.injuryPercent = data.injuryPercent;
         this.targetMaxHPPercent = data.targetMaxHPPercent;

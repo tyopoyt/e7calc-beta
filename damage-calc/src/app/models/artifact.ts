@@ -30,6 +30,7 @@ export class Artifact {
     flat: (artiScale: number, inputValues: DamageFormData) => number;
     attackPercent: number;
     defensePercent: number;
+    hpPercent: number;
     defenseScaling: boolean;
     fixedDamage: number;
     hpScaling: boolean;
@@ -57,6 +58,7 @@ export class Artifact {
         this.flat = _.get(data, 'flat', () => 0); //TODO: add appropriate inputs to these fxns
         this.attackPercent = _.get(data, 'attackPercent', 0);
         this.defensePercent = _.get(data, 'defensePercent', 0);
+        this.hpPercent = _.get(data, 'hpPercent', 0);
         this.fixedDamage = _.get(data, 'fixedDamage', 0);
         this.penetrate = _.get(data, 'penetrate', 0.7);
         this.artifactSpecific = _.get(data, 'artifactSpecific', []);
@@ -113,13 +115,14 @@ export class Artifact {
 
     getAfterMathMultipliers(skill: Skill, inputValues: DamageFormData, isExtra: boolean) {
         if(!this.applies(skill, inputValues)) return null;
-        if (this.id === undefined || ![ArtifactDamageType.aftermath, ArtifactDamageType.fixedDamage].includes(this.type)  || (this.attackPercent === undefined && this.defensePercent === undefined) || this.penetrate === undefined) {
+        if (this.id === undefined || ![ArtifactDamageType.aftermath, ArtifactDamageType.fixedDamage].includes(this.type)  || (this.attackPercent === undefined && this.defensePercent === undefined && this.hpPercent === undefined) || this.penetrate === undefined) {
           return null;
         }
 
         return {
           attackPercent: this.attackPercent,
           defensePercent: this.defensePercent,
+          hpPercent: this.hpPercent,
           fixedDamage: this.type === ArtifactDamageType.fixedDamage ? this.value(this.getScale(inputValues.artifactLevel), inputValues, skill, isExtra) : 0,
           penetrate: this.penetrate
         };

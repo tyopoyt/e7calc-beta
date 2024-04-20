@@ -632,7 +632,7 @@ html, body {
       padding: 0;
       display: flex;
       flex-direction: column;
-      height: 5rem;
+      height: 7.5rem;
       justify-content: space-around;
       margin-top: $gutter;
       z-index: $popup-z-index;
@@ -690,7 +690,7 @@ html, body {
 
     &.extra-item {
       .mat-mdc-menu-content {
-        height: 7.5rem;
+        height: 10rem;
       }
     }
 
@@ -1134,7 +1134,7 @@ html, body {
       }
     }
 
-    .mat-mdc-table {  
+    .mat-mdc-table {
       thead {
         > tr {
           background-color: $ui-light-theme-medium-color;
@@ -1264,6 +1264,164 @@ html, body {
 
     app-dismissible {
       color: white;
+    }
+  }
+
+  &.retro-theme {
+    .page-container {
+      mat-form-field {
+        border: 1px solid $ui-light-color;
+      }
+
+      .column-3 {
+        > * {
+          width: calc(33.3% - calc(#{$gutter} * (2/3)) - 2px);
+        }
+      }
+
+      mat-card.mat-mdc-card {
+        box-shadow: none;
+      }
+
+      .damage-block, .credits-block {
+        mat-card.mat-mdc-card {
+          border: 1px solid $ui-medium-light-color;
+        }
+      }
+
+      app-number-input-group {
+        .mat-mdc-unelevated-button:not(:disabled) {
+          border: 1px solid $ui-medium-light-color;
+          height: 2.1rem;
+        }
+
+        mat-form-field {
+          border: 1px solid $ui-light-color;
+          border-right: none;
+          border-left: none;
+        }
+      }
+
+      .mat-mdc-checkbox {
+        .mdc-form-field {
+          background-color: transparent;
+          border: 1px solid $ui-light-color;
+        }
+
+        &:not(.mat-mdc-checkbox-checked) {
+          .mdc-checkbox__background {
+            border-color: $font-light-color !important; // really don't feel like fighting angular material on this one
+            background: $ui-light-color !important;
+          }
+        }
+        
+      }
+
+    }
+
+    &.light-theme {
+      .color-grey, .color-blue, .color-orange, .color-green {
+        color: white !important;
+      }
+      .page-container {
+        background-color: white;
+
+        .mat-mdc-form-field.number-input-field .mat-mdc-text-field-wrapper {
+          background-color: white;
+        }
+
+        mat-form-field {
+          border: 1px solid $ui-light-theme-color;
+          &.mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper {
+            background-color: whitesmoke;
+          }
+        }
+
+        mat-card.mat-mdc-card {
+          background-color: whitesmoke;
+        }
+
+        .damage-block, .credits-block {
+          mat-card.mat-mdc-card {
+            background-color: white;
+          }
+        }
+  
+        app-number-input-group {
+          .mat-mdc-unelevated-button:not(:disabled) {
+            border: 1px solid $ui-medium-light-color;
+            background-color: transparent;
+          }
+  
+          mat-form-field {
+            border-color: $ui-medium-light-color;
+            border-right: none;
+            border-left: none;
+          }
+        }
+  
+        .mat-mdc-checkbox {
+          .mdc-form-field {
+            border: 1px solid $ui-medium-light-color;
+          }
+  
+          &:not(.mat-mdc-checkbox-checked) {
+            .mdc-checkbox__background {
+              border-color: $ui-medium-light-color !important; // really don't feel like fighting angular material on this one
+              background: transparent !important;
+            }
+          }
+          
+        }
+
+        .mat-mdc-table {
+          border: 1px solid $ui-medium-light-color;
+          thead {
+            > tr {
+              background-color: $ui-light-theme-color;
+      
+              .mat-mdc-header-cell {
+                border-right: $gutter-tiny solid $ui-light-theme-medium-color;
+              }
+      
+              > :last-child {
+                border-right: none;
+              }
+            }
+          }
+      
+          tr {
+            background-color: white;
+            color: $font-dark-color;
+      
+            .mat-mdc-cell {
+              border-bottom: 2px solid $ui-light-theme-medium-color;
+              border-right: 2px solid $ui-light-theme-medium-color;
+            }
+      
+            > :last-child {
+              border-right: none;
+            }
+          }
+    
+          tbody {
+            > :last-child {
+              .mat-mdc-cell {
+                border-bottom: none;
+              }
+            }
+          }
+        }
+
+        .extra-label {
+          color:white;
+        }
+
+        .multi-slide {
+          background-color: whitesmoke;
+          box-shadow: none;
+        }
+      }
     }
   }
 

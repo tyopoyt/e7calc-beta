@@ -661,6 +661,7 @@
     },
     "ui": {
       "dark_mode": "ダークモード",
+      "retro_mode": "レトロなテーマ",
       "donate": "施す",
       "skillEnhance": "スキルレベル",
       "credits": "クレジット",

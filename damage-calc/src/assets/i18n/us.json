@@ -660,6 +660,7 @@
     "increasedDefense": "Increased Defense",
     "decreasedDefense": "Decreased Defense",
     "targetHasTrauma": "Trauma",
+    "trauma": "Trauma",
     "target": "Target",
     "defenseIncrease": "Defense % Increase",
     "defenseIncreaseHint": "Example: Aurius, Card of Small Miracles, Resolute Soldier Series",
@@ -805,6 +806,7 @@
   },
   "ui": {
     "dark_mode": "Dark Mode",
+    "retro_mode": "Retro Theme",
     "donate": "Donate",
     "credits": "Credits",
     "contribute": "Contribute",

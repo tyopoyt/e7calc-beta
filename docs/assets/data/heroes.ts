@@ -8232,7 +8232,6 @@ export const Heroes: Record<string, Hero> = {
       })
     }
   }),
-
   shadow_rose: new Hero({
     element: HeroElement.dark,
     class: HeroClass.knight,
@@ -8260,6 +8259,29 @@ export const Heroes: Record<string, Hero> = {
         pow: () => 0.8,
         enhance: [0.1, 0.1, 0, 0.15, 0.15],
         isAOE: () => true,
+      }),
+    }
+  }),
+  shalltear: new Hero({
+    element: HeroElement.fire,
+    class: HeroClass.warrior,
+    baseAttack: 1177,
+    baseHP: 5542,
+    baseDefense: 553,
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: (soulburn: boolean) => soulburn ? 1.5: 1.1,
+        pow: () => 1,
+        enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
+        isSingle: () => true,
+      }),
+      s3: new Skill({
+        id: 's3',
+        rate: () => 1.9,
+        pow: () => 1,
+        enhance: [0.05, 0.05, 0, 0.05, 0.15],
+        isSingle: () => true,
       }),
     }
   }),
@@ -9648,6 +9670,41 @@ export const Heroes: Record<string, Hero> = {
         enhance: [0.05, 0.05, 0, 0.1, 0.1],
         isSingle: () => true,
       })
+    }
+  }),
+  wandering_prince_cidd: new Hero({
+    element: HeroElement.light,
+    class: HeroClass.mage,
+    baseAttack: 1021,
+    baseHP: 5474,
+    baseDefense: 610,
+    heroSpecific: ['targetBombDetonate'],
+    dot: [DoT.bomb],
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 1,
+        pow: () => 1,
+        enhance: [0.05, 0.05, 0, 0.05, 0, 0.05, 0.1],
+        isSingle: () => true,
+      }),
+      s2: new Skill({
+        id: 's2',
+        name: 'wandering_prince_cidd_continuous_strike',
+        rate: () => 0.6,
+        pow: () => 0.9,
+        enhance: [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.1],
+        isExtra: true,
+        isSingle: () => true,
+      }),
+      s3: new Skill({
+        id: 's3',
+        rate: () => 0,
+        pow: () => 0,
+        detonate: [DoT.bomb],
+        detonation: () => 1.1,
+        isSingle: () => false,
+      }),
     }
   }),
   watcher_schuri: new Hero({

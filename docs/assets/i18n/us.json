@@ -270,6 +270,7 @@
     "serila": "Serila",
     "sez": "Sez",
     "shadow_rose": "Shadow Rose",
+    "shalltear": "Shalltear",
     "sharun": "Sharun",
     "shepherd_jena": "Shepherd Jena",
     "shooting_star_achates": "Shooting Star Achates",
@@ -315,6 +316,7 @@
     "vivian": "Vivian",
     "wanda": "Wanda",
     "wanderer_silk": "Wanderer Silk",
+    "wandering_prince_cidd": "Wandering Prince Cidd",
     "watcher_schuri": "Watcher Schuri",
     "yoonryoung": "Yoonryoung",
     "yufine": "Yufine",
@@ -516,6 +518,7 @@
     "s2_counter": "S2 (Counter)",
     "s2_wave_3": "S2 Wave 3",
     "sez_explosion": "Explosion",
+    "wandering_prince_cidd_continuous_strike": "Continuous Strike",
     "yoonryoung_slash": "Dazzling Slash",
     "zio_disappear": "Disappear",
     "custom": {
@@ -794,7 +797,7 @@
     "yoonryoung_slash": "Dazzling Slash",
     "zio_disappear": "Disappear",
     "speed_tuner_instructions": "To use the speed tuner, input the current speed of your slower and/or faster unit, as well as any Combat Readiness increase that will be applied.\nThe tuner will calculate how the units' speeds need to be adjusted to guarantee turn order.\n\nIn Faster Unit Pushes mode, set the speed of the slower and/or faster unit and the CR push to calculate the speed needed for the slower unit to move next.",
-    "damageCalculatorUpdates": "Apr 13 2024 Update: Added Sea Phantom Politis, Ragnvald, Pernilla, Albedo, Ainz Ooal Gown, and 3F.\n\nOct 27 2023 Update: Multi-Hero comparison added.  Check the box 'Add to Multi-Hero Compare' when saving a build to add, then view the comparison from the compare screen of any hero.\n\nOct 25 2023 Update: E7Calc 2.0 Beta released! Everything should work pretty much the same as it always has with a refreshed UI and some new features here and there.  Please reach out to me if you find any bugs! @tyopoyt on Discord or Reddit."
+    "damageCalculatorUpdates": "Apr 26 2024 Update: Added Shalltear, Pipette Lance, and Wandering Prince Cidd.\n\nOct 27 2023 Update: Multi-Hero comparison added.  Check the box 'Add to Multi-Hero Compare' when saving a build to add, then view the comparison from the compare screen of any hero.\n\nOct 25 2023 Update: E7Calc 2.0 Beta released! Everything should work pretty much the same as it always has with a refreshed UI and some new features here and there.  Please reach out to me if you find any bugs! @tyopoyt on Discord or Reddit."
   },
   "titles": {
     "app_title": "E7Calc",

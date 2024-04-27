@@ -218,7 +218,7 @@ export class DamageService {
   updateDamages() {
     const newDamages: DamageRow[] = []
     for (const skill of Object.values(this.currentHero.skills)) {
-      if (skill.rate(false, this.damageForm) || skill.pow(false, this.damageForm) || skill.afterMath(HitType.crit, this.damageForm, false)) {
+      if (skill.rate(false, this.damageForm) || skill.pow(false, this.damageForm) || skill.afterMath(HitType.crit, this.damageForm, false) || skill.detonation()) {
         newDamages.push(this.getDamage(skill, false, false));
 
         if (skill.soulburn) {

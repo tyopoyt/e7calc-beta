@@ -262,6 +262,14 @@ export const Artifacts: Record<string, Artifact> = {
     exclusive: HeroClass.warrior,
     applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(inputValues),
   }),
+  pipette_lance: new Artifact({
+    id: 'pipette_lance',
+    name: 'Pipette Lance',
+    scale: [0.1, 0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2],
+    type: ArtifactDamageType.damage,
+    exclusive: HeroClass.warrior,
+    applies: (skill: Skill, inputValues: DamageFormData) => skill.isSingle(inputValues),
+  }),
   portrait_of_the_saviors: new Artifact({
     id: 'portrait_of_the_saviors',
     name: 'Portrait of the Saviors',

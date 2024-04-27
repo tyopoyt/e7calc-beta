@@ -9,7 +9,9 @@ To test your translation locally, there is a hidden option to load a custom tran
 ## Changelog
 
 ### <strong>Apr 20 2024 Update:</strong>
-Added 'retro' theme for old reddit enjoyers.
+Added Shalltear, Pipette Lance, and Wandering Prince Cidd.
+### <strong>Apr 20 2024 Update:</strong>
+Added 'classic' theme for old reddit enjoyers.
 ### <strong>Apr 13 2024 Update:</strong>
 Minor bugfixes for last update and skill multiplier popup.
 ### <strong>Apr 13 2024 Update:</strong>

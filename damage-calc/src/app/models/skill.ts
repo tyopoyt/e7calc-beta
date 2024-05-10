@@ -52,7 +52,7 @@ export class Skill {
     flat2: Function;
     flatTip: Function;
     ignoreDamageTransfer: Function;
-    isAOE: Function;
+    isAOE: (inputValues: DamageFormData) => boolean;
     isExtra: boolean;
     isSingle: (inputValues: DamageFormData) => boolean;
     mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => number;

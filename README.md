@@ -8,7 +8,9 @@ To test your translation locally, there is a hidden option to load a custom tran
 
 ## Changelog
 
-### <strong>Apr 20 2024 Update:</strong>
+### <strong>May 10 2024 Update:</strong>
+Added Birgitta and Dragon Bride Senya.
+### <strong>Apr 26 2024 Update:</strong>
 Added Shalltear, Pipette Lance, and Wandering Prince Cidd.
 ### <strong>Apr 20 2024 Update:</strong>
 Added 'classic' theme for old reddit enjoyers.

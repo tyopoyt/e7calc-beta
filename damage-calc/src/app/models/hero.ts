@@ -41,6 +41,7 @@ export class Hero {
     heroSpecific: string[];
     heroSpecificMaximums: Record<string, number>;
     innateAttackIncrease?: (inputValues: DamageFormData) => number;
+    innateHPIncrease?: (inputValues: DamageFormData) => number;
     skills: Record<string, Skill>;
     exclusiveEquipmentMultiplier?: (inputValues: DamageFormData) => number;
     innateAtkUp: any;
@@ -66,6 +67,7 @@ export class Hero {
     this.heroSpecific = _.get(heroValues, 'heroSpecific', []);
     this.heroSpecificMaximums = _.get(heroValues, 'heroSpecificMaximums', {});
     this.innateAttackIncrease = _.get(heroValues, 'innateAttackIncrease', () => 0);
+    this.innateHPIncrease = _.get(heroValues, 'innateHPIncrease', () => 0);
     this.exclusiveEquipmentMultiplier = _.get(heroValues, 'exclusiveEquipmentMultiplier', () => 0);
     this.skills = _.get(heroValues, 'skills', {});
   }

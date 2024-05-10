@@ -1542,6 +1542,22 @@ export const Heroes: Record<string, Hero> = {
       }),
     }
   }),
+  birgitta: new Hero({
+    element: HeroElement.ice,
+    class: HeroClass.soul_weaver,
+    baseAttack: 785,
+    baseHP: 5077,
+    baseDefense: 634,
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 1,
+        pow: () => 1,
+        enhance: [0.05, 0, 0.1, 0, 0.15],
+        isSingle: () => true,
+      })
+    }
+  }),
   blaze_dingo: new Hero({
     element: HeroElement.light,
     class: HeroClass.soul_weaver,
@@ -3199,6 +3215,38 @@ export const Heroes: Record<string, Hero> = {
         pow: () => 1,
         enhance: [0.05, 0.1, 0, 0, 0.15],
         isSingle: () => true,
+      })
+    }
+  }),
+  dragon_bride_senya: new Hero({
+    element: HeroElement.light,
+    class: HeroClass.knight,
+    baseAttack: 894,
+    baseHP: 6840,
+    baseDefense: 694,
+    heroSpecific: ['casterHasOathOfPunishment', 'casterMaxHP'],
+    barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => inputValues.casterFinalMaxHP(artifact) * 0.3,
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 0.7,
+        pow: () => 0.9,
+        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.1,
+        flatTip: () => ({ casterMaxHP: 5 }),
+        enhance: [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.1],
+        isSingle: () => true,
+      }),
+      s3: new Skill({
+        id: 's3',
+        rate: () => 0.3,
+        pow: () => 0.9,
+        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * (soulburn ? 0.11 : 0.09),
+        flatTip: (soulburn: boolean) => ({ casterMaxHP: (soulburn ? 11 : 9) }),
+        enhance: [0.05, 0.05, 0.05, 0, 0.05, 0.05, 0.15],
+        penetrate: () => 1,
+        noCrit: true,
+        soulburn: true,
+        isAOE: (inputValues: DamageFormData) => inputValues.casterHasOathOfPunishment,
       })
     }
   }),

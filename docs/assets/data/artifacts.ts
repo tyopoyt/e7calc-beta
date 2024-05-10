@@ -245,7 +245,7 @@ export const Artifacts: Record<string, Artifact> = {
     scale: [0.07, 0.077, 0.084, 0.091, 0.098, 0.105, 0.112, 0.119, 0.126, 0.133, 0.14],
     type: ArtifactDamageType.damage,
     exclusive: HeroClass.mage,
-    applies: (skill: Skill, inputValues: DamageFormData) => skill.isAOE(),
+    applies: (skill: Skill, inputValues: DamageFormData) => skill.isAOE(inputValues),
   }),
   mature_sunglasses: new Artifact({
     id: 'mature_sunglasses',
@@ -307,7 +307,7 @@ export const Artifacts: Record<string, Artifact> = {
     scale: [0.08, 0.088, 0.096, 0.104, 0.112, 0.12, 0.128, 0.136, 0.144, 0.152, 0.16],
     type: ArtifactDamageType.damage,
     exclusive: HeroClass.ranger,
-    applies: (skill: Skill, inputValues: DamageFormData) => skill.isAOE(),
+    applies: (skill: Skill, inputValues: DamageFormData) => skill.isAOE(inputValues),
   }),
   our_beautiful_seasons: new Artifact({
     id: 'our_beautiful_seasons',
@@ -321,7 +321,7 @@ export const Artifacts: Record<string, Artifact> = {
     scale: [0.25, 0.275, 0.3, 0.325, 0.35, 0.375, 0.4, 0.425, 0.45, 0.475, 0.5],
     type: ArtifactDamageType.damage,
     exclusive: HeroClass.mage,
-    applies: (skill: Skill, inputValues: DamageFormData) => skill.isAOE()
+    applies: (skill: Skill, inputValues: DamageFormData) => skill.isAOE(inputValues)
   }),
   reingar_special_drink: new Artifact({
     id: 'reingar_special_drink',
@@ -330,7 +330,7 @@ export const Artifacts: Record<string, Artifact> = {
     attackPercent: 0.3,
     penetrate: 0.7,
     exclusive: HeroClass.ranger,
-    applies: (skill: Skill, inputValues: DamageFormData) => skill.isAOE()
+    applies: (skill: Skill, inputValues: DamageFormData) => skill.isAOE(inputValues)
   }),
   rocket_punch_gauntlet: new Artifact({
     id: 'rocket_punch_gauntlet',
@@ -432,7 +432,7 @@ export const Artifacts: Record<string, Artifact> = {
     scale: [0.1, 0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2],
     type: ArtifactDamageType.penetrate,
     exclusive: HeroClass.thief,
-    applies: (skill: Skill, inputValues: DamageFormData) => skill.isAOE(),
+    applies: (skill: Skill, inputValues: DamageFormData) => skill.isAOE(inputValues),
   }),
   sword_of_winter_shadow: new Artifact({
     id: 'sword_of_winter_shadow',

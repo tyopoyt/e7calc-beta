@@ -1667,19 +1667,23 @@ export const Heroes: Record<string, Hero> = {
         hpScaling: true,
         rate: () => 0.3,
         pow: () => 1,
+        penetrate: () => 1,
         flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.03,
         flatTip: () => ({ casterMaxHP: 3 }),
         enhance: [0.05, 0.1, 0.15],
         isSingle: () => true,
+        noCrit: true
       }),
       s1_extra: new Skill({
         id: 's1_extra',
         name: 'blood_moon_haste_bloody_retribution',
         rate: () => 0.3,
         pow: () => 1,
+        penetrate: () => 1,
         flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.1,
         flatTip: () => ({ casterMaxHP: 10 }),
         isSingle: () => true,
+        noCrit: true
       }),
       s2: new Skill({
         id: 's2',
@@ -1695,7 +1699,7 @@ export const Heroes: Record<string, Hero> = {
         flatTip: () => ({ casterMaxHP: 14 }),
         penetrate: () => 1.0,
         enhance: [0.05, 0.05, 0, 0.05, 0.05, 0.1],
-        isSingle: () => true,
+        isSingle: () => true
       }),
     }
   }),

@@ -499,11 +499,11 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
   // Update info for skill multiplier popup
   updateMultiplierTips() {
     for (const skill of Object.entries(this.hero.skills)) {
-      let multipliers = this.damageService.getModifiers(skill[1], skill[0].endsWith('_soulburn'))
+      let multipliers = this.damageService.getModifiers(skill[1], skill[0].endsWith('_soulburn'), skill[0].endsWith('_extra'))
       this.skillMultiplierTips[skill[1].name? skill[1].name : skill[0]] = multipliers;
 
       if (skill[1].soulburn) {
-        multipliers = this.damageService.getModifiers(skill[1], true);
+        multipliers = this.damageService.getModifiers(skill[1], true, skill[0].endsWith('_extra'));
         this.skillMultiplierTips[skill[0] + '_soulburn'] = multipliers;
       }
     }

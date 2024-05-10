@@ -25,6 +25,7 @@ export enum HeroClass {
 //TODO: refactor atk to attack and crit to critDamage
 export class Hero {
     attackIncrease: (inputValues: DamageFormData) => number;
+    flatAttackIncrease: (inputValues: DamageFormData, artifact: Artifact) => number;
     defenseIncrease: (inputValues: DamageFormData) => number;
     speedIncrease: (inputValues: DamageFormData) => number;
     barrier?: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => number;
@@ -51,6 +52,7 @@ export class Hero {
     )
   {
     this.attackIncrease = _.get(heroValues, 'attackIncrease', () => 1);
+    this.flatAttackIncrease = _.get(heroValues, 'flatAttackIncrease', () => 0);
     this.defenseIncrease = _.get(heroValues, 'defenseIncrease', () => 0);
     this.speedIncrease = _.get(heroValues, 'speedIncrease', () => 1);
     this.barrier = _.get(heroValues, 'barrier', null);
@@ -117,7 +119,7 @@ export class Hero {
           + artifact.getAttackBoost(inputValues.artifactLevel, inputValues, skill, isExtra);
     }
 
-    return (atk + atkImprint) * atkMod;
+    return ((atk + atkImprint) * atkMod) + this.flatAttackIncrease(inputValues, artifact);
   }
 
   // Get the hero's attack if it's modified

@@ -9,7 +9,7 @@ To test your translation locally, there is a hidden option to load a custom tran
 ## Changelog
 
 ### <strong>May 10 2024 Update:</strong>
-Added Birgitta and Dragon Bride Senya.
+May 10 2024 Update: Added Dragon Bride Senya and Birgitta. Updated heroes in 5/9 balance patch. Fix bug where skills that should ignore damage transfer were affected by damage transfer.
 ### <strong>Apr 26 2024 Update:</strong>
 Added Shalltear, Pipette Lance, and Wandering Prince Cidd.
 ### <strong>Apr 20 2024 Update:</strong>

@@ -177,7 +177,7 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
     this.heroSubscription = this.dataService.currentHero.subscribe(hero => {
       this.heroSkills = [];
       for (const skill of Object.keys(hero.skills)) {
-        if (hero.skills[skill].rate(false, this.inputValues) || hero.skills[skill].pow(false, this.inputValues)) {
+        if (hero.skills[skill].rate(false, this.inputValues, false) || hero.skills[skill].pow(false, this.inputValues)) {
           this.heroSkills.push(skill);
           // TODO: support extra attacks when relevant (prayer of solitude)
           if (hero.skills[skill].soulburn) {
@@ -303,7 +303,8 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
     // Filter out any unneeded datasets for unused stats ============================================================
     const attackLabel = this.translationPipe.transform('attack', 'graph', this.languageService.language.value);
     let filteredDatasets = this.damageData.datasets.filter(dataset => dataset.label === attackLabel);
-    if (!skill.rate(!!soulburn, this.dataService.damageInputValues) && filteredDatasets.length && !(this.artifact.attackPercent && artifactApplies)) {
+    // TODO: if extras are supported fix the skill.rate calls in this file
+    if (!skill.rate(!!soulburn, this.dataService.damageInputValues, false) && filteredDatasets.length && !(this.artifact.attackPercent && artifactApplies)) {
       this.damageData.datasets.splice(this.damageData.datasets.indexOf(filteredDatasets[0]), 1);
     }
   
@@ -333,7 +334,7 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
     // =============================================================================================================================
 
     // Calculate damage data points for relevant stat changes ----------------------------------------------------------------------
-    if (skill.rate(!!soulburn, this.dataService.damageInputValues) || (this.artifact.attackPercent && artifactApplies)) {
+    if (skill.rate(!!soulburn, this.dataService.damageInputValues, false) || (this.artifact.attackPercent && artifactApplies)) {
       const attackStep = Math.max(Math.floor(((8 / 7) / 100) * this.hero.baseAttack * (1 + (this.hero.innateAtkUp ? this.hero.innateAtkUp() : 0))), 1);
       this.getStatDataPoints('attack', attackStep, intersectionPoint, numSteps, skill);
     }

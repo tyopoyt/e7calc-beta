@@ -1209,3 +1209,99 @@
   //     }),
   //   }
   // }),
+  // clarissa_old: new Hero({
+  //   element: HeroElement.ice,
+  //   class: HeroClass.warrior,
+  //   baseAttack: 1252,
+  //   baseHP: 5219,
+  //   baseDefense: 564,
+  //   heroSpecific: ['exclusiveEquipment3'/*, 'casterEnraged'*/],
+  //   dot: [DoT.bleed],
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0, 0.1, 0, 0.15],
+  //       isSingle: () => true,
+  //     }),
+  //     s2: new Skill({
+  //       id: 's2',
+  //       rate: () => 0.7,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0.05, 0.05, 0.1, 0.1],
+  //       isExtra: true,
+  //       isAOE: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       soulburn: true,
+  //       rate: (soulburn: boolean) => soulburn ? 1.05 : 0.8,
+  //       pow: () => 1,
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterEnraged ? 1.3 : 1,
+  //       multTip: () => ({ caster_rage: 30 }),
+  //       exclusiveEquipmentMultiplier: (inputValues: DamageFormData) => inputValues.exclusiveEquipment3 ? 0.1 : 0,
+  //       enhance: [0.05, 0.05, 0, 0.1, 0.1],
+  //       isAOE: () => true,
+  //     })
+  //   }
+  // }),
+  // requiem_roana_old: new Hero({
+  //   element: HeroElement.dark,
+  //   class: HeroClass.mage,
+  //   heroSpecific: ['attackSkillStack'],
+  //   heroSpecificMaximums: {'attackSkillStack': 3},
+  //   baseAttack: 1316,
+  //   baseHP: 4777,
+  //   baseDefense: 715,
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       afterMath: (hitType: HitType) => hitType !== HitType.miss ? new AftermathSkill(({ attackPercent: 0.5 })) : null,
+  //       noCrit: true,
+  //       enhance: [0.05, 0.05, 0, 0.1, 0.1],
+  //       isSingle: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       rate: () => 0.3,
+  //       pow: () => 1,
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + inputValues.attackSkillStack * 0.15,
+  //       multTip: () => ({per_stack: 15}),
+  //       penetrate: () => 1.0,
+  //       noCrit: true,
+  //       enhance: [0.05, 0.05, 0, 0.1, 0.1],
+  //       isAOE: () => true
+  //     }),
+  //   }
+  // }),
+  // top_model_luluca_old: new Hero({
+  //   element: HeroElement.dark,
+  //   class: HeroClass.mage,
+  //   baseAttack: 1228,
+  //   baseHP: 4370,
+  //   baseDefense: 662,
+  //   heroSpecific: ['casterSpeed'],
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
+  //       noTrans: true,
+  //       isSingle: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       speedScaling: true,
+  //       rate: () => 1.6,
+  //       pow: () => 1,
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + inputValues.casterFinalSpeed() * 0.0015,
+  //       multTip: () => ({ casterSpeed: 0.15 }),
+  //       enhance: [0.05, 0.05, 0, 0.1, 0.1],
+  //       isSingle: () => true,
+  //     })
+  //   }
+  // }),

@@ -99,7 +99,7 @@ export class DamageService {
   }
 
   // Get skill multiplier info for the popup
-  getModifiers(skill: Skill, soulburn = false) {
+  getModifiers(skill: Skill, soulburn = false, isExtra = false) {
     // Handle aftermath damage
     const aftermathFormula = skill.afterMath(HitType.crit, this.damageForm, soulburn);
     const formattedAftermathFormula: Record<string, number> = {}
@@ -113,7 +113,7 @@ export class DamageService {
     }
 
     return {
-      rate: skill.rate(soulburn, this.damageForm),
+      rate: skill.rate(soulburn, this.damageForm, isExtra),
       pow: skill.pow(soulburn, this.damageForm),
       mult: Math.round(((skill.mult(soulburn, this.damageForm, this.currentArtifact) - 1) * 100)), // TODO: change anything checking for this to be null to check for -1
       multTip: this.languageService.getSkillModTip(skill.multTip(soulburn)),
@@ -135,7 +135,7 @@ export class DamageService {
 
   // Calculate caster's base damage
   offensivePower(skill: Skill, soulburn = false, isExtra = false) {
-    const rate = skill.rate(soulburn, this.damageForm);
+    const rate = skill.rate(soulburn, this.damageForm, isExtra);
     const flatMod = skill.flat(soulburn, this.damageForm, this.currentArtifact);
     //TODO: rename this
     const flatMod2 = this.currentArtifact.getFlatMult(this.damageForm.artifactLevel, this.damageForm, skill, isExtra) + (skill.flat2(this.damageForm));
@@ -219,15 +219,16 @@ export class DamageService {
   updateDamages() {
     const newDamages: DamageRow[] = []
     for (const skill of Object.values(this.currentHero.skills)) {
-      if (skill.rate(false, this.damageForm) || skill.pow(false, this.damageForm) || skill.afterMath(HitType.crit, this.damageForm, false) || skill.detonation()) {
+      // probably will never happen but if a hero is made whose rate is 0 unless extra, this logic will need to change
+      if (skill.rate(false, this.damageForm, false) || skill.pow(false, this.damageForm) || skill.afterMath(HitType.crit, this.damageForm, false) || skill.detonation()) {
         newDamages.push(this.getDamage(skill, false, false));
 
         if (skill.soulburn) {
           newDamages.push(this.getDamage(skill, true, false));
         }
   
-        if (skill.canExtra && this.currentArtifact.extraAttackBonus) {
-        newDamages.push(this.getDamage(skill, false, true));
+        if (skill.canExtra && (this.currentArtifact.extraAttackBonus || skill.extraModifier)) {
+          newDamages.push(this.getDamage(skill, false, true));
         }
       }
     }

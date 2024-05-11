@@ -7485,7 +7485,6 @@ export const Heroes: Record<string, Hero> = {
         id: 's3',
         rate: () => 1.2,
         pow: () => 0.95,
-        penetrate: () => 0.5,
         exclusiveEquipmentMultiplier: (inputValues: DamageFormData) => inputValues.exclusiveEquipment2 ? 0.1 : 0,
         enhance: [0.05, 0.05, 0, 0.1, 0.15],
         isAOE: () => true,

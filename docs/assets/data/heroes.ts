@@ -5611,6 +5611,7 @@ export const Heroes: Record<string, Hero> = {
         mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + inputValues.casterFinalSpeed() * 0.001,
         multTip: () => ({ casterSpeed: 0.1 }),
         enhanceFrom: 's1',
+        s1Benefits: true,
         isSingle: () => true,
       }),
     }

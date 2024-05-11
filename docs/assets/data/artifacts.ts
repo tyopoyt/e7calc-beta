@@ -203,6 +203,13 @@ export const Artifacts: Record<string, Artifact> = {
     exclusive: HeroClass.warrior,
     value: (artiScale: number, inputValues: DamageFormData) => inputValues.turnStack * artiScale
   }),
+  hostess_of_the_banquet: new Artifact({
+    id: 'hostess_of_the_banquet',
+    name: 'Hostess of the Banquet',
+    scale: [0.08, 0.088, 0.096, 0.104, 0.112, 0.12, 0.128, 0.136, 0.144, 0.152, 0.16],
+    type: ArtifactDamageType.damage,
+    exclusive: HeroClass.thief
+  }),
   ignition_cloth_gloves: new Artifact({
     id: 'ignition_cloth_gloves',
     name: 'Ignition Cloth Gloves',

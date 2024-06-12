@@ -1577,6 +1577,29 @@ export const Heroes: Record<string, Hero> = {
       }),
     }
   }),
+  bernard: new Hero({
+    element: HeroElement.earth,
+    class: HeroClass.soul_weaver,
+    baseAttack: 594,
+    baseHP: 4329,
+    baseDefense: 603,
+    barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => inputValues.casterFinalMaxHP(artifact) * 0.2,
+    barrierEnhance: 's2',
+    barrier2: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => inputValues.casterFinalMaxHP(artifact) * 0.15,
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 1,
+        pow: () => 1,
+        enhance: [0.05, 0.05, 0, 0.05, 0.05, 0, 0.1],
+        isSingle: () => true,
+      }),
+      s2: new Skill({
+        id: 's2',
+        enhance: [0.05, 0.05, 0.05, 0.05, 0.1, 0.1, 0.1]
+      })
+    }
+  }),
   birgitta: new Hero({
     element: HeroElement.ice,
     class: HeroClass.soul_weaver,

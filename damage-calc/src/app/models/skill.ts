@@ -56,7 +56,7 @@ export class Skill {
     isExtra: boolean;
     extraModifier: boolean;
     isSingle: (inputValues: DamageFormData) => boolean;
-    mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => number;
+    mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact, heroAttack: number) => number;
     multTip: Function;
     name: string | null;
     penetrate: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact, casterAttack: number, casterSpeed: number) => number;

@@ -14,7 +14,8 @@ export class Target {
       const base = skill.penetrate(soulburn, inputValues, artifact, casterAttack, casterSpeed);
       const artifactPenetration = artifact.getDefensePenetration(inputValues.artifactLevel, inputValues, skill);
       const set = (skill.isSingle(inputValues)) && inputValues.penetrationSet ? BattleConstants.penetrationSet : 0;
-      return Math.min(1, (1 - base) * (1 - set) * (1 - artifactPenetration));
+      const penResist = inputValues.penetrationResistance / 100;
+      return Math.min(1, (((1 - base) * (1 - set) * (1 - artifactPenetration)) + penResist));
     }
   
     defensivePower(skill: Skill, inputValues: DamageFormData, globalDefMult: number, artifact: Artifact, soulburn: boolean, casterAttack: number, casterSpeed: number, noReduc = false) {

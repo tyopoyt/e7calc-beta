@@ -115,7 +115,7 @@ export class DamageService {
     return {
       rate: skill.rate(soulburn, this.damageForm, isExtra),
       pow: skill.pow(soulburn, this.damageForm),
-      mult: Math.round(((skill.mult(soulburn, this.damageForm, this.currentArtifact) - 1) * 100)), // TODO: change anything checking for this to be null to check for -1
+      mult: Math.round(((skill.mult(soulburn, this.damageForm, this.currentArtifact, this.currentHero.getAttack(this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), skill)) - 1) * 100)), // TODO: change anything checking for this to be null to check for -1
       multTip: this.languageService.getSkillModTip(skill.multTip(soulburn)),
       afterMathDmg: Math.round(this.currentHero.getAfterMathSkillDamage(skill, HitType.crit, soulburn, this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), this.getGlobalDefenseMult(), this.dataService.currentTarget)),
       afterMathFormula: Object.keys(formattedAftermathFormula).length ? this.languageService.getSkillModTip(formattedAftermathFormula) : '',
@@ -128,7 +128,7 @@ export class DamageService {
       fixedTip: this.languageService.getSkillModTip(skill.fixedTip(skill.fixed(HitType.crit, this.damageForm), this.damageForm)),
       flat: Math.round(skill.flat(soulburn, this.damageForm, this.currentArtifact)),
       flatTip: this.languageService.getSkillModTip(skill.flatTip(soulburn)),
-      pen: (skill.penetrate(soulburn, this.damageForm, this.currentArtifact, this.currentHero.getAttack(this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), skill), this.currentHero.getSpeed(this.damageForm)) * 100).toFixed(2),
+      pen: Math.max((skill.penetrate(soulburn, this.damageForm, this.currentArtifact, this.currentHero.getAttack(this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), skill), this.currentHero.getSpeed(this.damageForm)) * 100) - this.damageForm.penetrationResistance, 0).toFixed(2),
       penTip: this.languageService.getSkillModTip(skill.penetrateTip(soulburn)),
     };
   }
@@ -151,7 +151,7 @@ export class DamageService {
         + this.getGlobalDamageMult(skill)
         + this.damageForm.damageIncrease / 100
         + this.currentArtifact.getDamageMultiplier(this.damageForm.artifactLevel, this.damageForm, skill, isExtra)
-        + (skill.mult ? skill.mult(soulburn, this.damageForm, this.currentArtifact) - 1 : 0);
+        + (skill.mult ? skill.mult(soulburn, this.damageForm, this.currentArtifact, this.currentHero.getAttack(this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), skill)) - 1 : 0);
     return ((this.currentHero.getAttack(this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), skill, isExtra) * rate + flatMod) * BattleConstants.damageConstant + flatMod2) * pow * skillEnhance * elementalAdvantage * target * dmgMod;
   }
 

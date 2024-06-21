@@ -4604,6 +4604,49 @@ export const Heroes: Record<string, Hero> = {
       })
     }
   }),
+  immortal_wukong: new Hero({
+    element: HeroElement.earth,
+    class: HeroClass.warrior,
+    baseAttack: 1208,
+    baseHP: 6488,
+    baseDefense: 616,
+    heroSpecific: ['casterAttackedStack', 'targetAttack'],
+    heroSpecificMaximums: {'casterAttackedStack': 3},
+    barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => hero.getAttack(artifact, inputValues, attackMultiplier, skill) * 0.3,
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 0.85,
+        pow: () => 1,
+        enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
+        isSingle: () => true,
+      }),
+      s1_bis: new Skill({
+        name: 'immortal_wukong_s1_aoe',
+        id: 's1_bis',
+        soulburn: true,
+        rate: (soulburn: boolean) => soulburn ? 1.1 : 0.85,
+        enhanceFrom: 's1',
+        pow: () => 1,
+        isAOE: () => true,
+      }),
+      s3: new Skill({
+        id: 's3',
+        rate: () => 1.5,
+        pow: () => 1,
+        mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact, heroAttack: number) => {
+          const targetAtk = inputValues.targetFinalAttack();
+
+          const multDiff = (heroAttack - targetAtk) * 0.000175;
+
+          return Math.min(Math.max(multDiff + 1, 1), 1.7);
+        },
+        multTip: () => ({caster_target_atk_diff: 0.0175}),
+        enhance: [0.05, 0.05, 0, 0.1, 0.1],
+        isSingle: () => true,
+      }),
+    }
+  }),
   inferno_khawazu: new Hero({
     element: HeroElement.dark,
     class: HeroClass.warrior,
@@ -6755,7 +6798,6 @@ export const Heroes: Record<string, Hero> = {
       })
     }
   }),
-
   muse_rima: new Hero({
     element: HeroElement.ice,
     class: HeroClass.ranger,
@@ -6906,6 +6948,45 @@ export const Heroes: Record<string, Hero> = {
         flatTip: (soulburn: boolean) => ({ targetMaxHP: soulburn ? 8.5 : 5 }),
         enhance: [0.05, 0.05, 0.05, 0, 0.1, 0.1, 0.15],
         isSingle: () => true,
+      })
+    }
+  }),
+  new_moon_luna: new Hero({
+    element: HeroElement.light,
+    class: HeroClass.mage,
+    baseAttack: 1039,
+    baseHP: 6034,
+    baseDefense: 613,
+    heroSpecific: ['casterMaxHP'],
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        hpScaling: true,
+        rate: () => 0.7,
+        pow: () => 1,
+        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.12,
+        flatTip: () => ({ casterMaxHP: 12 }),
+        enhance: [0.05, 0, 0.05, 0.05, 0, 0.15],
+        isSingle: () => true,
+      }),
+      s2: new Skill({
+        id: 's2',
+        hpScaling: true,
+        rate: () => 0.7,
+        pow: () => 0.95,
+        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.2,
+        flatTip: () => ({ casterMaxHP: 20 }),
+        enhance: [0.05, 0.05, 0.05, 0.05, 0.05, 0.1],
+        isSingle: () => true,
+      }),
+      s2_splash: new Skill({
+        id: 's2_splash',
+        name: 's2_splash',
+        rate: () => 0,
+        pow: () => 0,
+        afterMath: (hitType: HitType, inputValues: DamageFormData) => new AftermathSkill({ hpPercent: 0.16 }),
+        noCrit: true,
+        noMiss: true,
       })
     }
   }),

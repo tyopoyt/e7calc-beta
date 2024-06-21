@@ -4612,6 +4612,7 @@ export const Heroes: Record<string, Hero> = {
     baseDefense: 616,
     heroSpecific: ['casterAttackedStack', 'targetAttack'],
     heroSpecificMaximums: {'casterAttackedStack': 3},
+    attackIncrease: (inputValues: DamageFormData) => 1 + inputValues.casterAttackedStack * 0.2,
     barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => hero.getAttack(artifact, inputValues, attackMultiplier, skill) * 0.3,
     skills: {
       s1: new Skill({

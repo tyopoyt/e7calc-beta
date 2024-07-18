@@ -752,6 +752,7 @@
     "S3OnCooldown": "Skill 3 on Cooldown",
     "singleAttackStack": "Single Attack Stack",
     "skill3Stack": "Skill 3 Stack",
+    "skill1Stack": "Skill 1 Stack",
     "skillTreeCompleted": "Skill Tree Completed",
     "targetAsleep": "Target is Asleep",
     "targetAttack": "Target's Attack",
@@ -815,7 +816,7 @@
     "yoonryoung_slash": "Dazzling Slash",
     "zio_disappear": "Disappear",
     "speed_tuner_instructions": "To use the speed tuner, input the current speed of your slower and/or faster unit, as well as any Combat Readiness increase that will be applied.\nThe tuner will calculate how the units' speeds need to be adjusted to guarantee turn order.\n\nIn Faster Unit Pushes mode, set the speed of the slower and/or faster unit and the CR push to calculate the speed needed for the slower unit to move next.",
-    "damageCalculatorUpdates": "Jun 20 2024 Update: Added New Moon Luna and Immortal Wukong. Added Penetration Resistance to enemy section.\n\nOct 27 2023 Update: Multi-Hero comparison added.  Check the box 'Add to Multi-Hero Compare' when saving a build to add, then view the comparison from the compare screen of any hero.\n\nOct 25 2023 Update: E7Calc 2.0 Beta released! Everything should work pretty much the same as it always has with a refreshed UI and some new features here and there.  Please reach out to me if you find any bugs! @tyopoyt on Discord or Reddit."
+    "damageCalculatorUpdates": "Jul 18 2024 Update: Added changes from 7/18 balance patch.\n\nOct 27 2023 Update: Multi-Hero comparison added.  Check the box 'Add to Multi-Hero Compare' when saving a build to add, then view the comparison from the compare screen of any hero.\n\nOct 25 2023 Update: E7Calc 2.0 Beta released! Everything should work pretty much the same as it always has with a refreshed UI and some new features here and there.  Please reach out to me if you find any bugs! @tyopoyt on Discord or Reddit."
   },
   "titles": {
     "app_title": "E7Calc",

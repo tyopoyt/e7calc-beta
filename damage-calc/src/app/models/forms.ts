@@ -370,6 +370,11 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
         min: 0,
         defaultValue: 0
     },
+    skill1Stack: {
+        max: 3,
+        min: 0,
+        defaultValue: 0
+    },
     enemyDefeated: {
         icon: 'icons/skull.svg',
         svgIcon: true,
@@ -479,6 +484,7 @@ export class DamageFormData {
     S3OnCooldown: boolean;
     singleAttackStack: number;
     skill3Stack: number;
+    skill1Stack: number;
     skillTreeCompleted: boolean;
     soulburnStack: number;
     targetAsleep: boolean;
@@ -612,6 +618,7 @@ export class DamageFormData {
         this.S3OnCooldown = _.get(data, 'S3OnCooldown', false);
         this.singleAttackStack = _.get(data, 'singleAttackStack', 0);
         this.skill3Stack = _.get(data, 'skill3Stack', 0);
+        this.skill1Stack = _.get(data, 'skill1Stack', 0);
         this.skillTreeCompleted = _.get(data, 'skillTreeCompleted', true);
         this.soulburnStack = _.get(data, 'soulburnStack', 0);
         this.targetAsleep = _.get(data, 'targetAsleep', false);

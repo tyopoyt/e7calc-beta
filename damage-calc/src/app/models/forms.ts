@@ -113,6 +113,9 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
     targetAttackUpGreat: {
         icon: 'buffs/greater-attack-buff.png'
     },
+    targetArchdemonsMight: {
+        icon: 'buffs/archdemons-might-buff.png'
+    },
     targetAsleep: {
         icon: 'debuffs/sleep-debuff.png'
     },
@@ -145,6 +148,10 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
     },
     casterHasFlameAlchemist: {
         icon: 'buffs/flame-alchemist-buff.png',
+        default: true
+    },
+    casterHasArchdemonsMight: {
+        icon: 'buffs/archdemons-might-buff.png',
         default: true
     },
     targetIsHighestMaxHP: {
@@ -393,7 +400,7 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
 }
 
 export const TargetAttackModifiers = [
-    'targetAttackDown', 'targetAttackUp', 'targetAttackUpGreat', 'targetVigor', 'targetEnraged'
+    'targetAttackDown', 'targetAttackUp', 'targetAttackUpGreat', 'targetVigor', 'targetEnraged', 'targetArchdemonsMight'
 ]
 
 export class DamageFormData {
@@ -429,6 +436,7 @@ export class DamageFormData {
     casterHasOathOfPunishment: boolean;
     casterHasBloodAura: boolean;
     casterHasFlameAlchemist: boolean;
+    casterHasArchdemonsMight: boolean;
     casterHasImmensePower: boolean;
     casterHasMultilayerBarrier: boolean;
     casterHasNeoPhantomSword: boolean;
@@ -563,6 +571,7 @@ export class DamageFormData {
         this.casterHasOathOfPunishment = _.get(data, 'casterHasOathOfPunishment', false);
         this.casterHasBloodAura = _.get(data, 'casterHasBloodAura', false);
         this.casterHasFlameAlchemist = _.get(data, 'casterHasFlameAlchemist', false);
+        this.casterHasArchdemonsMight = _.get(data, 'casterHasArchdemonsMight', false);
         this.casterHasImmensePower = _.get(data, 'casterHasImmensePower', false);
         this.casterHasMultilayerBarrier = _.get(data, 'casterHasMultilayerBarrier', false);
         this.casterHasNeoPhantomSword = _.get(data, 'casterHasNeoPhantomSword', false);

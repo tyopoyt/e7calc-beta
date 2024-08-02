@@ -796,7 +796,7 @@ export const Heroes: Record<string, Hero> = {
     baseAttack: 1283,
     baseHP: 5138,
     baseDefense: 522,
-    heroSpecific: ['casterFullFocus'],
+    heroSpecific: ['casterFullFocus', 'casterHasArchdemonsMight'],
     skills: {
       s1: new Skill({
         id: 's1',
@@ -1608,7 +1608,7 @@ export const Heroes: Record<string, Hero> = {
     baseAttack: 1138,
     baseHP: 5871,
     baseDefense: 462,
-    heroSpecific: ['casterCurrentHPPercent'],
+    heroSpecific: ['casterCurrentHPPercent', 'exclusiveEquipment3'],
     attackIncrease: (inputValues: DamageFormData) => {
       let boost = 0.0051;
       for (let i = 0; i < inputValues.molagoras2; i++) {
@@ -1633,6 +1633,7 @@ export const Heroes: Record<string, Hero> = {
         soulburn: true,
         rate: (soulburn: boolean) => soulburn ? 1.45 : 1.2,
         pow: () => 0.95,
+        exclusiveEquipmentMultiplier: (inputValues: DamageFormData) => inputValues.exclusiveEquipment3 ? 0.1 : 0,
         enhance: [0.05, 0.05, 0, 0.1, 0.15],
         isAOE: () => true,
       }),
@@ -5627,7 +5628,7 @@ export const Heroes: Record<string, Hero> = {
     baseAttack: 885,
     baseHP: 6149,
     baseDefense: 613,
-    heroSpecific: ['casterMaxHP'],
+    heroSpecific: ['casterMaxHP', 'exclusiveEquipment1'],
     skills: {
       s1: new Skill({
         id: 's1',
@@ -5642,6 +5643,7 @@ export const Heroes: Record<string, Hero> = {
         hpScaling: true,
         rate: () => 0.3,
         pow: () => 1.3,
+        exclusiveEquipmentMultiplier: (inputValues: DamageFormData) => inputValues.exclusiveEquipment1 ? 0.1 : 0,
         flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.22,
         flatTip: () => ({casterMaxHP: 22}),
         penetrate: () => 1,

@@ -796,7 +796,7 @@ export const Heroes: Record<string, Hero> = {
     baseAttack: 1283,
     baseHP: 5138,
     baseDefense: 522,
-    heroSpecific: ['casterFullFocus'],
+    heroSpecific: ['casterFullFocus', 'casterHasArchdemonsMight'],
     skills: {
       s1: new Skill({
         id: 's1',
@@ -1608,7 +1608,7 @@ export const Heroes: Record<string, Hero> = {
     baseAttack: 1138,
     baseHP: 5871,
     baseDefense: 462,
-    heroSpecific: ['casterCurrentHPPercent'],
+    heroSpecific: ['casterCurrentHPPercent', 'exclusiveEquipment3'],
     attackIncrease: (inputValues: DamageFormData) => {
       let boost = 0.0051;
       for (let i = 0; i < inputValues.molagoras2; i++) {
@@ -1633,6 +1633,7 @@ export const Heroes: Record<string, Hero> = {
         soulburn: true,
         rate: (soulburn: boolean) => soulburn ? 1.45 : 1.2,
         pow: () => 0.95,
+        exclusiveEquipmentMultiplier: (inputValues: DamageFormData) => inputValues.exclusiveEquipment3 ? 0.1 : 0,
         enhance: [0.05, 0.05, 0, 0.1, 0.15],
         isAOE: () => true,
       }),
@@ -3580,6 +3581,38 @@ export const Heroes: Record<string, Hero> = {
       })
     }
   }),
+  empyrean_ilynav: new Hero({
+    element: HeroElement.light,
+    class: HeroClass.knight,
+    baseAttack: 794,
+    baseHP: 7332,
+    baseDefense: 767,
+    heroSpecific: ['casterMaxHP', 'targetInjuries'],
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        hpScaling: true,
+        rate: () => 1,
+        pow: () => 1,
+        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * (soulburn ? 0.17 : 0.1),
+        flatTip: (soulburn: boolean) => ({ casterMaxHP: soulburn ? 17 : 10 }),
+        afterMath: (hitType: HitType, damageForm: DamageFormData, soulburn: boolean) => new AftermathSkill({ injuryPercent: soulburn ? 0.5 : 0 }),
+        enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
+        soulburn: true,
+        isSingle: () => true,
+      }),
+      s3: new Skill({
+        id: 's3',
+        hpScaling: true,
+        rate: () => 1,
+        pow: () => 1,
+        flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.18,
+        flatTip: () => ({ casterMaxHP: 18 }),
+        enhance: [0.05, 0.05, 0, 0.1, 0.1],
+        isSingle: () => true,
+      })
+    }
+  }),
   enott: new Hero({
     element: HeroElement.ice,
     class: HeroClass.warrior,
@@ -3820,6 +3853,36 @@ export const Heroes: Record<string, Hero> = {
         flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.12,
         flatTip: () => ({ casterMaxHP: 12 }),
         enhance: [0.05, 0.05, 0, 0.1, 0.15],
+        isAOE: () => true,
+      })
+    }
+  }),
+  festive_eda: new Hero({
+    element: HeroElement.fire,
+    class: HeroClass.mage,
+    baseAttack: 1102,
+    baseDefense: 634,
+    baseHP: 5782,
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 1,
+        pow: () => 1,
+        enhance: [0.05, 0, 0.05, 0, 0.05, 0.05, 0.1],
+        isSingle: () => true,
+      }),
+      s2: new Skill({
+        id: 's2',
+        name: 'festive_eda_expected_outcome',
+        rate: () => 1,
+        pow: () => 1,
+        isAOE: () => true,
+      }),
+      s3: new Skill({
+        id: 's3',
+        rate: () => 0.9,
+        pow: () => 1,
+        enhance: [0.05, 0.05, 0, 0.05, 0.05, 0, 0.1],
         isAOE: () => true,
       })
     }
@@ -5627,7 +5690,7 @@ export const Heroes: Record<string, Hero> = {
     baseAttack: 885,
     baseHP: 6149,
     baseDefense: 613,
-    heroSpecific: ['casterMaxHP'],
+    heroSpecific: ['casterMaxHP', 'exclusiveEquipment1'],
     skills: {
       s1: new Skill({
         id: 's1',
@@ -5642,6 +5705,7 @@ export const Heroes: Record<string, Hero> = {
         hpScaling: true,
         rate: () => 0.3,
         pow: () => 1.3,
+        exclusiveEquipmentMultiplier: (inputValues: DamageFormData) => inputValues.exclusiveEquipment1 ? 0.1 : 0,
         flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.22,
         flatTip: () => ({casterMaxHP: 22}),
         penetrate: () => 1,

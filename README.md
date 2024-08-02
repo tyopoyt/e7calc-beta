@@ -8,6 +8,8 @@ To test your translation locally, there is a hidden option to load a custom tran
 
 ## Changelog
 
+### <strong>Aug 02 2024 Update:</strong>
+Added New EEs, Empyrean Ilynav, and Festive Eda.
 ### <strong>Jul 18 2024 Update:</strong>
 Added changes from 7/18 balance patch.
 ### <strong>Jun 20 2024 Update:</strong>

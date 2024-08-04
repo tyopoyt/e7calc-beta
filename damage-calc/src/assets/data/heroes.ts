@@ -1,6 +1,6 @@
 /*
  * Notes:
- * aftermath damage is only used when it scales with the caster's attack (hwayoung)
+ * aftermath damage is extra damage that procs after skill (hwayoung)
  * fixed damage is used for flat extra damage (rimuru)
  * flat damage is used for damage scaling with stats other than attack (alencia)
  */
@@ -12,7 +12,7 @@ import { AftermathSkill, DoT, HitType, Skill } from "src/app/models/skill";
 import { BattleConstants } from "./constants";
 
 export const Heroes: Record<string, Hero> = {
-  // If a new first hero with out an s3 is released, update the logic for the loading variable in damage-calculator.component.ts
+  // If a new first hero without an s3 is released, update the logic for the loading variable in damage-calculator.component.ts
   abigail: new Hero({
     element: HeroElement.fire,
     class: HeroClass.warrior,

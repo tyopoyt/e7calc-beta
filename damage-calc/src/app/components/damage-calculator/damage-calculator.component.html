@@ -146,7 +146,7 @@
             </mat-checkbox>
         </div>
         <div *ngIf="stackingSets.length" class="artifact-block header-block">
-            <h1>{{'numberOfSets' | translate:'ui':languageService.language.value}}</h1>
+            <h1>{{'numberOfSets' | translate:'form':languageService.language.value}}</h1>
             <div class="neat-container full-width">
                 <div *ngFor="let set of stackingSets" class="full-width">
                     <app-slide-input #slideInput
@@ -475,6 +475,7 @@
     <!-- <span *ngIf="skillMultiplierTips[i]?.elementalAdvantage" class="flex-aligned flex-between">
         <b>{{'elementalAdvantage' | translate:'ui':languageService.language.value}}:</b><img class="icon tiny tiny-margin-left svg-icon link" src="assets/icons/open-in-new.svg" alt="Elemental advantage">
     </span> -->
+    <!-- TODO: implement custom multis? like apoc's per dead enemy? -->
     <span *ngIf="skillMultiplierTips[i]?.flat || skillMultiplierTips[i]?.flatTip" class="flex-aligned flex-between">
         <b>{{'flat' | translate:'ui':languageService.language.value}}:</b><p class="no-margin">&nbsp;{{skillMultiplierTips[i]?.flatTip}}</p>&nbsp;<p class="no-margin">{{skillMultiplierTips[i]?.flat}}</p>
     </span>

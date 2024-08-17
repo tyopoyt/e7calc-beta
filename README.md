@@ -1,6 +1,6 @@
 ## Contributing a Translation
 
-To submit a translation, please make a copy of the [English translation file](./damage-calc/src/assets/i18n/us.json) and fill out the values with the translations for the new language.  For example if you were creating a translation for French, `"attack": "Attack"` might become `"attack": "Attaque"`.
+To submit a translation, please make a copy of the [English translation file](https://github.com/tyopoyt/e7calc-beta/blob/gh-pages/damage-calc/src/assets/i18n/us.json) and fill out the values with the translations for the new language.  For example if you were creating a translation for French, `"attack": "Attack"` might become `"attack": "Attaque"`.
 
 To test your translation locally, there is a hidden option to load a custom translation file.  If you select the active language from the selector three times in a row you will be prompted asking if you'd like to upload a file.  If you then upload a tranlsation file it will be applied to the UI. This works with both the large and small screen language selectors.  Here is an example:
 
@@ -8,32 +8,35 @@ To test your translation locally, there is a hidden option to load a custom tran
 
 ## Changelog
 
+### <strong>Aug 17 2024 Update:</strong>
+- Added Frida.
+- Fixed some bugs with Penetration Resistance. Still need to do some testing in-game as it's probably not totally correct at the moment.
 ### <strong>Aug 02 2024 Update:</strong>
-Added New EEs, Empyrean Ilynav, and Festive Eda.
+- Added New EEs, Empyrean Ilynav, and Festive Eda.
 ### <strong>Jul 18 2024 Update:</strong>
-Added changes from 7/18 balance patch.
+- Added changes from 7/18 balance patch.
 ### <strong>Jun 20 2024 Update:</strong>
-Added New Moon Luna and Immortal Wukong. Added Penetration Resistance to enemy section.
+- Added New Moon Luna and Immortal Wukong. Added Penetration Resistance to enemy section.
 ### <strong>Jun 10 2024 Update:</strong>
-Added Bernard.
+- Added Bernard.
 ### <strong>May 10 2024 Update:</strong>
-May 10 2024 Update: Added Dragon Bride Senya and Birgitta. Updated heroes in 5/9 balance patch. Fix bug where skills that should ignore damage transfer were affected by damage transfer.
+- May 10 2024 Update: Added Dragon Bride Senya and Birgitta. Updated heroes in 5/9 balance patch. Fix bug where skills that should ignore damage transfer were affected by damage transfer.
 ### <strong>Apr 26 2024 Update:</strong>
-Added Shalltear, Pipette Lance, and Wandering Prince Cidd.
+- Added Shalltear, Pipette Lance, and Wandering Prince Cidd.
 ### <strong>Apr 20 2024 Update:</strong>
-Added 'classic' theme for old reddit enjoyers.
+- Added 'classic' theme for old reddit enjoyers.
 ### <strong>Apr 13 2024 Update:</strong>
-Minor bugfixes for last update and skill multiplier popup.
+- Minor bugfixes for last update and skill multiplier popup.
 ### <strong>Apr 13 2024 Update:</strong>
-Added Sea Phantom Politis, Ragnvald, Pernilla, Albedo, Ainz Ooal Gown, and 3F. 
+- Added Sea Phantom Politis, Ragnvald, Pernilla, Albedo, Ainz Ooal Gown, and 3F. 
 ### <strong>Mar 23 2024 Update:</strong>
-Added Jenua and Dark Blood Keeper.  Updated Heroes and Artifacts included in 3/14 balance patch.
+- Added Jenua and Dark Blood Keeper.  Updated Heroes and Artifacts included in 3/14 balance patch.
 ### <strong>Feb 26 2024 Update:</strong>
-Added Beehoo EE.
+- Added Beehoo EE.
 ### <strong>Feb 1 2024 Update:</strong>
-Added Laia and Sweet Miracle.
+- Added Laia and Sweet Miracle.
 ### <strong>Jan 18 2024 Update:</strong>
-Added changes from 01/2024 Balance patch.
+- Added changes from 01/2024 Balance patch.
 ### <strong>Jan 4 2024 Update:</strong>
 - Added Dragon King Sharun, Elvira, and Leah.
 ### <strong>Dec 7 2023 Update:</strong>

@@ -120,3 +120,5 @@ export class Skill {
         this.soulburn = _.get(data, 'soulburn', false);
     }
 }
+
+export const DoTSkill: Skill = new Skill({id: 'dot', penetrate: () => 0.7});

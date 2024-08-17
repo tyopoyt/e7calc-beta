@@ -18,7 +18,7 @@ import { Artifact } from 'src/app/models/artifact';
 import { SlideInputComponent } from '../ui-elements/slide-input/slide-input.component';
 import { DamageFormData, FormDefaults } from 'src/app/models/forms';
 import { MatTableDataSource } from '@angular/material/table';
-import { DoT, Skill } from 'src/app/models/skill';
+import { DoT, DoTSkill } from 'src/app/models/skill';
 import { MatDialog } from '@angular/material/dialog';
 import { CompareSaveComponent } from '../compare-save/compare-save.component';
 import { animate, style, transition, trigger } from '@angular/animations';
@@ -620,9 +620,9 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
   updateDots() {
     Promise.resolve().then(() => {
       this.heroDots = [...(new Set(this.hero.getDoT(this.artifact)))];
-      this.dotDamages['bleed'] = Math.round(this.damageService.getDotDamage(new Skill({}), DoT.bleed));
-      this.dotDamages['bomb'] = Math.round(this.damageService.getDotDamage(new Skill({}), DoT.bomb));
-      this.dotDamages['burn'] = Math.round(this.damageService.getDotDamage(new Skill({}), DoT.burn));
+      this.dotDamages['bleed'] = this.heroDots.includes(DoT.bleed) ? Math.round(this.damageService.getDotDamage(DoTSkill, DoT.bleed)) : 0;
+      this.dotDamages['bomb'] = this.heroDots.includes(DoT.bomb) ? Math.round(this.damageService.getDotDamage(DoTSkill, DoT.bomb)) : 0;
+      this.dotDamages['burn'] = this.heroDots.includes(DoT.burn) ? Math.round(this.damageService.getDotDamage(DoTSkill, DoT.burn)) : 0;
     });
   }
 

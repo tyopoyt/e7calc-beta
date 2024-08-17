@@ -1235,7 +1235,6 @@ export const Heroes: Record<string, Hero> = {
       }),
     }
   }),
-
   baiken: new Hero({
     element: HeroElement.earth,
     class: HeroClass.thief,
@@ -3884,6 +3883,25 @@ export const Heroes: Record<string, Hero> = {
         pow: () => 1,
         enhance: [0.05, 0.05, 0, 0.05, 0.05, 0, 0.1],
         isAOE: () => true,
+      })
+    }
+  }),
+  frida: new Hero({
+    element: HeroElement.ice,
+    class: HeroClass.soul_weaver,
+    baseAttack: 694,
+    baseDefense: 613,
+    baseHP: 4855,
+    barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => {
+      return inputValues.casterFinalMaxHP(artifact) * 0.2;
+    },
+    skills: {
+      s1: new Skill({
+        id: 's1',
+        rate: () => 1,
+        pow: () => 1,
+        enhance: [0.05, 0, 0.05, 0, 0.1, 0.1],
+        isSingle: () => true,
       })
     }
   }),

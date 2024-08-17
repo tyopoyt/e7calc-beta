@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DoT, HitType, Skill } from '../models/skill';
+import { DoT, HitType, Skill, DoTSkill } from '../models/skill';
 import { DataService } from './data.service';
 import { DamageFormData } from '../models/forms';
 import { LanguageService } from './language.service';
@@ -157,16 +157,17 @@ export class DamageService {
 
   // This getAtk is called because of lilias
   getDotDamage(skill: Skill, type: DoT) {
+    // TODO: is it necessary to pass skill in here? or can just use DoTSkill?
     const casterAttack = this.currentHero.getAttack(this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), skill);
     const casterSpeed = this.currentHero.getSpeed(this.damageForm) // TODO: refactor so this isn't needed?  DotDamage probably shouldn't require the caster's speed...
     switch (type) {
-    case DoT.bleed:
-      return this.currentHero.getAttack(this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), skill) * 0.3 * BattleConstants.damageConstant * this.dataService.currentTarget.defensivePower(new Skill({ penetrate: () => 0.7 }), this.damageForm, this.getGlobalDefenseMult(), this.currentArtifact, false, casterAttack, casterSpeed, true);
-    case DoT.burn:
-      return this.currentHero.getAttack(this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), skill) * 0.6 * BattleConstants.damageConstant * (this.damageForm.beehooPassive ? this.dataService.heroConstants.beehooBurnMult : 1) * this.dataService.currentTarget.defensivePower(new Skill({ penetrate: () => 0.7 }), this.damageForm, this.getGlobalDefenseMult(), this.currentArtifact, false, casterAttack, casterSpeed, true);
-    case DoT.bomb:
-      return this.currentHero.getAttack(this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), skill) * 1.5 * BattleConstants.damageConstant * this.dataService.currentTarget.defensivePower(new Skill({ penetrate: () => 0.7 }), this.damageForm, this.getGlobalDefenseMult(), this.currentArtifact, false, casterAttack, casterSpeed, true);
-    default: return 0;
+      case DoT.bleed:
+        return this.currentHero.getAttack(this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), skill) * 0.3 * BattleConstants.damageConstant * this.dataService.currentTarget.defensivePower(DoTSkill, this.damageForm, this.getGlobalDefenseMult(), this.currentArtifact, false, casterAttack, casterSpeed, true);
+      case DoT.burn:
+        return this.currentHero.getAttack(this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), skill) * 0.6 * BattleConstants.damageConstant * (this.damageForm.beehooPassive ? this.dataService.heroConstants.beehooBurnMult : 1) * this.dataService.currentTarget.defensivePower(DoTSkill, this.damageForm, this.getGlobalDefenseMult(), this.currentArtifact, false, casterAttack, casterSpeed, true);
+      case DoT.bomb:
+        return this.currentHero.getAttack(this.currentArtifact, this.damageForm, this.getGlobalAttackMult(), skill) * 1.5 * BattleConstants.damageConstant * this.dataService.currentTarget.defensivePower(DoTSkill, this.damageForm, this.getGlobalDefenseMult(), this.currentArtifact, false, casterAttack, casterSpeed, true);
+      default: return 0;
     }
   }
 

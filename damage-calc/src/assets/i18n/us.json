@@ -132,6 +132,7 @@
     "fighter_maya": "Fighter Maya",
     "flan": "Flan",
     "free_spirit_tieria": "Free Spirit Tieria",
+    "frida": "Frida",
     "fumyr": "Fumyr",
     "furious": "Furious",
     "general_purrgis": "General Purrgis",
@@ -803,7 +804,6 @@
     "alencia_trample": "Trample",
     "albedo_lets_go_bicom": "Let's Go, Bicom!",
     "arunka_expose": "Expose",
-    "balance_op_sigret": "Balance Update: Added Speed scaling, lowered Attack scaling: S2: 0.8 -> 0.75 / S3 1.1 -> 1",
     "beehoo_incinerate": "Incinerate",
     "kane_rock_smash": "Rock Smash",
     "lethe_call_of_the_abyss": "Call of the Abyss",
@@ -826,7 +826,7 @@
     "yoonryoung_slash": "Dazzling Slash",
     "zio_disappear": "Disappear",
     "speed_tuner_instructions": "To use the speed tuner, input the current speed of your slower and/or faster unit, as well as any Combat Readiness increase that will be applied.\nThe tuner will calculate how the units' speeds need to be adjusted to guarantee turn order.\n\nIn Faster Unit Pushes mode, set the speed of the slower and/or faster unit and the CR push to calculate the speed needed for the slower unit to move next.",
-    "damageCalculatorUpdates": "Aug 02 2024 Update: Added New EEs, Empyrean Ilynav, and Festive Eda.\n\nOct 27 2023 Update: Multi-Hero comparison added.  Check the box 'Add to Multi-Hero Compare' when saving a build to add, then view the comparison from the compare screen of any hero.\n\nOct 25 2023 Update: E7Calc 2.0 Beta released! Everything should work pretty much the same as it always has with a refreshed UI and some new features here and there.  Please reach out to me if you find any bugs! @tyopoyt on Discord or Reddit."
+    "damageCalculatorUpdates": "Aug 17 2024 Update: Added Frida.\n\nOct 27 2023 Update: Multi-Hero comparison added.  Check the box 'Add to Multi-Hero Compare' when saving a build to add, then view the comparison from the compare screen of any hero.\n\nOct 25 2023 Update: E7Calc 2.0 Beta released! Everything should work pretty much the same as it always has with a refreshed UI and some new features here and there.  Please reach out to me if you find any bugs! @tyopoyt on Discord or Reddit."
   },
   "titles": {
     "app_title": "E7Calc",

@@ -1,10 +1,8 @@
 {
     "heroes": {
-        "eligos_old": "엘리고스 (이전 버전)",
-        "inferno_khawazu_old": "광염의 카와주 (이전 버전)",
-        "martial_artist_ken_old": "무투가 켄 (이전 버전)",
-        "moon_bunny_dominiel_old": "달토끼 도미니엘 (이전 버전)",
-        "twisted_eidolon_kayron_old": "뒤틀린 망령 카일론 (이전 버전)",
+        "lone_crescent_bellona_old": "일편고월 벨로나 (이전 버전)",
+        "serila_old": "세릴라 (이전 버전)",
+        "death_dealer_ray_old": "죽음의 탐구자 레이 (이전 버전)",
 
         "abigail": "아비게일",
         "abyssal_yufine": "심연의 유피네",
@@ -114,6 +112,7 @@
         "emilia": "에밀리아",
         "enott": "에노트",
         "ervalen": "에르발렌",
+        "eternal_wanderer_ludwig": "영겁의 표류자 루트비히",
         "fairytale_tenebria": "메르헨 테네브리아",
         "faithless_lidica": "불신자 리디카",
         "falconer_kluri": "매사냥꾼 쿠루리",
@@ -704,7 +703,7 @@
         "silk_automatic_fire": "연발 사격",
         "kane_rock_smash": "록 스매시",
         "lethe_call_of_the_abyss": "심연의 부름",
-        "lqc_s3_splash": "스킬 3 스플래시",
+        "s3_splash": "스킬 3 스플래시",
         "ml_celine_nimble_sword": "쾌검",
         "navy_captain_landy_salvo_fire": "일제 사격",
         "s1_extra_attack": "스킬 1 추가 공격",

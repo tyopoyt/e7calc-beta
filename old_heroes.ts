@@ -770,3 +770,751 @@
   //     }
   //   }
   // },
+  // twisted_eidolon_kayron_old: new Hero({ //TODO: translate when available
+  //   element: HeroElement.light,
+  //   class: HeroClass.thief,
+  //   baseAttack: 1228,
+  //   baseHP: 6266,
+  //   baseDefense: 473,
+  //   barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => inputValues.casterFinalMaxHP(artifact) * 0.12,
+  //   heroSpecific: ['targetCurrentHPPercent', 'casterEnraged', 'casterMaxHP'],
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: (soulburn: boolean) => soulburn ? 1.7 : 1,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + (1 - (inputValues.targetCurrentHPPercent / 100)) * 0.3,
+  //       multTip: () => ({ target_lost_hp_pc: 30 }),
+  //       isSingle: () => true,
+  //       soulburn: true
+  //     }),
+  //     s1_bis: new Skill({
+  //       id: 's1_bis',
+  //       name: 'ml_kayron_flash_slash',
+  //       rate: () => 0.85,
+  //       pow: () => 1,
+  //       enhanceFrom: 's1',
+  //       isAOE: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       rate: () => 0.9,
+  //       pow: () => 1,
+  //       fixed: (hitType: HitType, inputValues: DamageFormData) => (hitType !== HitType.miss) ? ((inputValues.casterEnraged) ? 10000 : 2000) : 0,
+  //       fixedTip: () => ({ caster_rage_flat: 10000 }),
+  //       enhance: [0.05, 0.05, 0, 0.1, 0.1],
+  //       isAOE: () => true,
+  //     }),
+  //   }
+  // }),
+    // eligos_old: new Hero({
+  //   element: HeroElement.fire,
+  //   class: HeroClass.ranger,
+  //   heroSpecific: ['casterSpeed', 'casterPerception', 'targetSpeed'],
+  //   baseAttack: 1283,
+  //   baseHP: 4976,
+  //   baseDefense: 536,
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       speedScaling: true,
+  //       rate: () => 0.95,
+  //       pow: () => 0.9,
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + inputValues.casterFinalSpeed() * 0.00075,
+  //       multTip: () => ({ casterSpeed: 0.075 }),
+  //       enhance: [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.1],
+  //       isSingle: () => true,
+  //     }),
+  //     s2: new Skill({
+  //       id: 's2',
+  //       speedScaling: true,
+  //       rate: () => 0.7,
+  //       pow: () => 1.3,
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => {
+  //         const spdDiff = (inputValues.casterFinalSpeed() - inputValues.targetFinalSpeed()) * 0.025;
+  //         return 1 + Math.min(Math.max(0, spdDiff), 2);
+  //       },
+  //       multTip: () => ({ caster_target_spd_diff: 0.25 }),
+  //       isSingle: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       rate: () => 1.5,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0.05, 0, 0, 0, 0.1, 0.1],
+  //       isSingle: () => true,
+  //     })
+  //   }
+  // }),
+  // inferno_khawazu_old: new Hero({
+  //   element: HeroElement.dark,
+  //   class: HeroClass.warrior,
+  //   baseAttack: 1119,
+  //   baseHP: 6091,
+  //   baseDefense: 594,
+  //   heroSpecific: ['targetBurnDetonate'],
+  //   dot: [DoT.burn],
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 0.95,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0, 0.05, 0, 0.1,  0.1],
+  //       isSingle: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       rate: () => 0.7,
+  //       pow: () => 1,
+  //       detonate: DoT.burn,
+  //       detonation: () => 1.2,
+  //       isSingle: () => true,
+  //     })
+  //   }
+  // }),
+  // martial_artist_ken_old: new Hero({
+  //   element: HeroElement.dark,
+  //   class: HeroClass.warrior,
+  //   baseAttack: 1359,
+  //   baseHP: 5542,
+  //   baseDefense: 585,
+  //   heroSpecific: ['casterCurrentHPPercent'],
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 0.95,
+  //       enhance: [0.05, 0.05, 0, 0.1, 0, 0.15],
+  //       isSingle: () => true,
+  //     }),
+  //     s2: new Skill({
+  //       id: 's2',
+  //       onlyCrit: () => true,
+  //       rate: () => 1.2,
+  //       pow: () => 0.95,
+  //       mult: (molagoras: Record<string, number>, inputValues: DamageFormData) => {
+  //         let extra = 0;
+  //         for (let i = 0; i < inputValues.molagoras1; i++) {
+  //           extra += Heroes.martial_artist_ken.skills.s1.enhance[i];
+  //         }
+  //         return (1 + (100 - inputValues.casterCurrentHPPercent) * 0.004 + extra);
+  //       },
+  //       multTip: () => ({ caster_lost_hp_pc: 40 }),
+  //       enhance: [0.05, 0.1, 0.15],
+  //       isSingle: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       soulburn: true,
+  //       rate: (soulburn: boolean) => soulburn ? 1.1 : 0.9,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0, 0, 0.1, 0, 0.15],
+  //       isAOE: () => true,
+  //     })
+  //   }
+  // }),
+    // moon_bunny_dominiel_old: new Hero({
+  //   element: HeroElement.light,
+  //   class: HeroClass.soul_weaver,
+  //   baseAttack: 649,
+  //   baseHP: 4572,
+  //   baseDefense: 631,
+  //   heroSpecific: ['casterMaxHP'],
+  //   barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => inputValues.casterFinalMaxHP(artifact) * 0.21,
+  //   barrierEnhance: 's2',
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 0.9,
+  //       enhance: [0.05, 0, 0.05, 0, 0.1, 0.1],
+  //       isSingle: () => true,
+  //     }),
+  //     s2: new Skill({
+  //       id: 's2',
+  //       enhance: [0.05, 0.05, 0.05, 0.1, 0.1, 0.1]
+  //     }),
+  //   }
+  // }),
+  // lone_crescent_bellona_old: new Hero({
+  //   element: HeroElement.dark,
+  //   class: HeroClass.warrior,
+  //   heroSpecific: ['casterBuffed', 'attackSkillStack'],
+  //   heroSpecificMaximums: {'attackSkillStack': 5},
+  //   baseAttack: 1208,
+  //   baseHP: 6488,
+  //   baseDefense: 616,
+  //   attackIncrease: (inputValues: DamageFormData) => 1 + inputValues.attackSkillStack * 0.1,
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       onlyCrit: () => true,
+  //       rate: () => 0.9,
+  //       pow: () => 0.95,
+  //       enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
+  //       isSingle: () => true,
+  //     }),
+  //     s2: new Skill({
+  //       id: 's2',
+  //       onlyCrit: () => true,
+  //       rate: () => 0.6,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
+  //       isExtra: true,
+  //       isAOE: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       onlyCrit: () => true,
+  //       rate: () => 1.5,
+  //       pow: () => 1,
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + (inputValues.casterBuffed ? 0.3 : 0),
+  //       multTip: () => ({ casterBuffed: 30 }),
+  //       enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
+  //       isSingle: () => true,
+  //     })
+  //   }
+  // }),
+    // serila_old: new Hero({
+  //   element: HeroElement.fire,
+  //   class: HeroClass.mage,
+  //   baseAttack: 1218,
+  //   baseHP: 4521,
+  //   baseDefense: 683,
+  //   dot: [DoT.burn],
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0, 0.1, 0, 0.15],
+  //       isSingle: () => true,
+  //     }),
+  //     s2: new Skill({
+  //       id: 's2',
+  //       soulburn: true,
+  //       rate: (soulburn: boolean) => soulburn ? 2 : 1.5,
+  //       pow: () => 1.05,
+  //       enhance: [0.1, 0, 0, 0, 0.15],
+  //       isSingle: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       rate: () => 1.8,
+  //       pow: () => 1.05,
+  //       enhance: [0.1, 0, 0, 0, 0.15],
+  //       isSingle: () => true,
+  //     })
+  //   }
+  // }),
+    // death_dealer_ray_old: new Hero({
+  //   element: HeroElement.dark,
+  //   class: HeroClass.soul_weaver,
+  //   baseAttack: 621,
+  //   baseHP: 6034,
+  //   baseDefense: 775,
+  //   heroSpecific: ['targetInjuries'],
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       //TODO: add venom detonate
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0.05, 0, 0.1, 0.1],
+  //       isSingle: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       noCrit: true,
+  //       noMiss: true,
+  //       rate: () => 0,
+  //       pow: () => 0,
+  //       afterMath: () => new AftermathSkill({ injuryPercent: 0.8 }), // TODO: check if this still works, does it penetrate correctly?
+  //       isAOE: () => true,
+  //     })
+  //   }
+  // }),
+  // elvira_old: new Hero({
+  //   element: HeroElement.ice,
+  //   class: HeroClass.thief,
+  //   heroSpecific: ['targetCurrentHP'],
+  //   baseAttack: 1057,
+  //   baseHP: 5542,
+  //   baseDefense: 532,
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0, 0.1, 0, 0.15],
+  //       isSingle: () => true,
+  //       noCrit: true,
+  //     }),
+  //     s1_extra: new Skill({
+  //       id: 's1_extra',
+  //       name: 'elviraExterminate',
+  //       rate: () => 0.5,
+  //       pow: () => 1.3,
+  //       isAOE: () => true,
+  //       noCrit: true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       rate: () => 0.2,
+  //       pow: () => 1,
+  //       flat: (soulburn: boolean, inputValues: DamageFormData) => inputValues.targetCurrentHP * 0.16,
+  //       flatTip: () => ({ targetCurrentHP: 16 }),
+  //       penetrate: () => 1,
+  //       enhance: [0.05, 0.05, 0, 0.05, 0.15],
+  //       isSingle: () => true,
+  //       noCrit: true,
+  //     })
+  //   }
+  // }),
+    // hwayoung_old: new Hero({
+  //   element: HeroElement.fire,
+  //   class: HeroClass.warrior,
+  //   baseAttack: 1119,
+  //   baseHP: 6226,
+  //   baseDefense: 627,
+  //   heroSpecific: ['casterBuffed', 'casterMaxHP', 'targetMaxHP'],
+  //   barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => hero.getAttack(artifact, inputValues, attackMultiplier, skill) * 0.45,
+  //   innateAttackIncrease: (inputValues: DamageFormData) => {
+  //     let boost = 0.20;
+  //     for (let i = 0; i < inputValues.molagoras2; i++) {
+  //       boost += Heroes.hwayoung_old.skills.s2.enhance[i];
+  //     }
+  //     return boost;
+  //   },
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 0.8,
+  //       pow: () => 1,
+  //       afterMath: (hitType: HitType, inputValues: DamageFormData) => inputValues.casterBuffed && hitType !== HitType.miss ? new AftermathSkill({ attackPercent: 0.25 }) : null,
+  //       enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
+  //       isSingle: () => true,
+  //       noCrit: true,
+  //     }),
+  //     s2: new Skill({
+  //       id: 's2',
+  //       enhance: [0.01, 0.02, 0.02, 0.02, 0.03],
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       hpScaling: true,
+  //       rate: () => 1.25,
+  //       pow: () => 1,
+  //       penetrate: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => {
+  //         return inputValues.casterFinalMaxHP(artifact) < inputValues.targetFinalMaxHP()
+  //                ? Math.min((inputValues.targetFinalMaxHP() - inputValues.casterFinalMaxHP(artifact)) * 0.000091, 1)
+  //                : 0;
+  //       },
+  //       penetrateTip: () => ({ caster_vs_target_hp_diff: 9.1 }),
+  //       enhance: [0.05, 0.05, 0, 0.1, 0.1],
+  //       isSingle: () => true,
+  //       noCrit: true,
+  //     }),
+  //   }
+  // }),
+    // judge_kise_old: new Hero({
+  //   element: HeroElement.light,
+  //   class: HeroClass.warrior,
+  //   baseAttack: 1039,
+  //   baseHP: 5340,
+  //   baseDefense: 617,
+  //   heroSpecific: ['numberOfTargets'],
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       enhance: [0.15, 0, 0, 0.15],
+  //       isSingle: () => true,
+  //     }),
+  //     s2: new Skill({
+  //       id: 's2',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0.05, 0.1, 0.1],
+  //       isAOE: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + (inputValues.numberOfTargets - 1) * 0.1,
+  //       multTip: () => ({ per_target: 10 }),
+  //       enhance: [0.05, 0, 0.05, 0, 0, 0.1, 0.1],
+  //       isAOE: () => true,
+  //     })
+  //   }
+  // }),
+    // romann_old: new Hero({
+  //   element: HeroElement.ice,
+  //   class: HeroClass.mage,
+  //   baseAttack: 1109,
+  //   baseHP: 4329,
+  //   baseDefense: 655,
+  //   heroSpecific: ['targetHasBuff'],
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0.05, 0, 0.1, 0.1],
+  //       isSingle: () => true,
+  //     }),
+  //     s2: new Skill({
+  //       id: 's2',
+  //       rate: () => 0.7,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0, 0, 0.1, 0.15],
+  //       isAOE: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       rate: () => 0.9,
+  //       pow: () => 0.85,
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.targetHasBuff ? 1.3 : 1,
+  //       multTip: () => ({ targetHasBuff: 30 }),
+  //       enhance: [0.05, 0.1, 0, 0.15, 0.15],
+  //       isAOE: () => true,
+  //     }),
+  //   }
+  // }),
+    // spirit_eye_celine_old: new Hero({
+  //   element: HeroElement.light,
+  //   class: HeroClass.thief,
+  //   baseAttack: 1158,
+  //   baseHP: 5016,
+  //   baseDefense: 532,
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 0.9,
+  //       enhance: [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.1],
+  //       isSingle: () => true,
+  //     }),
+  //     s1_bis: new Skill({
+  //       id: 's1_bis',
+  //       name: 'ml_celine_nimble_sword',
+  //       rate: () => 1.3,
+  //       pow: () => 0.9,
+  //       penetrate: () => 0.35,
+  //       enhanceFrom: 's1',
+  //       isSingle: () => true,
+  //     }),
+  //   }
+  // }),
+  // clarissa_old: new Hero({
+  //   element: HeroElement.ice,
+  //   class: HeroClass.warrior,
+  //   baseAttack: 1252,
+  //   baseHP: 5219,
+  //   baseDefense: 564,
+  //   heroSpecific: ['exclusiveEquipment3'/*, 'casterEnraged'*/],
+  //   dot: [DoT.bleed],
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0, 0.1, 0, 0.15],
+  //       isSingle: () => true,
+  //     }),
+  //     s2: new Skill({
+  //       id: 's2',
+  //       rate: () => 0.7,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0.05, 0.05, 0.1, 0.1],
+  //       isExtra: true,
+  //       isAOE: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       soulburn: true,
+  //       rate: (soulburn: boolean) => soulburn ? 1.05 : 0.8,
+  //       pow: () => 1,
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterEnraged ? 1.3 : 1,
+  //       multTip: () => ({ caster_rage: 30 }),
+  //       exclusiveEquipmentMultiplier: (inputValues: DamageFormData) => inputValues.exclusiveEquipment3 ? 0.1 : 0,
+  //       enhance: [0.05, 0.05, 0, 0.1, 0.1],
+  //       isAOE: () => true,
+  //     })
+  //   }
+  // }),
+  // requiem_roana_old: new Hero({
+  //   element: HeroElement.dark,
+  //   class: HeroClass.mage,
+  //   heroSpecific: ['attackSkillStack'],
+  //   heroSpecificMaximums: {'attackSkillStack': 3},
+  //   baseAttack: 1316,
+  //   baseHP: 4777,
+  //   baseDefense: 715,
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       afterMath: (hitType: HitType) => hitType !== HitType.miss ? new AftermathSkill(({ attackPercent: 0.5 })) : null,
+  //       noCrit: true,
+  //       enhance: [0.05, 0.05, 0, 0.1, 0.1],
+  //       isSingle: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       rate: () => 0.3,
+  //       pow: () => 1,
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + inputValues.attackSkillStack * 0.15,
+  //       multTip: () => ({per_stack: 15}),
+  //       penetrate: () => 1.0,
+  //       noCrit: true,
+  //       enhance: [0.05, 0.05, 0, 0.1, 0.1],
+  //       isAOE: () => true
+  //     }),
+  //   }
+  // }),
+  // top_model_luluca_old: new Hero({
+  //   element: HeroElement.dark,
+  //   class: HeroClass.mage,
+  //   baseAttack: 1228,
+  //   baseHP: 4370,
+  //   baseDefense: 662,
+  //   heroSpecific: ['casterSpeed'],
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
+  //       noTrans: true,
+  //       isSingle: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       speedScaling: true,
+  //       rate: () => 1.6,
+  //       pow: () => 1,
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + inputValues.casterFinalSpeed() * 0.0015,
+  //       multTip: () => ({ casterSpeed: 0.15 }),
+  //       enhance: [0.05, 0.05, 0, 0.1, 0.1],
+  //       isSingle: () => true,
+  //     })
+  //   }
+  // }),
+    // bellona_old: new Hero({
+  //   element: HeroElement.earth,
+  //   class: HeroClass.ranger,
+  //   baseAttack: 1003,
+  //   baseHP: 5704,
+  //   baseDefense: 585,
+  //   heroSpecific: ['targetMaxHP', 'numberOfTargets'],
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 0.95,
+  //       flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.targetFinalMaxHP() * 0.04,
+  //       flatTip: () => ({ targetMaxHP: 4 }),
+  //       enhance: [0.05, 0.05, 0.05, 0.1, 0.1],
+  //       isSingle: () => true,
+  //     }),
+  //     s2: new Skill({
+  //       id: 's2',
+  //       rate: () => 0.8,
+  //       pow: () => 0.95,
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.numberOfTargets > 1 ? 1 + (inputValues.numberOfTargets - 1) * 0.1 : 1,
+  //       multTip: () => ({ per_target: 10 }),
+  //       enhance: [0.05, 0.05, 0.05, 0.1, 0.1],
+  //       isAOE: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       soulburn: true,
+  //       rate: (soulburn: boolean) => soulburn ? 1.2 : 0.95,
+  //       pow: () => 1,
+  //       enhance: [0.15, 0, 0, 0, 0.15],
+  //       isAOE: () => true,
+  //     })
+  //   }
+  // }),
+
+    // blood_moon_haste_old: new Hero({
+  //   element: HeroElement.dark,
+  //   class: HeroClass.soul_weaver,
+  //   baseAttack: 621,
+  //   baseHP: 5474,
+  //   baseDefense: 802,
+  //   heroSpecific: ['casterMaxHP'],
+  //   barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => inputValues.casterFinalMaxHP(artifact) * 0.4,
+  //   barrierEnhance: 's2',
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       hpScaling: true,
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.12,
+  //       flatTip: () => ({ casterMaxHP: 12 }),
+  //       enhance: [0.05, 0.1, 0.15],
+  //       isSingle: () => true,
+  //     }),
+  //     s2: new Skill({
+  //       id: 's2',
+  //       enhance: [0.05, 0.05, 0.05, 0.1, 0.1, 0.15]
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       hpScaling: true,
+  //       noCrit: true,
+  //       rate: () => 0.3,
+  //       pow: () => 1,
+  //       flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterFinalMaxHP(artifact) * 0.12,
+  //       flatTip: () => ({ casterMaxHP: 12 }),
+  //       penetrate: () => 1.0,
+  //       enhance: [0.05, 0.05, 0, 0.05, 0.05, 0.1],
+  //       isSingle: () => true,
+  //     }),
+  //   }
+  // }),
+
+    // celine_old: new Hero({
+  //   element: HeroElement.earth,
+  //   class: HeroClass.thief,
+  //   heroSpecific: ['exclusiveEquipment2', 'exclusiveEquipment3'],
+  //   baseAttack: 1228,
+  //   baseHP: 6267,
+  //   baseDefense: 473,
+  //   barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => hero.getAttack(artifact, inputValues, attackMultiplier, skill) * 0.5,
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 1,
+  //       pow: () => 1,
+  //       critDmgBoost: () => 0.2,
+  //       enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
+  //       isSingle: () => true,
+  //     }),
+  //     s2: new Skill({
+  //       id: 's2',
+  //       rate: () => 1.4,
+  //       pow: () => 1,
+  //       exclusiveEquipmentMultiplier: (inputValues: DamageFormData) => inputValues.exclusiveEquipment2 ? 0.1 : 0,
+  //       enhance: [0.05, 0.05, 0.05, 0.05, 0.1],
+  //       isSingle: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       soulburn: true,
+  //       rate: (soulburn: boolean) => soulburn ? 2.5 : 1.8,
+  //       pow: () => 1,
+  //       exclusiveEquipmentMultiplier: (inputValues: DamageFormData) => inputValues.exclusiveEquipment3 ? 0.1 : 0,
+  //       enhance: [0.05, 0.05, 0, 0.1, 0.1],
+  //       ignoreDamageTransfer: () => true,
+  //       isSingle: () => true,
+  //     })
+  //   }
+  // }),
+  // kane_old: new Hero({
+  //   element: HeroElement.fire,
+  //   class: HeroClass.warrior,
+  //   baseAtk: 1359,
+  //   baseHP: 5542,
+  //   baseDef: 585,
+  //   heroSpecific: [/*'casterEnraged',*/ 'targetNumberOfDebuffs'],
+  //   dot: [DoT.bleed],
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       rate: () => 0.9,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+  //       isSingle: () => true,
+  //     }),
+  //     s1_bis: new Skill({
+  //       name: 'kane_rock_smash',
+  //       id: 's1_bis',
+  //       rate: () => 0.5,
+  //       pow: () => 1.3,
+  //       isAOE: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       rate: () => 1.6,
+  //       pow: () => 1,
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + inputValues.targetNumberOfDebuffs * 0.2,
+  //       multTip: () => ({ per_target_debuff: 20 }),
+  //       enhance: [0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+  //       isAOE: () => true,
+  //     })
+  //   }
+  // }),
+  // last_piece_karin_old: new Hero({
+  //   element: HeroElement.light,
+  //   class: HeroClass.thief,
+  //   baseAttack: 1029,
+  //   baseHP: 5097,
+  //   baseDefense: 473,
+  //   barrier: (hero: Hero, skill: Skill, artifact: Artifact, inputValues: DamageFormData, attackMultiplier: number) => hero.getAttack(artifact, inputValues, attackMultiplier, skill) * 0.65,
+  //   heroSpecific: ['casterSpeed', 'targetMaxHP', 'casterHasNeoPhantomSword'],
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       speedScaling: true,
+  //       soulburn: true,
+  //       rate: (soulburn: boolean) => soulburn ? 1.5 : 0.9,
+  //       pow: () => 1,
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + inputValues.casterFinalSpeed() * 0.00075,
+  //       multTip: () => ({ casterSpeed: 0.075 }),
+  //       flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterHasNeoPhantomSword ? inputValues.targetFinalMaxHP() * 0.2 : 0,
+  //       flatTip: () => ({ targetMaxHP: 20 }),
+  //       enhance: [0.05, 0, 0.05, 0, 0.1, 0, 0.1],
+  //       isSingle: () => true,
+  //       ignoreDamageTransfer: (inputValues: DamageFormData) => inputValues.casterHasNeoPhantomSword ? true : false
+  //     }),
+  //     s2: new Skill({
+  //       id: 's2',
+  //       speedScaling: true,
+  //       rate: () => 1.5,
+  //       pow: () => 0.9,
+  //       mult: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => 1 + inputValues.casterFinalSpeed() * 0.0015,
+  //       multTip: () => ({ casterSpeed: 0.15 }),
+  //       flat: (soulburn: boolean, inputValues: DamageFormData, artifact: Artifact) => inputValues.casterHasNeoPhantomSword ? inputValues.targetFinalMaxHP() * 0.2 : 0,
+  //       flatTip: () => ({ targetMaxHP: 20 }),
+  //       enhance: [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.1],
+  //       isSingle: () => true,
+  //       ignoreDamageTransfer: (inputValues: DamageFormData) => inputValues.casterHasNeoPhantomSword
+  //     })
+  //   }
+  // }),
+  // ravi_old: new Hero({
+  //   element: HeroElement.fire,
+  //   class: HeroClass.warrior,
+  //   baseAttack: 966,
+  //   baseHP: 7323,
+  //   baseDefense: 657,
+  //   heroSpecific: ['attackSkillStack'],
+  //   heroSpecificMaximums: {'attackSkillStack': 5},
+  //   attackIncrease: (inputValues: DamageFormData, artifact: Artifact) => 1 + inputValues.attackSkillStack * 0.15,
+  //   skills: {
+  //     s1: new Skill({
+  //       id: 's1',
+  //       soulburn: true,
+  //       rate: (soulburn: boolean) => soulburn ? 2.5 : 1,
+  //       pow: () => 1,
+  //       enhance: [0.05, 0, 0.1, 0, 0.15],
+  //       isSingle: () => true,
+  //     }),
+  //     s3: new Skill({
+  //       id: 's3',
+  //       rate: () => 0.85,
+  //       pow: () => 0.95,
+  //       penetrate: () => 0.5,
+  //       enhance: [0.05, 0.05, 0, 0.1, 0.15],
+  //       isAOE: () => true,
+  //     })
+  //   }
+  // }),

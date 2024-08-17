@@ -7,7 +7,9 @@ export const BattleConstants: Record<string, number> = {
   'attackUp': 1.5, 
   'targetAttackUp': 1.5, 
   'attackUpGreat': 1.75,
+  'casterHasArchdemonsMight': 1.3,
   'targetAttackUpGreat': 1.75, 
+  'targetArchdemonsMight': 1.3, 
   'casterVigor': 1.3,
   'targetVigor': 0.3,
   'increasedCritDamage': 0.5,
@@ -19,12 +21,13 @@ export const BattleConstants: Record<string, number> = {
   'target': 1.15,
   'caster-fury': 1.3,
   'spdUp': 1.3, 
-  'casterEnraged': 1.1,
-  'targetEnraged': 1.1,
+  'casterEnraged': 1.2,
+  'targetEnraged': 1.2,
   'perception': 0.15,
   'casterHasStarsBlessing': 1.15,
   'trauma': -0.7,
-  'targetHasTrauma': -0.7
+  'targetHasTrauma': -0.7,
+  'casterHasPossession': 1.25
 };
 
 export const HeroConstants = {

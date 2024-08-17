@@ -1,10 +1,10 @@
 import * as _ from 'lodash-es'
 import { DefensePreset, ReductionPreset } from './target-presets';
 import { BattleConstants } from 'src/assets/data/constants';
-import { Artifact } from './artifact';
+import { Artifact, ArtifactDamageType } from './artifact';
 
 // The | null here is to suppress a warning when using ?. in the html to check for a value in FormDefaults
-// TODO: actually use the default: true
+// TODO: this should probably be moved out of here since it's just a large amount data
 export const FormDefaults: Record<string, {max?: number, min?: number, defaultValue?: number, default?: boolean, step?: number, hint?: string, icon?: string, svgIcon?: boolean} | null> = {
     casterMaxHP: {
         max: 50000,
@@ -19,6 +19,9 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
     },
     casterHasStarsBlessing: {
         icon: 'buffs/stars-blessing-buff.png'
+    },
+    casterHasPossession: {
+        icon: 'buffs/possession-buff.png'
     },
     casterHasTrauma: {
         icon: 'debuffs/trauma-debuff.png'
@@ -110,6 +113,9 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
     targetAttackUpGreat: {
         icon: 'buffs/greater-attack-buff.png'
     },
+    targetArchdemonsMight: {
+        icon: 'buffs/archdemons-might-buff.png'
+    },
     targetAsleep: {
         icon: 'debuffs/sleep-debuff.png'
     },
@@ -132,6 +138,10 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
         icon: 'icons/half-hp.png',
         default: true
     },
+    casterBelow30PercentHP: {
+        icon: 'icons/30-hp.png',
+        default: false
+    },
     casterHasImmensePower: {
         icon: 'buffs/immense-power-buff.png',
         default: true
@@ -140,12 +150,28 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
         icon: 'buffs/flame-alchemist-buff.png',
         default: true
     },
+    casterHasArchdemonsMight: {
+        icon: 'buffs/archdemons-might-buff.png',
+        default: true
+    },
     targetIsHighestMaxHP: {
         icon: 'icons/highest-hp.png',
     },
     casterHasBzzt: {
         icon: 'buffs/bzzt-buff.png',
         default: true
+    },
+    casterHasCascade: {
+        icon: 'buffs/cascade-buff.png',
+        default: false
+    },
+    casterHasOathOfPunishment: {
+        icon: 'buffs/oath-of-punishment.png',
+        default: false
+    },
+    casterHasBloodAura: {
+        icon: 'buffs/blood-aura-buff.png',
+        default: false
     },
     numberOfTargets: {
         max: 9,
@@ -193,6 +219,11 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
         defaultValue: 0
     },
     targetNumberOfDebuffs: {
+        max: 10,
+        min: 0,
+        defaultValue: 0
+    },
+    enemyNumberOfDebuffs: {
         max: 10,
         min: 0,
         defaultValue: 0
@@ -266,6 +297,12 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
         defaultValue: 0,
         step: 5
     },
+    casterElementalWisdomStack: {
+        max: 3,
+        min: 0,
+        defaultValue: 0,
+        step: 1
+    },
     criticalHitStack: {
         max: 50,
         min: 0,
@@ -330,10 +367,17 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
     highestAllyAttackDown: {
         icon: 'debuffs/attack-debuff.png'
     },
-    s3OnCooldown: {
-        default: true
+    S3OnCooldown: {
+        default: true,
+        icon: 'icons/battery-low.svg',
+        svgIcon: true
     },
     skill3Stack: {
+        max: 3,
+        min: 0,
+        defaultValue: 0
+    },
+    skill1Stack: {
         max: 3,
         min: 0,
         defaultValue: 0
@@ -347,15 +391,21 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
         default: false,
         hint: 'inBattleHPHint',
         icon: 'icons/full-hp.png'
-    }
+    },
+    soulburnStack: {
+        max: 2,
+        min: 0,
+        defaultValue: 0
+    },
 }
 
 export const TargetAttackModifiers = [
-    'targetAttackDown', 'targetAttackUp', 'targetAttackUpGreat', 'targetVigor', 'targetEnraged'
+    'targetAttackDown', 'targetAttackUp', 'targetAttackUpGreat', 'targetVigor', 'targetEnraged', 'targetArchdemonsMight'
 ]
 
 export class DamageFormData {
-    [key: string]: string | number | boolean | DefensePreset | ReductionPreset | undefined | ((artifact: Artifact) => number) | Record<string, number>,
+    // Make sure to periodically comment the next line to ensure functions are being passed the right params
+    [key: string]: string | number | boolean | DefensePreset | ReductionPreset | undefined | ((artifact: Artifact) => number) | ((heroMultiplier: number) => number) | Record<string, number>,
     AOEStack: number;
     artifactLevel: number;
     attack: number;
@@ -365,6 +415,7 @@ export class DamageFormData {
     damageIncrease: number;
     decreasedAttack: boolean;
     casterAboveHalfHP: boolean;
+    casterBelow30PercentHP: boolean;
     casterAttackedStack: number;
     casterCurrentHP: number;
     casterCurrentHPPercent: number;
@@ -372,6 +423,7 @@ export class DamageFormData {
     casterDefense: number;
     casterDefenseUp: boolean;
     casterDefenseDown: boolean;
+    casterElementalWisdomStack: number;
     casterEnraged: boolean;
     casterFocus: number;
     casterFullFightingSpirit: boolean;
@@ -380,13 +432,18 @@ export class DamageFormData {
     casterFury: boolean;
     casterBuffed: boolean;
     casterHasBzzt: boolean;
+    casterHasCascade: boolean;
+    casterHasOathOfPunishment: boolean;
+    casterHasBloodAura: boolean;
     casterHasFlameAlchemist: boolean;
+    casterHasArchdemonsMight: boolean;
     casterHasImmensePower: boolean;
     casterHasMultilayerBarrier: boolean;
     casterHasNeoPhantomSword: boolean;
     casterHasStealth: boolean;
     casterHasTrauma: boolean;
     casterHasStarsBlessing: boolean;
+    casterHasPossession: boolean;
     casterInvincible: boolean;
     casterMaxHP: number;
     casterNumberOfBuffs: number;
@@ -401,11 +458,13 @@ export class DamageFormData {
     criticalHitStack: number;
     damageReduction: number;
     damageTransfer: number
+    penetrationResistance: number
     defensePercentUp: number;
     defensePreset?: DefensePreset;
     dualAttackStack: number;
     elementalAdvantage: boolean;
     enemyCounterStack: number;
+    enemyNumberOfDebuffs: number;
     enemyDefeated: boolean;
     exclusiveEquipment1: boolean;
     exclusiveEquipment2: boolean;
@@ -433,7 +492,9 @@ export class DamageFormData {
     S3OnCooldown: boolean;
     singleAttackStack: number;
     skill3Stack: number;
+    skill1Stack: number;
     skillTreeCompleted: boolean;
+    soulburnStack: number;
     targetAsleep: boolean;
     targetAttack: number;
     targetBleedDetonate: number;
@@ -470,6 +531,7 @@ export class DamageFormData {
 
     inputOverrides: Record<string, number>;
 
+    // These two functions are mostly used for the damage graph
     get casterFinalAttack() {
         return this.inputOverrides['attack'] ? this.inputOverrides['attack'] : this.attack;
     }
@@ -488,6 +550,7 @@ export class DamageFormData {
         this.damageIncrease = _.get(data, 'damageIncrease', 0);
         this.decreasedAttack = _.get(data, 'decreasedAttack', false);
         this.casterAboveHalfHP = _.get(data, 'casterAboveHalfHP', true);
+        this.casterBelow30PercentHP = _.get(data, 'casterBelow30PercentHP', false);
         this.casterAttackedStack = _.get(data, 'casterAttackedStack', 0);
         this.casterCurrentHP = _.get(data, 'casterCurrentHP', 10000);
         this.casterCurrentHPPercent = _.get(data, 'casterCurrentHPPercent', 100);
@@ -496,6 +559,7 @@ export class DamageFormData {
         this.casterDefenseUp = _.get(data, 'casterDefenseUp', false);
         this.casterDefenseDown = _.get(data, 'casterDefenseDown', false);
         this.casterEnraged = _.get(data, 'casterEnraged', false);
+        this.casterElementalWisdomStack = _.get(data, 'casterElementalWisdomStack', 0);
         this.casterFocus = _.get(data, 'casterFocus', 0);
         this.casterFullFightingSpirit = _.get(data, 'casterFullFightingSpirit', false);
         this.casterFightingSpirit = _.get(data, 'casterFightingSpirit', 0);
@@ -503,13 +567,18 @@ export class DamageFormData {
         this.casterFury = _.get(data, 'casterFury', false);
         this.casterBuffed = _.get(data, 'casterBuffed', false);
         this.casterHasBzzt = _.get(data, 'casterHasBzzt', false);
+        this.casterHasCascade = _.get(data, 'casterHasCascade', false);
+        this.casterHasOathOfPunishment = _.get(data, 'casterHasOathOfPunishment', false);
+        this.casterHasBloodAura = _.get(data, 'casterHasBloodAura', false);
         this.casterHasFlameAlchemist = _.get(data, 'casterHasFlameAlchemist', false);
+        this.casterHasArchdemonsMight = _.get(data, 'casterHasArchdemonsMight', false);
         this.casterHasImmensePower = _.get(data, 'casterHasImmensePower', false);
         this.casterHasMultilayerBarrier = _.get(data, 'casterHasMultilayerBarrier', false);
         this.casterHasNeoPhantomSword = _.get(data, 'casterHasNeoPhantomSword', false);
         this.casterHasStealth = _.get(data, 'casterHasStealth', false);
         this.casterHasTrauma = _.get(data, 'casterHasTrauma', false);
         this.casterHasStarsBlessing = _.get(data, 'casterHasStarsBlessing', false);
+        this.casterHasPossession = _.get(data, 'casterHasPossession', false);
         this.casterInvincible = _.get(data, 'casterInvincible', false);
         this.casterMaxHP = _.get(data, 'casterMaxHP', 10000);
         this.casterNumberOfBuffs = _.get(data, 'casterNumberOfBuffs', 0)
@@ -524,11 +593,13 @@ export class DamageFormData {
         this.criticalHitStack = _.get(data, 'criticalHitStack', 0)
         this.damageReduction = _.get(data, 'damageReduction', 0);
         this.damageTransfer = _.get(data, 'damageTransfer', 0);
+        this.penetrationResistance = _.get(data, 'penetrationResistance', 0);
         this.defensePercentUp = _.get(data, 'defensePercentUp', 0);
         this.defensePreset = _.get(data, 'defensePreset', null);
         this.dualAttackStack = _.get(data, 'dualAttackStack', 0)
         this.elementalAdvantage = _.get(data, 'elementalAdvantage', false);
         this.enemyCounterStack = _.get(data, 'enemyCounterStack', 0)
+        this.enemyNumberOfDebuffs = _.get(data, 'enemyNumberOfDebuffs', 0);
         this.enemyDefeated = _.get(data, 'enemyDefeated', false);
         this.exclusiveEquipment1 = _.get(data, 'exclusiveEquipment1', false);
         this.exclusiveEquipment2 = _.get(data, 'exclusiveEquipment2', false);
@@ -556,7 +627,9 @@ export class DamageFormData {
         this.S3OnCooldown = _.get(data, 'S3OnCooldown', false);
         this.singleAttackStack = _.get(data, 'singleAttackStack', 0);
         this.skill3Stack = _.get(data, 'skill3Stack', 0);
+        this.skill1Stack = _.get(data, 'skill1Stack', 0);
         this.skillTreeCompleted = _.get(data, 'skillTreeCompleted', true);
+        this.soulburnStack = _.get(data, 'soulburnStack', 0);
         this.targetAsleep = _.get(data, 'targetAsleep', false);
         this.targetAttack = _.get(data, 'targetAttack', 2500);
         this.targetBleedDetonate = _.get(data, 'targetBleedDetonate', 0);
@@ -593,34 +666,42 @@ export class DamageFormData {
         this.inputOverrides = _.get(data, 'inputOverrides', {});
     }
 
+    // Get the caster's final speed after modifiers
     casterFinalSpeed = () => {
         return Math.floor((this.inputOverrides['casterSpeed'] ? this.inputOverrides['casterSpeed'] : this.casterSpeed) * (1 + (this.casterSpeedUp ? BattleConstants.spdUp - 1 : 0)
            + (this.casterSpeedDown ? 1 - BattleConstants.spdUp : 0)
            + (this.casterEnraged ? BattleConstants.casterEnraged - 1 : 0)));
     }
 
+    // Get the target's final speed after modifiers
     targetFinalSpeed = () => {
         return Math.floor(this.targetSpeed * (1 + (this.targetSpeedUp ? BattleConstants.spdUp - 1 : 0)
            + (this.targetSpeedDown ? 1 - BattleConstants.spdUp : 0)
            + (this.targetEnraged ? BattleConstants.targetEnraged - 1 : 0)));
     }
 
+    // Get the caster's final defense after modifiers
     // TODO: Make sure the targetdefense... get replaced when constants are renamed
-    casterFinalDefense = () => {
+    casterFinalDefense = (heroMultiplier = 0) => {
         let defenseMultiplier = (1 + (this.casterDefenseUp ? BattleConstants.targetDefenseUp : 0)
         + (this.casterDefenseDown ? BattleConstants.targetDefenseDown : 0)
         + (this.casterHasTrauma ? BattleConstants.trauma : 0)
         + (this.casterVigor ? BattleConstants.casterVigor - 1 : 0)
-        + (this.casterFury ? BattleConstants['caster-fury'] - 1 : 0));
+        + (this.casterFury ? BattleConstants['caster-fury'] - 1 : 0)
+        + heroMultiplier);
 
         if (this.casterHasTrauma && this.casterDefenseDown) {
             defenseMultiplier -= BattleConstants.trauma;
             defenseMultiplier *= BattleConstants.trauma * -1;
         }
-        
+
         return Math.floor((this.inputOverrides['casterDefense'] ? this.inputOverrides['casterDefense'] : this.casterDefense) * defenseMultiplier);
+        
+        // return Math.floor((this.inputOverrides['casterDefense'] ? this.inputOverrides['casterDefense'] : this.casterDefense) * defenseMultiplier);
     }
-    // TODO: add indomitable for peacemaker
+
+    // Get the target's final speed after modifiers
+    // TODO: add indomitable for peacemaker. Also just fix peacemaker lol
     targetFinalDefense = () => {
         let defenseMultiplier = (1 + (this.targetDefenseUp ? BattleConstants.targetDefenseUp : 0)
         + (this.targetDefenseDown ? BattleConstants.targetDefenseDown : 0)
@@ -636,14 +717,18 @@ export class DamageFormData {
         return Math.floor(this.targetDefense * defenseMultiplier);
     }
 
+    // Get the caster's final max HP after modifiers
     casterFinalMaxHP = (artifact: Artifact) => {
-        return (this.inputOverrides['casterMaxHP'] ? this.inputOverrides['casterMaxHP'] : this.casterMaxHP) * (this.inBattleHP ? 1: artifact.maxHP);
+        const artifactHP = (artifact.type === ArtifactDamageType.health_only && artifact.scale?.length) ? artifact.scale[Math.floor(this.artifactLevel/3)] : artifact.maxHP;
+        return (this.inputOverrides['casterMaxHP'] ? this.inputOverrides['casterMaxHP'] : this.casterMaxHP) * (this.inBattleHP ? 1 : artifactHP);
     }
 
+    // Get the target's final max HP after modifiers
     targetFinalMaxHP = () => {
         return (this.inputOverrides['targetMaxHP'] ? this.inputOverrides['targetMaxHP'] : this.targetMaxHP * (this.defensePreset?.hpDamageMultiplier ? this.defensePreset.hpDamageMultiplier : 1));
     }
 
+    // Get the target's final attack after modifiers
     targetFinalAttack = () => {
         let targetAttackModifier = 1
         TargetAttackModifiers.forEach((mod) => {

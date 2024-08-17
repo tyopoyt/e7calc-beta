@@ -1,10 +1,8 @@
 {
     "heroes": {
-      "eligos_old": "Eligós (Pré-Balanceamento)",
-      "inferno_khawazu_old": "Khawazu Infernal (Pré-Balanceamento)",
-      "martial_artist_ken_old": "Artista Marcial Ken (Pré-Balanceamento)",
-      "moon_bunny_dominiel_old": "Dominiel Coelhinha Lunar (Pré-Balanceamento)",
-      "twisted_eidolon_kayron_old": "Espírito Distorcido Kayron (Pré-Balanceamento)",
+      "lone_crescent_bellona_old": "Bellona Lua Solitária (Pré-Balanceamento)",
+      "serila_old": "Serila (Pré-Balanceamento)",
+      "death_dealer_ray_old": "Ray Investigador da Morte (Pré-Balanceamento)",
 
       "abigail": "Abigail",
       "achates": "Acates",
@@ -616,7 +614,7 @@
       "beehoo_incinerate": "Carbonizar",
       "silk_automatic_fire": "Disparo Automático",
       "lethe_call_of_the_abyss": "Chamado do Abismo",
-      "lqc_s3_splash": "S3 Splash",
+      "s3_splash": "S3 Splash",
       "ml_celine_nimble_sword": "Fulgor",
       "navy_captain_landy_salvo_fire": "Salva de Tiros",
       "s1_extra_attack": "S1 Ataque Extra",

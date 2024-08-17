@@ -42,12 +42,10 @@ export interface DamageDataset {
 })
 export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  // Grab the chart from dom
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
-  translationPipe: TranslationPipe = new TranslationPipe(this.languageService);
-
-  heroSubscription: Subscription;
-
+  // Graph controls -------------------------------------------------------------------------
   public heroSkills: string[];
   public skillControl: FormControl<string | null>;
 
@@ -58,9 +56,21 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
   noCrit = false;
   onlyMiss = false;
   noMiss = false;
+  // ----------------------------------------------------------------------------------------
   
+  // Used during graph calcualtions +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   calculationValues: Record<string, number> = {};
+  public damageData: ChartConfiguration['data'] = {datasets: [], labels: []};
+  allDamages: ChartDamageData = {'crit': {}, 'crush': {}, 'normal': {}, 'miss': {}};
+  
+  damageToUse = 'crit';
+  maxDamages: number[] = [];
+  minDamages: number[] = [];
+  patchValues = {};
+  labels: string[] = [];
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+  // Graph configuration ====================================================================
   statIndices = {
     'attack': 0,
     'critDamage': 1,
@@ -72,7 +82,7 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
   pointBackgrounds = ['rgba(23, 119, 212, 0.75)', 'rgba(212, 55, 88,0.75)', 'rgba(199, 129, 16, 0.75)', 'rgba(28, 145, 106, 0.75)', 'rgba(83, 62, 176, 0.75)'];
   pointOutlines = ['#36a2eb', '#ff6384', '#fcaf32', '#08c988', '#7059d4'];
   pointStyles = ['circle', 'triangle', 'rect', 'rectRot', 'star'];
-// TODO: color of axis and legend labels
+
   options: ChartOptions = {
     maintainAspectRatio: false,
     scales: {
@@ -129,7 +139,13 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }
   }
+  // ========================================================================================= 
 
+  // Misc.
+  translationPipe: TranslationPipe = new TranslationPipe(this.languageService);
+  heroSubscription: Subscription;
+
+  // Getters
   get artifact() {
     return this.dataService.currentArtifact.value;
   }
@@ -148,7 +164,6 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
               public screenService: ScreenService
              )
   {
-
     // TODO: Make this type safe
     if (this.options.plugins?.annotation?.annotations && (this.options.plugins?.annotation?.annotations as any[])[0]) {
       (this.options.plugins.annotation.annotations as any[])[0].label.content = this.translationPipe.transform('currentStats', 'ui', this.languageService.language.value)
@@ -158,10 +173,11 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
     this.hitTypeControl = new FormControl<string | null>('crit')
     this.heroSkills = [];
 
+    // Listen for hero updates
     this.heroSubscription = this.dataService.currentHero.subscribe(hero => {
       this.heroSkills = [];
       for (const skill of Object.keys(hero.skills)) {
-        if (hero.skills[skill].rate(false, this.inputValues) || hero.skills[skill].pow(false, this.inputValues)) {
+        if (hero.skills[skill].rate(false, this.inputValues, false) || hero.skills[skill].pow(false, this.inputValues)) {
           this.heroSkills.push(skill);
           // TODO: support extra attacks when relevant (prayer of solitude)
           if (hero.skills[skill].soulburn) {
@@ -193,6 +209,7 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
   
+  // Add/remove/update the oneshot line
   updateOneshotLine = () => {
     // TODO: implement after queryparams
     if (this.oneshotHP) {
@@ -201,7 +218,7 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
   
     // check if damage is close enough to oneshot that the line should be shown
     if (this.oneshotHP.value && this.oneshotHP.value <= Math.max(...this.maxDamages) * 1.25 && Math.min(...this.minDamages) <= this.oneshotHP.value * 1.25) {
-      // Just to ensuer it can be assigned
+      // Just to ensure it can be assigned
       if (this.options?.plugins?.annotation?.annotations) {
         // Update value if the line already exists
         if (this.options.plugins.annotation.annotations.length === 2) {
@@ -236,17 +253,8 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
     // Probably a better way but it's not obvious how.  Calling chart.update doesn't do the trick. Seems to have 0 performance hit.
     this.labels = [...this.labels]
   };
-  
-  public damageData: ChartConfiguration['data'] = {datasets: [], labels: []};
-  allDamages: ChartDamageData = {'crit': {}, 'crush': {}, 'normal': {}, 'miss': {}};
-  
-  damageToUse = 'crit';
-  // skillSelect;
-  maxDamages: number[] = [];
-  minDamages: number[] = [];
-  patchValues = {};
-  labels: string[] = [];
 
+  // Calculate data points for the graph
   calculateChart() {
     this.maxDamages = [];
     this.minDamages = [];
@@ -263,6 +271,7 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
     this.noMiss = skill.noMiss;
     this.onlyMiss = skill.onlyMiss;
 
+    // Update damage type when needed i.e. after hero change
     if (['crit', 'crush'].includes(this.damageToUse) && skill.noCrit) {
       this.damageToUse = 'normal';
       this.hitTypeControl.setValue('normal');
@@ -291,9 +300,11 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
     
     const artifactApplies = this.dataService.currentArtifact.value.applies(skill, this.dataService.damageInputValues);
   
+    // Filter out any unneeded datasets for unused stats ============================================================
     const attackLabel = this.translationPipe.transform('attack', 'graph', this.languageService.language.value);
     let filteredDatasets = this.damageData.datasets.filter(dataset => dataset.label === attackLabel);
-    if (!skill.rate(!!soulburn, this.dataService.damageInputValues) && filteredDatasets.length && !(this.artifact.attackPercent && artifactApplies)) {
+    // TODO: if extras are supported fix the skill.rate calls in this file
+    if (!skill.rate(!!soulburn, this.dataService.damageInputValues, false) && filteredDatasets.length && !(this.artifact.attackPercent && artifactApplies)) {
       this.damageData.datasets.splice(this.damageData.datasets.indexOf(filteredDatasets[0]), 1);
     }
   
@@ -320,8 +331,10 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
     if (!skill.speedScaling && filteredDatasets.length && !(this.artifact.speedScaling && artifactApplies)) {
       this.damageData.datasets.splice(this.damageData.datasets.indexOf(filteredDatasets[0]), 1);
     }
+    // =============================================================================================================================
 
-    if (skill.rate(!!soulburn, this.dataService.damageInputValues) || (this.artifact.attackPercent && artifactApplies)) {
+    // Calculate damage data points for relevant stat changes ----------------------------------------------------------------------
+    if (skill.rate(!!soulburn, this.dataService.damageInputValues, false) || (this.artifact.attackPercent && artifactApplies)) {
       const attackStep = Math.max(Math.floor(((8 / 7) / 100) * this.hero.baseAttack * (1 + (this.hero.innateAtkUp ? this.hero.innateAtkUp() : 0))), 1);
       this.getStatDataPoints('attack', attackStep, intersectionPoint, numSteps, skill);
     }
@@ -344,10 +357,12 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
       const speedStep = (4 / 7);
       this.getStatDataPoints('casterSpeed', speedStep, intersectionPoint, numSteps, skill, soulburn)
     }
+    // --------------------------------------------------------------------------------------------------------------------------
   
     this.updateOneshotLine();
   }
   
+  // Update the hit type to use for calculation
   setChartHitType = (hitType = 'crit') => {
     this.damageToUse = hitType;
     // TODO: fix when queryparams are implemented?
@@ -357,8 +372,10 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
     this.calculateChart();
   };
 
+  // calculate the data points for changing a particular stat
   getStatDataPoints(stat: StatType, step: number, intersectionPoint: number, stepCount: number, skill: Skill, soulburn = false, maxStat = Infinity) {
     // filteredDatasets = this.damageData.filter(dataset => dataset.label === formLabel(stat));
+    // Dataset configuation
     const statLabel = this.translationPipe.transform(stat, 'graph', this.languageService.language.value);
     const filteredDatasets = this.damageData.datasets.filter(dataset => dataset.label === statLabel);
     if (!filteredDatasets.length) {
@@ -382,17 +399,19 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
       // (this.damageData.datasets[indexOfDataset] as any).pointBorderColor = this.pointOutlines[this.statIndices[stat]];
     }
 
+    // Calculation setup
     const statDataIndex = this.damageData.datasets.indexOf(filteredDatasets[0]);
-
     this.calculationValues[stat] = Math.floor(this.inputValues[stat] - (intersectionPoint * step));
     this.damageData.datasets[statDataIndex].data = [];
 
+    // Datapoint calculation
     while (this.damageData.datasets[statDataIndex].data.length < stepCount && this.calculationValues[stat] <= maxStat) {
-      // const damage = hero.getDamage(selected, soulburn);
+      // Get the damage
       // TODO: handle extra attacks when applicable (prayer of solitude)
       const damage = this.damageService.getDamage(skill, soulburn, false, this.calculationValues)
       const finalDam = (damage[this.damageToUse as keyof DamageRow] || 0) as number;
 
+      // Create dataset if needed
       if (!this.damageData.datasets[statDataIndex].data.length) {
         this.minDamages.push(Number(finalDam));
         Object.keys(damage).forEach(damageType => {
@@ -402,13 +421,15 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
         });
       }
 
+      // Push data to dataset
       Object.keys(damage).forEach(damageType => {
         if (damageType !== 'skill' && damage[damageType as keyof DamageRow] != null) {
           this.allDamages[damageType as keyof ChartDamageData][stat].push(damage[damageType as DamageRowStringKey] || 0);
         }
       });
-  
       this.damageData.datasets[statDataIndex].data.push(finalDam);
+
+      // Update labels
       // this.damageData[statDataIndex].label = (`${Math.floor(this.calculationValues[stat])} ${formLabel(stat)}`);
       if (this.damageData.labels && this.damageData.labels.length < stepCount) {
         this.damageData.labels.push((`${Math.floor(this.calculationValues[stat])} ${statLabel}`));
@@ -425,9 +446,11 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }
 
+    // Reset the temporary calculation values
     delete this.calculationValues[stat]
   }
 
+  // Set hp for the oneshot line
   setOneshotHP(hp: number) {
     this.oneshotHP.next(hp);
     this.updateOneshotLine();

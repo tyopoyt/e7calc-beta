@@ -866,6 +866,25 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
     this.refreshCompareBadge();
   }
 
+
+  shareResults() {
+    const result: Record<string, string> = {};
+
+    for (const key in this.damageService.damageForm) {
+      const value = this.damageService.damageForm[key]
+
+      if (typeof value !== 'function' && key !== 'inputOverrides') {
+        // Handle objects and arrays separately
+        if (typeof value === 'object' && value !== null) {
+          result[key] = String(value.id);
+        } else {
+          result[key] = String(value);
+        }
+      }
+    }
+    console.log( new URLSearchParams(result).toString())
+  }
+
   // TODO: add when share button is implemented
   // window.dataLayer.push({
   //   'event': 'shared_query_params',

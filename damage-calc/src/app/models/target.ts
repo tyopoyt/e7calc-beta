@@ -15,11 +15,13 @@ export class Target {
       const artifactPenetration = artifact.getDefensePenetration(inputValues.artifactLevel, inputValues, skill);
       const set = (skill.isSingle(inputValues)) && inputValues.penetrationSet ? BattleConstants.penetrationSet : 0;
       const penResist = skill.id !== 'FixedPenetration' ? inputValues.penetrationResistance / 100 : 0;
-      // console.log(skill.id)
-      // console.log(Math.min(1, (((1 - base) * (1 - set) * (1 - artifactPenetration)) + penResist)))
-      // console.log(`base: ${base} | arti: ${artifactPenetration} | set: ${set} | penRes: ${penResist}`)
-      // console.log(skill)
-      return Math.min(1, (((1 - base) * (1 - set) * (1 - artifactPenetration)) + penResist));
+
+      // Each source of penetration is mitigated by pen resist
+      const totalPenetration = (1 - (base * (1 - penResist)))
+                             * (1 - (set * (1 - penResist)))
+                             * (1 - (artifactPenetration * (1 - penResist)))
+
+      return Math.min(1, totalPenetration);
     }
   
     defensivePower(skill: Skill, inputValues: DamageFormData, globalDefMult: number, artifact: Artifact, soulburn: boolean, casterAttack: number, casterSpeed: number, noReduc = false) {

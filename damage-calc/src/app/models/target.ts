@@ -14,7 +14,7 @@ export class Target {
       const base = skill.penetrate(soulburn, inputValues, artifact, casterAttack, casterSpeed);
       const artifactPenetration = artifact.getDefensePenetration(inputValues.artifactLevel, inputValues, skill);
       const set = (skill.isSingle(inputValues)) && inputValues.penetrationSet ? BattleConstants.penetrationSet : 0;
-      const penResist = skill.id !== 'dot' ? inputValues.penetrationResistance / 100 : 0;
+      const penResist = skill.id !== 'FixedPenetration' ? inputValues.penetrationResistance / 100 : 0;
       // console.log(skill.id)
       // console.log(Math.min(1, (((1 - base) * (1 - set) * (1 - artifactPenetration)) + penResist)))
       // console.log(`base: ${base} | arti: ${artifactPenetration} | set: ${set} | penRes: ${penResist}`)

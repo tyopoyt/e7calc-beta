@@ -121,4 +121,4 @@ export class Skill {
     }
 }
 
-export const DoTSkill: Skill = new Skill({id: 'dot', penetrate: () => 0.7});
+export const DoTSkill: Skill = new Skill({id: 'FixedPenetration', penetrate: () => 0.7});

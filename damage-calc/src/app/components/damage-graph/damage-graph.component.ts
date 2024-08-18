@@ -253,7 +253,7 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
     // Probably a better way but it's not obvious how.  Calling chart.update doesn't do the trick. Seems to have 0 performance hit.
     this.labels = [...this.labels]
   };
-
+  // TODO: fix bugs, look at ml yufine, hers is messed up
   // Calculate data points for the graph
   calculateChart() {
     this.maxDamages = [];
@@ -365,10 +365,18 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
   // Update the hit type to use for calculation
   setChartHitType = (hitType = 'crit') => {
     this.damageToUse = hitType;
-    // TODO: fix when queryparams are implemented?
-    // if (!loadingQueryParams) {
-    //   updateQueryParams();
-    // }
+
+    // for manual sets like loading query params
+    if (this.hitTypeControl.value !== hitType) {
+      this.hitTypeControl.setValue(hitType)
+    }
+
+    this.calculateChart();
+  };
+
+  // Update the hit type to use for calculation
+  setChartSkill = (skill = 's1') => {
+    this.skillControl.setValue(skill);
     this.calculateChart();
   };
 

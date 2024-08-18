@@ -614,7 +614,7 @@
         "full_stop": "",
         "attackImprint": "",
         "attackImprintHint": "",
-        "attackIncrease": "",
+        "attackIncreasePercent": "",
         "attackIncreaseHint": "",
         "critDamage": "",
         "damageIncrease": "",
@@ -631,7 +631,7 @@
         "increasedDefense": "",
         "decreasedDefense": "",
         "target": "",
-        "defenseIncrease": "",
+        "targetDefenseIncrease": "",
         "defenseIncreaseHint": "",
         "damageReduction": "",
         "damageTransfer": ""

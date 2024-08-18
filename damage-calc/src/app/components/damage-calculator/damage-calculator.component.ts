@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Languages } from 'src/app/models/languages';
 import { AttackPreset, AttackPresets } from 'src/app/models/attack-presets';
 import { LanguageService } from 'src/app/services/language.service';
@@ -8,7 +8,7 @@ import { DismissibleColorOption } from '../ui-elements/dismissible/dismissible.c
 import { DamageRow, DamageService } from 'src/app/services/damage.service';
 import { DataService } from 'src/app/services/data.service';
 import { Heroes } from 'src/assets/data/heroes';
-import { Hero } from 'src/app/models/hero';
+import { Hero, HeroClass } from 'src/app/models/hero';
 import { TranslationPipe } from 'src/app/pipes/translation.pipe';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -55,6 +55,7 @@ import { GoogleTagManagerService } from 'angular-google-tag-manager';
     )
   ]
 })
+
 export class DamageCalculatorComponent implements OnInit, OnDestroy {
   // Get all slide inputs as ViewChildren
   @ViewChildren('slideInput') slideInputs: QueryList<SlideInputComponent> = new QueryList();
@@ -147,6 +148,8 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
   savedBuildsCount = 0;
   showGraph = false;
   loading = true;
+  paramsLoading = true;
+  shareButtonText = 'share';
   // ==================================================================
 
   // BehaviorSubject subscriptions ------------------------------------
@@ -309,6 +312,10 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
     // initialize language with param from url
     const langParam = this.route.snapshot.paramMap.get('lang') || 'us';
     this.languageService.setLanguage(Languages[langParam]);
+
+    setTimeout(() => {
+      this.paramsLoading = false;
+    }, 300);
   }
 
   ngOnDestroy(): void {
@@ -455,7 +462,7 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
       } else {
         this.stackingSets = this.stackingSets.filter(set => field !== set)
       }
-    } else if (field === 'targetMaxHP') { // Update graph oneshot line if needed
+    } else if (field === 'targetMaxHP' && !this.paramsLoading) { // Update graph oneshot line if needed
       this.damageGraph?.setOneshotHP(value as number);
     } else if (field === 'targetDefense' && this.targetPresetControl.value?.defense !== value) { // Reset target if needed
       this.targetPresetControl.setValue(TargetPresetGroups.default[0])
@@ -489,12 +496,16 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
       }
     }
 
-
     this.updateDamageBlockHeader();
 
     // Debounce to avoid rapid unnecessary calculations as inputs are slid
     debounce('calculateChart', () => {this.damageGraph?.calculateChart()}, undefined, 150);
     debounce('updateMultiplierTips', () => {this.updateMultiplierTips()}, undefined, 150)
+
+    if (!this.paramsLoading && window.location.search.length > 0) {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+    this.shareButtonText = 'share';
   }
 
   // Update info for skill multiplier popup
@@ -599,7 +610,7 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
       damageTransferSlider?.overrideValue(0)
     }
 
-    const targetDefenseIncreaseSlider = this.slideInputs.filter(input => input.label === this.translationPipe.transform('defenseIncrease', 'form', this.language))[0]
+    const targetDefenseIncreaseSlider = this.slideInputs.filter(input => input.label === this.translationPipe.transform('targetDefenseIncrease', 'form', this.language))[0]
     if (this.reductionPresetControl.value?.defenseIncrease && targetDefenseIncreaseSlider) {
       targetDefenseIncreaseSlider.overrideValue(this.reductionPresetControl.value.defenseIncrease)
     } else if (this.reductionPresetControl.value?.id !== 'manual') {
@@ -820,8 +831,8 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
       'page': 'damage_calculator',
       'loaded_params': JSON.stringify(this.queuedQueryParams)
     });
-
     if (!this.loading && this.queuedQueryParams) {
+      this.paramsLoading = true;
       const paramInputs: Record<string, boolean | number | string> = {};
       let paramArtifact = '';
       // setvalue on sliders
@@ -831,14 +842,36 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
         } else if (param[1].toLowerCase() === 'false') {
           paramInputs[param[0]] = false;
         } else if (!isNaN(Number(param[1]))) { // Handle number inputs
-          // paramInputs[param[0]] = Number(param[1]);
-          this.slideInputs.filter(input => input.label === this.translationPipe.transform(param[0], 'form', this.language))[0]?.overrideValue(Number(param[1]))
+          paramInputs[param[0]] = Number(param[1]);
+          if (param[0] === 'targetDefense') {
+            this.slideInputs.filter(input => input.label === this.translationPipe.transform(param[0].replace('targetD', 'd'), 'form', this.language))[0]?.overrideValue(Number(param[1]))
+          } else if (param[0].endsWith('SetStack')) {
+            this.stackingSets.push(param[0]);
+            // settimeout so that the slider can be added first
+            setTimeout(() => {
+              this.slideInputs.filter(input => input.label === this.translationPipe.transform(param[0], 'form', this.language))[0]?.overrideValue(Number(param[1]))
+            }, 0);
+          } else {
+            this.slideInputs.filter(input => input.label === this.translationPipe.transform(param[0], 'form', this.language))[0]?.overrideValue(Number(param[1]))
+          }
         } else if (['defensePreset', 'reductionPreset'].includes(param[0])) { // Handle presets
           paramInputs[param[0]] = param[1];
         } else if (param[0].toLowerCase() === 'hero' && Object.keys(Heroes).includes(param[1])) { // Handle hero
           await Promise.resolve()
           this.selectHero(param[1])
           this.heroControl.setValue(param[1])
+
+          setTimeout(() => {
+            for (const skill of Object.entries(this.hero.skills)) {
+              const skillMolaLabel = `molagora${skill[0]}`
+              if (skillMolaLabel in (this.queuedQueryParams || {})) {
+                Promise.resolve().then(() => {
+                  this.slideInputs.filter(input => input.label === this.translationPipe.transform(skill[0], 'skills', this.language))[0]?.overrideValue(Number((this.queuedQueryParams as Record<string, string>)[skillMolaLabel]))
+                })
+              }
+            }
+          }, 0);
+          
         } else if (param[0].toLowerCase() === 'artifact' && Object.keys(Artifacts).includes(param[1])) { // Handle artifact
           paramArtifact = param[1];
         }
@@ -846,8 +879,20 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
 
       // Ensure invalid hero/artifact combos aren't possible through queryparam manipulation
       if (paramArtifact
-          && (Artifacts[paramArtifact].exclusive === this.hero.class || Artifacts[paramArtifact].heroExclusive.includes(this.heroID))) {
+          && (
+                   Artifacts[paramArtifact].exclusive === this.hero.class
+                || Artifacts[paramArtifact].heroExclusive.includes(this.heroID)
+                || Artifacts[paramArtifact].exclusive === HeroClass.common
+             )
+        ) {
         this.selectArtifact(paramArtifact)
+        
+        if (Object.keys(this.queuedQueryParams).includes('artifactLevel')) {
+          setTimeout(() => {
+            this.slideInputs.filter(input => input.label === this.translationPipe.transform('level', 'form', this.language))[0]?.overrideValue(Number(this.queuedQueryParams?.artifactLevel || 30))
+          }, 0);
+        }
+        
       }
 
       // Select defPreset from queryparam
@@ -862,33 +907,92 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
   
       // Send all the queryparam info to dataService to update form
       this.dataService.updateDamageInputValues(paramInputs);
+      this.refreshCompareBadge();
+
+      setTimeout(() => {
+        if ('showGraph' in (this.queuedQueryParams || {})) {
+          this.showGraph = true;
+
+          // settimeout so chart can render
+          setTimeout(() => {
+            this.damageGraph?.setChartHitType((this.queuedQueryParams as Record<string, string>).graphHitType)
+            this.damageGraph?.setChartSkill((this.queuedQueryParams as Record<string, string>).graphSkill)
+            this.damageGraph?.setOneshotHP(Number((this.queuedQueryParams as Record<string, string>).graphOneshotHP))
+          }, 1);
+        }
+      }, 0);
     }
-    this.refreshCompareBadge();
   }
 
 
   shareResults() {
     const result: Record<string, string> = {};
+    const defaultReduction = TargetReductionPresetGroups.default[0]
 
     for (const key in this.damageService.damageForm) {
       const value = this.damageService.damageForm[key]
 
       if (typeof value !== 'function' && key !== 'inputOverrides') {
         // Handle objects and arrays separately
-        if (typeof value === 'object' && value !== null) {
-          result[key] = String(value.id);
+        if (typeof value === 'object') {
+          if (key === 'defensePreset' && value && value.id !== TargetPresetGroups.default[0].id) {
+            result[key] = String(value.id);
+          } else if (key === 'reductionPreset' && value && value.id !== defaultReduction.id) {
+            result[key] = String(value.id);
+          }
         } else {
-          result[key] = String(value);
+          if (Object.keys(FormDefaults).includes(key) && (FormDefaults[key]?.defaultValue || FormDefaults[key]?.default) != undefined) {
+            if (value !== (FormDefaults[key]?.defaultValue || FormDefaults[key]?.default)){
+              if (key === 'artifactLevel' && this.artifact.id === 'noProc') {
+                continue;
+              } else {
+                result[key] = String(value);
+              }
+            }
+          } else {
+            if (key.includes('molagora')) {
+              const defaultMolas = this.hero.skills[key.slice(-2)]?.enhance?.length
+              if (defaultMolas && value !== defaultMolas) {
+                result[key] = String(value)
+              }
+            } else if (['damageReduction', 'damageTransfer', 'targetDefenseIncrease'].includes(key)) {
+              if (value && this.reductionPresetControl.value?.id === 'manual'
+              ) {
+                result[key] = String(value)
+              }
+            } else if (key === 'heroID') {
+              result['hero'] = String(value)
+            } else if (value) {
+              result[key] = String(value)
+            }
+          }
         }
       }
     }
-    console.log( new URLSearchParams(result).toString())
-  }
 
-  // TODO: add when share button is implemented
-  // window.dataLayer.push({
-  //   'event': 'shared_query_params',
-  //   'page': page,
-  //   'shared_params': linkURL.search
-  // });
+    // TODO: should probably find magic strings like this and make them defined consts somewhere...
+    if (this.artifact.id !== 'noProc') {
+        result['artifact'] = this.artifact.id;
+    }
+
+    if (this.showGraph) {
+      result['showGraph'] = 'true';
+      result['graphSkill'] = String(this.damageGraph?.skillControl.value)
+      result['graphHitType'] = String(this.damageGraph?.damageToUse)
+      result['graphOneshotHP'] = String(this.damageGraph?.oneshotHP.value)
+    }
+
+    const queryParams = new URLSearchParams(result)
+    const linkURL = new URL(window.location.href);
+    linkURL.search = queryParams.toString();
+    navigator.clipboard.writeText(linkURL.href);
+
+    this.shareButtonText = 'linkCopied'
+
+    this.gtmService.pushTag({
+      'event': 'shared_query_params',
+      'page': 'damage',
+      'shared_params': linkURL.search
+    });
+  }
 }

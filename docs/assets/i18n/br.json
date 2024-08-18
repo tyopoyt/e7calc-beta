@@ -527,7 +527,7 @@
       "faster_unit_possible": "a unidade mais rápida pode ter até ",
       "attackImprint": "",
       "attackImprintHint": "",
-      "attackIncrease": "",
+      "attackIncreasePercent": "",
       "attackIncreaseHint": "",
       "critDamage": "",
       "damageIncrease": "",
@@ -544,7 +544,7 @@
       "increasedDefense": "",
       "decreasedDefense": "",
       "target": "",
-      "defenseIncrease": "",
+      "targetDefenseIncrease": "",
       "defenseIncreaseHint": "",
       "damageReduction": "",
       "damageTransfer": ""

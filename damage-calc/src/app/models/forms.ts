@@ -6,6 +6,26 @@ import { Artifact, ArtifactDamageType } from './artifact';
 // The | null here is to suppress a warning when using ?. in the html to check for a value in FormDefaults
 // TODO: this should probably be moved out of here since it's just a large amount data
 export const FormDefaults: Record<string, {max?: number, min?: number, defaultValue?: number, default?: boolean, step?: number, hint?: string, icon?: string, svgIcon?: boolean} | null> = {
+    attack: {
+        max: 10000,
+        min: 200,
+        defaultValue: 2500
+    },
+    artifactLevel: {
+        max: 30,
+        min: 0,
+        defaultValue: 30
+    },
+    critDamage: {
+        max: 350,
+        min: 150,
+        defaultValue: 250
+    },
+    targetDefense: {
+        max: 5000,
+        min: 200,
+        defaultValue: 1000
+    },
     casterMaxHP: {
         max: 50000,
         min: 1000,
@@ -152,7 +172,6 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
     },
     casterHasArchdemonsMight: {
         icon: 'buffs/archdemons-might-buff.png',
-        default: true
     },
     targetIsHighestMaxHP: {
         icon: 'icons/highest-hp.png',
@@ -555,7 +574,7 @@ export class DamageFormData {
         this.casterCurrentHP = _.get(data, 'casterCurrentHP', 10000);
         this.casterCurrentHPPercent = _.get(data, 'casterCurrentHPPercent', 100);
         this.casterDebuffed = _.get(data, 'casterDebuffed', false);
-        this.casterDefense = _.get(data, 'casterDefense', 1000);
+        this.casterDefense = _.get(data, 'casterDefense', 750);
         this.casterDefenseUp = _.get(data, 'casterDefenseUp', false);
         this.casterDefenseDown = _.get(data, 'casterDefenseDown', false);
         this.casterEnraged = _.get(data, 'casterEnraged', false);
@@ -566,13 +585,13 @@ export class DamageFormData {
         this.casterFullFocus = _.get(data, 'casterFullFocus', false);
         this.casterFury = _.get(data, 'casterFury', false);
         this.casterBuffed = _.get(data, 'casterBuffed', false);
-        this.casterHasBzzt = _.get(data, 'casterHasBzzt', false);
+        this.casterHasBzzt = _.get(data, 'casterHasBzzt', true);
         this.casterHasCascade = _.get(data, 'casterHasCascade', false);
         this.casterHasOathOfPunishment = _.get(data, 'casterHasOathOfPunishment', false);
         this.casterHasBloodAura = _.get(data, 'casterHasBloodAura', false);
-        this.casterHasFlameAlchemist = _.get(data, 'casterHasFlameAlchemist', false);
+        this.casterHasFlameAlchemist = _.get(data, 'casterHasFlameAlchemist', true);
         this.casterHasArchdemonsMight = _.get(data, 'casterHasArchdemonsMight', false);
-        this.casterHasImmensePower = _.get(data, 'casterHasImmensePower', false);
+        this.casterHasImmensePower = _.get(data, 'casterHasImmensePower', true);
         this.casterHasMultilayerBarrier = _.get(data, 'casterHasMultilayerBarrier', false);
         this.casterHasNeoPhantomSword = _.get(data, 'casterHasNeoPhantomSword', false);
         this.casterHasStealth = _.get(data, 'casterHasStealth', false);
@@ -600,13 +619,13 @@ export class DamageFormData {
         this.elementalAdvantage = _.get(data, 'elementalAdvantage', false);
         this.enemyCounterStack = _.get(data, 'enemyCounterStack', 0)
         this.enemyNumberOfDebuffs = _.get(data, 'enemyNumberOfDebuffs', 0);
-        this.enemyDefeated = _.get(data, 'enemyDefeated', false);
+        this.enemyDefeated = _.get(data, 'enemyDefeated', true);
         this.exclusiveEquipment1 = _.get(data, 'exclusiveEquipment1', false);
         this.exclusiveEquipment2 = _.get(data, 'exclusiveEquipment2', false);
         this.exclusiveEquipment3 = _.get(data, 'exclusiveEquipment3', false);
         this.extraDualOrCounter = _.get(data, 'extraDualOrCounter', false);
         this.heroID = _.get(data, 'heroID', 'abigail');
-        this.highestAllyAttack = _.get(data, 'highestAllyAttack', 2500);
+        this.highestAllyAttack = _.get(data, 'highestAllyAttack', 4000);
         this.highestAllyAttackUp = _.get(data, 'highestAllyAttackUp', false);
         this.highestAllyAttackUpGreat = _.get(data, 'highestAllyAttackUpGreat', false);
         this.highestAllyAttackDown = _.get(data, 'highestAllyAttackDown', false);
@@ -620,18 +639,18 @@ export class DamageFormData {
         this.attackSkillStack = _.get(data, 'attackSkillStack', 0);
         this.numberOfDeaths = _.get(data, 'numberOfDeaths', 0);
         this.numberOfHits = _.get(data, 'numberOfHits', 1);
-        this.numberOfTargets = _.get(data, 'numberOfTargets', 0);
+        this.numberOfTargets = _.get(data, 'numberOfTargets', 4);
         this.penetrationSet = _.get(data, 'penetrationSet', false);
         this.rageSet = _.get(data, 'rageSet', false);
         this.reductionPreset = _.get(data, 'reductionPreset', null);
-        this.S3OnCooldown = _.get(data, 'S3OnCooldown', false);
+        this.S3OnCooldown = _.get(data, 'S3OnCooldown', true);
         this.singleAttackStack = _.get(data, 'singleAttackStack', 0);
         this.skill3Stack = _.get(data, 'skill3Stack', 0);
         this.skill1Stack = _.get(data, 'skill1Stack', 0);
         this.skillTreeCompleted = _.get(data, 'skillTreeCompleted', true);
         this.soulburnStack = _.get(data, 'soulburnStack', 0);
         this.targetAsleep = _.get(data, 'targetAsleep', false);
-        this.targetAttack = _.get(data, 'targetAttack', 2500);
+        this.targetAttack = _.get(data, 'targetAttack', 2000);
         this.targetBleedDetonate = _.get(data, 'targetBleedDetonate', 0);
         this.targetBombDetonate = _.get(data, 'targetBombDetonate', 0);
         this.targetBurnDetonate = _.get(data, 'targetBurnDetonate', 0);
@@ -650,7 +669,7 @@ export class DamageFormData {
         this.targetInjuries = _.get(data, 'targetInjuries', 0);
         this.targetIsHighestMaxHP = _.get(data, 'targetIsHighestMaxHP', false);
         this.targetMagicNailed = _.get(data, 'targetMagicNailed', false);
-        this.targetMaxHP = _.get(data, 'targetMaxHP', 0);
+        this.targetMaxHP = _.get(data, 'targetMaxHP', 10000);
         this.targetNumberOfBleeds = _.get(data, 'targetNumberOfBleeds', 0);
         this.targetNumberOfDebuffs = _.get(data, 'targetNumberOfDebuffs', 0);
         this.targetProvoked = _.get(data, 'targetProvoked', false);

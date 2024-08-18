@@ -56,7 +56,7 @@
             </div>
             <div [class.full-width]="screenService.mediumSmallScreen.value">
                 <app-slide-input #slideInput
-                    [label]="'attackIncrease' | translate:'form':languageService.language.value"
+                    [label]="'attackIncreasePercent' | translate:'form':languageService.language.value"
                     [max]="20" [min]="0" [default]="0" (valueChange)="inputChange('attackIncreasePercent', $event)"
                     [column]="!screenService.largeScreen.value" [hint]="'attackIncreaseHint' | translate:'form':languageService.language.value">
                 </app-slide-input>
@@ -149,6 +149,7 @@
             <h1>{{'numberOfSets' | translate:'form':languageService.language.value}}</h1>
             <div class="neat-container full-width">
                 <div *ngFor="let set of stackingSets" class="full-width">
+                    <!-- TODO: figure out how to fix changedAfterCheckedError here -->
                     <app-slide-input #slideInput
                         [label]="set | translate:'form':languageService.language.value"
                         [max]="3" [min]="1" [default]="1"
@@ -231,7 +232,7 @@
                 </div>
                 <div [class.full-width]="screenService.mediumSmallScreen.value">
                     <app-slide-input #slideInput
-                        [label]="'defenseIncrease' | translate:'form':languageService.language.value"
+                        [label]="'targetDefenseIncrease' | translate:'form':languageService.language.value"
                         [max]="20" [min]="0" [default]="0" (valueChange)="inputChange('targetDefenseIncrease', $event)"
                         [column]="screenService.mediumScreen.value" [hint]="'defenseIncreaseHint' | translate:'form':languageService.language.value">
                     </app-slide-input>
@@ -356,14 +357,14 @@
                             </ng-container>
                             <span *ngIf="savedBuildsCount" class="count-badge">{{savedBuildsCount}}</span>
                         </button>
-                        <button type="button" class="color-orange button-line button-line-right" (click)="toggleGraph()" mat-flat-button>
+                        <button type="button" class="color-orange button-line" (click)="toggleGraph()" mat-flat-button>
                             <img class="svg-icon white" [class.tiny-margin-right]="!screenService.mediumScreen.value" src="assets/icons/line-chart.svg" alt="graph">
                             <ng-container *ngIf="!screenService.mediumScreen.value">{{ (showGraph ? 'hideGraph' : 'showGraph') | translate:'ui':languageService.language.value}}</ng-container>
                         </button>
-                        <!-- <button type="button" class="color-green button-line-right" (click)="shareResults()" mat-flat-button>
+                        <button type="button" class="color-green button-line-right" (click)="shareResults()" mat-flat-button>
                             <img class="svg-icon white" [class.tiny-margin-right]="!screenService.mediumScreen.value" src="assets/icons/share-nodes-solid.svg" alt="share">
-                            <ng-container *ngIf="!screenService.mediumScreen.value">{{'share' | translate:'ui':languageService.language.value}}</ng-container>
-                        </button> -->
+                            <ng-container *ngIf="!screenService.mediumScreen.value">{{shareButtonText | translate:'ui':languageService.language.value}}</ng-container>
+                        </button>
                     </div>
                     <div class="neat-container flex-row extra-large-margin-right">
                         <div *ngIf="!!artifactDamage && !collapsed" class="neat-container small-padding-top medium-text">

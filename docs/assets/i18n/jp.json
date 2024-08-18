@@ -516,7 +516,7 @@
     "increasedDefense": "防御力UP",
     "decreasedDefense": "防御力DOWN",
     "target": "標的",
-    "defenseIncrease": "防御力 % 増加",
+    "targetDefenseIncrease": "防御力 % 増加",
     "defenseIncreaseHint": "例: アウリウス, 小さな奇跡のカード, 連作【決意に満ちし兵たち】",
     "damageReduction": "ダメージ軽減 (%)",
     "damageTransfer": "ダメージ身代わり (%)",

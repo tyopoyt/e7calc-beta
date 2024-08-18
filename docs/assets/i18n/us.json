@@ -662,7 +662,7 @@
     "miss": "Miss",
     "attackImprint": "Attack % Imprint",
     "attackImprintHint": "Enter sum of all allies' Attack Imprint Release (Imprint Concentration already included in your hero stats). Calculation is based on 6 star fully awakened hero stats.",
-    "attackIncrease": "Attack % Increase",
+    "attackIncreasePercent": "Attack % Increase",
     "attackIncreaseHint": "Example: Rosa Hargana, Card of Small Miracles, Super Duper Water Gun Shooter",
     "critDamage": "Critical Damage (%)",
     "damageIncrease": "Damage Increase (%)",
@@ -687,7 +687,7 @@
     "targetHasTrauma": "Trauma",
     "trauma": "Trauma",
     "target": "Target",
-    "defenseIncrease": "Defense % Increase",
+    "targetDefenseIncrease": "Defense % Increase",
     "defenseIncreaseHint": "Example: Aurius, Card of Small Miracles, Resolute Soldier Series",
     "damageReduction": "Damage Reduction (%)",
     "damageTransfer": "Damage Transfer (%)",
@@ -826,7 +826,7 @@
     "yoonryoung_slash": "Dazzling Slash",
     "zio_disappear": "Disappear",
     "speed_tuner_instructions": "To use the speed tuner, input the current speed of your slower and/or faster unit, as well as any Combat Readiness increase that will be applied.\nThe tuner will calculate how the units' speeds need to be adjusted to guarantee turn order.\n\nIn Faster Unit Pushes mode, set the speed of the slower and/or faster unit and the CR push to calculate the speed needed for the slower unit to move next.",
-    "damageCalculatorUpdates": "Aug 17 2024 Update: Added Frida.\n\nOct 27 2023 Update: Multi-Hero comparison added.  Check the box 'Add to Multi-Hero Compare' when saving a build to add, then view the comparison from the compare screen of any hero.\n\nOct 25 2023 Update: E7Calc 2.0 Beta released! Everything should work pretty much the same as it always has with a refreshed UI and some new features here and there.  Please reach out to me if you find any bugs! @tyopoyt on Discord or Reddit."
+    "damageCalculatorUpdates": "Aug 17 2024 Update: Added Frida, added back share button to damage calculator page.\n\nOct 27 2023 Update: Multi-Hero comparison added.  Check the box 'Add to Multi-Hero Compare' when saving a build to add, then view the comparison from the compare screen of any hero.\n\nOct 25 2023 Update: E7Calc 2.0 Beta released! Everything should work pretty much the same as it always has with a refreshed UI and some new features here and there.  Please reach out to me if you find any bugs! @tyopoyt on Discord or Reddit."
   },
   "titles": {
     "app_title": "E7Calc",

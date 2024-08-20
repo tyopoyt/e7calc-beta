@@ -24,7 +24,7 @@ import { CompareSaveComponent } from '../compare-save/compare-save.component';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { CompareComponent, MultiCompareData } from '../compare/compare.component';
 import { DamageGraphComponent } from '../damage-graph/damage-graph.component';
-import { debounce } from 'src/app/utils/utils';
+import { debounce, delay } from 'src/app/utils/utils';
 import { DefensePreset, ReductionPreset, TargetPresetGroups, TargetReductionPresetGroups } from 'src/app/models/target-presets';
 import { GoogleTagManagerService } from 'angular-google-tag-manager';
 
@@ -835,7 +835,45 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
     if (!this.loading && this.queuedQueryParams) {
       this.paramsLoading = true;
       const paramInputs: Record<string, boolean | number | string> = {};
-      let paramArtifact = '';
+
+      const paramArtifact = _.get(this.queuedQueryParams, 'artifact')
+      const paramHero = _.get(this.queuedQueryParams, 'hero')
+
+      if (paramHero && Object.keys(Heroes).includes(paramHero)) {
+        this.selectHero(paramHero)
+        this.heroControl.setValue(paramHero)
+
+        setTimeout(() => {
+          for (const skill of Object.entries(this.hero.skills)) {
+            const skillMolaLabel = `molagora${skill[0]}`
+            if (skillMolaLabel in (this.queuedQueryParams || {})) {
+              this.slideInputs.filter(input => input.label === this.translationPipe.transform(skill[0], 'skills', this.language))[0]?.overrideValue(Number((this.queuedQueryParams as Record<string, string>)[skillMolaLabel]))
+            }
+          }
+        }, 0);
+      }
+
+      // Ensure invalid hero/artifact combos aren't possible through queryparam manipulation
+      if (   paramArtifact
+        && Object.keys(Artifacts).includes(paramArtifact)
+        && (
+                 Artifacts[paramArtifact].exclusive === this.hero.class
+              || Artifacts[paramArtifact].heroExclusive.includes(this.heroID)
+              || Artifacts[paramArtifact].exclusive === HeroClass.common
+           )
+      ) {
+        this.selectArtifact(paramArtifact)
+        
+        if (Object.keys(this.queuedQueryParams).includes('artifactLevel')) {
+          setTimeout(() => {
+            this.slideInputs.filter(input => input.label === this.translationPipe.transform('level', 'form', this.language))[0]?.overrideValue(Number(this.queuedQueryParams?.artifactLevel || 30))
+          }, 0);
+        }
+      }
+
+      // delay to ensure hero and artifact have been selected
+      await delay();
+
       // setvalue on sliders
       for (const param of Object.entries(this.queuedQueryParams)) {
         if (param[1].toLowerCase() === 'true') { // Handle boolean inputs
@@ -857,43 +895,7 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
           }
         } else if (['defensePreset', 'reductionPreset'].includes(param[0])) { // Handle presets
           paramInputs[param[0]] = param[1];
-        } else if (param[0].toLowerCase() === 'hero' && Object.keys(Heroes).includes(param[1])) { // Handle hero
-          await Promise.resolve()
-          this.selectHero(param[1])
-          this.heroControl.setValue(param[1])
-
-          setTimeout(() => {
-            for (const skill of Object.entries(this.hero.skills)) {
-              const skillMolaLabel = `molagora${skill[0]}`
-              if (skillMolaLabel in (this.queuedQueryParams || {})) {
-                Promise.resolve().then(() => {
-                  this.slideInputs.filter(input => input.label === this.translationPipe.transform(skill[0], 'skills', this.language))[0]?.overrideValue(Number((this.queuedQueryParams as Record<string, string>)[skillMolaLabel]))
-                })
-              }
-            }
-          }, 0);
-          
-        } else if (param[0].toLowerCase() === 'artifact' && Object.keys(Artifacts).includes(param[1])) { // Handle artifact
-          paramArtifact = param[1];
         }
-      }
-
-      // Ensure invalid hero/artifact combos aren't possible through queryparam manipulation
-      if (paramArtifact
-          && (
-                   Artifacts[paramArtifact].exclusive === this.hero.class
-                || Artifacts[paramArtifact].heroExclusive.includes(this.heroID)
-                || Artifacts[paramArtifact].exclusive === HeroClass.common
-             )
-        ) {
-        this.selectArtifact(paramArtifact)
-        
-        if (Object.keys(this.queuedQueryParams).includes('artifactLevel')) {
-          setTimeout(() => {
-            this.slideInputs.filter(input => input.label === this.translationPipe.transform('level', 'form', this.language))[0]?.overrideValue(Number(this.queuedQueryParams?.artifactLevel || 30))
-          }, 0);
-        }
-        
       }
 
       // Select defPreset from queryparam
@@ -925,7 +927,7 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
     }
   }
 
-
+  // copy link to clipboard with queryparams corresponding to form values
   shareResults() {
     const result: Record<string, string> = {};
     const defaultReduction = TargetReductionPresetGroups.default[0]

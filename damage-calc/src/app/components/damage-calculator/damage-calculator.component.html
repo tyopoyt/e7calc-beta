@@ -4,28 +4,32 @@
         <app-dismissible [content]="'damageCalculatorUpdates' | translate:'info':languageService.language.value" [color]="DismissibleColorOption.info"></app-dismissible>
         <!-- Hero/arti/preset selector row -->
         <div class="filter-select-container full-width neat-container" [ngClass]="!screenService.mediumSmallScreen.value ? 'column-3' : 'flex-column'">
-            <mat-form-field class="neat-container has-icons">
-                <img class="png-icon medium tiny-margin-right select-icon" src="assets/elements/{{hero.element}}.png" alt="{{hero.element}}">
-                <img class="png-icon medium tiny-margin-right select-icon-2" src="assets/classes/{{hero.class}}.png" alt="{{hero.class}}">
+            <mat-form-field class="neat-container has-icons-3">
+                <img class="png-icon medium tiny-margin-right select-icon" src="assets/heroes/{{dataService.currentHeroID.value}}-icon.png" alt="{{dataService.currentHeroID.value}} portrait">
+                <img class="png-icon medium tiny-margin-right select-icon-2" src="assets/elements/{{hero.element}}.png" alt="{{hero.element}}">
+                <img class="png-icon medium tiny-margin-right select-icon-3" src="assets/classes/{{hero.class}}.png" alt="{{hero.class}}">
                 <mat-select [formControl]="heroControl" placeholder="" #singleSelect (selectionChange)="selectHero($event.value)">
                     <mat-option>
                         <ngx-mat-select-search spellcheck="false" [formControl]="heroFilterControl" placeholderLabel="Find hero..."></ngx-mat-select-search>
                     </mat-option>
-                    <mat-option *ngFor="let hero of filteredHeroes" class="has-icons" [value]="hero[0]">
-                        <img class="png-icon medium tiny-margin-right select-option-icon" src="assets/elements/{{hero[1].element}}.png" alt="{{hero[1].element}}">
-                        <img class="png-icon medium tiny-margin-right select-option-icon-2" src="assets/classes/{{hero[1].class}}.png" alt="{{hero[1].class}}">
+                    <mat-option *ngFor="let hero of filteredHeroes" class="has-icons-3" [value]="hero[0]">
+                        <img class="png-icon medium tiny-margin-right select-option-icon" src="assets/heroes/{{hero[0]}}-icon.png" alt="{{hero[0]}} portrait">
+                        <img class="png-icon medium tiny-margin-right select-option-icon-2" src="assets/elements/{{hero[1].element}}.png" alt="{{hero[1].element}}">
+                        <img class="png-icon medium tiny-margin-right select-option-icon-3" src="assets/classes/{{hero[1].class}}.png" alt="{{hero[1].class}}">
                         {{hero[0] | translate:'heroes':languageService.language.value}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field class="neat-container has-icon">
-                <img class="png-icon medium tiny-margin-right select-icon" src=" assets/{{artifact.heroExclusive.length ? 'heroes' : 'classes'}}/{{artifact.heroExclusive.length ? artifact.heroExclusive[0] + '-icon' : artifact.exclusive}}.png" alt="{{artifact.exclusive}}">
+            <mat-form-field class="neat-container has-icons">
+                <img class="png-icon medium tiny-margin-right select-icon" src=" assets/artifacts/{{artifact.id}}.png" alt="{{artifact.id}}">
+                <img class="png-icon medium tiny-margin-right select-icon-2" src=" assets/{{artifact.heroExclusive.length ? 'heroes' : 'classes'}}/{{artifact.heroExclusive.length ? artifact.heroExclusive[0] + '-icon' : artifact.exclusive}}.png" alt="{{artifact.exclusive}}">
                 <mat-select [formControl]="artifactControl" placeholder="" #singleSelect (selectionChange)="selectArtifact($event.value)">
                     <mat-option>
                         <ngx-mat-select-search spellcheck="false" [formControl]="artifactFilterControl" placeholderLabel="Find artifact..."></ngx-mat-select-search>
                     </mat-option>
-                    <mat-option *ngFor="let artifact of filteredArtifacts" class="has-icon" [value]="artifact[0]" [disabled]="(artifact[1].exclusive !== 'common' && artifact[1].exclusive !== hero.class) || (!!artifact[1].heroExclusive.length && !(artifact[1].heroExclusive.includes(heroID)))">
-                        <img class="png-icon medium tiny-margin-right select-option-icon" src=" assets/{{artifact[1].heroExclusive.length ? 'heroes' : 'classes'}}/{{artifact[1].heroExclusive.length ? artifact[1].heroExclusive[0] + '-icon' : artifact[1].exclusive}}.png" alt="{{artifact[1].exclusive}}">
+                    <mat-option *ngFor="let artifact of filteredArtifacts" class="has-icons" [value]="artifact[0]" [disabled]="(artifact[1].exclusive !== 'common' && artifact[1].exclusive !== hero.class) || (!!artifact[1].heroExclusive.length && !(artifact[1].heroExclusive.includes(heroID)))">
+                        <img class="png-icon medium tiny-margin-right select-option-icon" src=" assets/artifacts/{{artifact[1].id}}.png" alt="{{artifact[1].id}}">
+                        <img class="png-icon medium tiny-margin-right select-option-icon-2" src=" assets/{{artifact[1].heroExclusive.length ? 'heroes' : 'classes'}}/{{artifact[1].heroExclusive.length ? artifact[1].heroExclusive[0] + '-icon' : artifact[1].exclusive}}.png" alt="{{artifact[1].exclusive}}">
                         {{artifact[0] | translate:'artifacts':languageService.language.value}}
                     </mat-option>
                 </mat-select>

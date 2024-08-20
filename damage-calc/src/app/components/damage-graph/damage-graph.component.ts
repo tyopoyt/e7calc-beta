@@ -253,7 +253,7 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
     // Probably a better way but it's not obvious how.  Calling chart.update doesn't do the trick. Seems to have 0 performance hit.
     this.labels = [...this.labels]
   };
-  // TODO: fix bugs, look at ml yufine, hers is messed up
+  // TODO: fix bugs, look at ml yufine, hers is messed up.  Also other languages have an extra attack line when changing languages
   // Calculate data points for the graph
   calculateChart() {
     this.maxDamages = [];

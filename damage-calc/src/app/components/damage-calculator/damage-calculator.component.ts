@@ -824,6 +824,7 @@ export class DamageCalculatorComponent implements OnInit, OnDestroy {
     
   }
 
+  // TODO: fix artifact specific inputs...
   // Load queryparams into the form
   async loadQueryParams() {
     this.gtmService.pushTag({

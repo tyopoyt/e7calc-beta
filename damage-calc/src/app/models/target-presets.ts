@@ -18,7 +18,8 @@ export const TargetPresetGroups: Record<string, DefensePreset[]> = {
             description: '20241 hp/175 spd',
             defense: 1392,
             hp: 20241,
-            speed: 175
+            speed: 175,
+            icon: 'monster/blazeDragona'
         },
         {
             id: 'bloodRidgeNaga13',
@@ -26,7 +27,8 @@ export const TargetPresetGroups: Record<string, DefensePreset[]> = {
             description: '13554 hp/154 spd',
             defense: 1340,
             hp: 13554,
-            speed: 154
+            speed: 154,
+            icon: 'bloodRidgeNaga'
         },
         {
             id: 'wyvernBoss13',
@@ -402,6 +404,7 @@ export class DefensePreset {
     hpDamageMultiplier?: number;
     singleAttackMultiplier?: number;
     nonSingleAttackMultiplier?: number;
+    icon?: string;
 
     constructor(data: any) {
         this.id = _.get(data, 'id', '');
@@ -415,6 +418,7 @@ export class DefensePreset {
         this.hpDamageMultiplier = _.get(data, 'hpDamageMultiplier', 1);
         this.singleAttackMultiplier = _.get(data, 'singleAttackMultiplier', 1);
         this.nonSingleAttackMultiplier = _.get(data, 'nonSingleAttackMultiplier', 1);
+        this.icon = _.get(data, 'icon', 1);
     }
 }
 

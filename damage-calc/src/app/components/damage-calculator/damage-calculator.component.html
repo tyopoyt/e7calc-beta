@@ -201,13 +201,20 @@
                 <h1 class="line-title">{{'target' | translate:'ui':languageService.language.value}}</h1>
                 <mat-form-field class="neat-container">
                     <mat-select [formControl]="targetPresetControl" placeholder="" #singleSelect>
-                        <mat-select-trigger>{{(targetPresetControl.value?.id || 'manual') | translate:'defensePreset':languageService.language.value}}</mat-select-trigger>
+                        <mat-select-trigger>
+                            <span class="has-icon trigger">
+                                <img class="png-icon medium small-margin-right trigger-icon" src="assets/{{targetPresetControl.value?.icon || 'icons/unknown_portrait'}}.png" alt="{{targetPresetControl.value?.icon || 'icons/unknown_portrait'}} portrait">
+                                {{(targetPresetControl.value?.id || 'manual') | translate:'defensePreset':languageService.language.value}}
+                            </span>
+                        </mat-select-trigger>
                         <mat-option>
                             <ngx-mat-select-search spellcheck="false" [formControl]="targetPresetFilterControl" placeholderLabel="Find Defense Preset..."></ngx-mat-select-search>
                         </mat-option>
                         <mat-optgroup *ngFor="let targetPresetGroup of filteredTargetPresetGroups" [label]="targetPresetGroup[0] | translate:'defensePreset':languageService.language.value">
-                            <mat-option *ngFor="let targetPreset of targetPresetGroup[1]" [value]="targetPreset">
-                                <span class="flex-row neat-container">{{targetPreset.id | translate:'defensePreset':languageService.language.value}}<p *ngIf="targetPreset.hp" class="preset-hint"> ({{targetPreset.hp + ' hp' + (targetPreset.speed ? '/' + targetPreset.speed + ' spd' : '')}})</p></span>
+                            <mat-option *ngFor="let targetPreset of targetPresetGroup[1]" [value]="targetPreset" class="has-icon indented">
+                                <span class="flex-row neat-container">
+                                    <img class="png-icon medium tiny-margin-right select-option-icon indented" src="assets/{{targetPreset.icon || 'icons/unknown_portrait'}}.png" alt="{{targetPreset.id || 'icons/unknown_portrait'}} portrait">
+                                    {{targetPreset.id | translate:'defensePreset':languageService.language.value}}<p *ngIf="targetPreset.hp" class="preset-hint"> ({{targetPreset.hp + ' hp' + (targetPreset.speed ? '/' + targetPreset.speed + ' spd' : '')}})</p></span>
                             </mat-option>
                         </mat-optgroup>
                     </mat-select>
@@ -217,9 +224,15 @@
                         <mat-option>
                             <ngx-mat-select-search spellcheck="false" [formControl]="reductionPresetFilterControl" placeholderLabel="Find Reduction Preset..."></ngx-mat-select-search>
                         </mat-option>
-                        <mat-select-trigger>{{(reductionPresetControl.value?.id || 'manual') | translate:'reductionPreset':languageService.language.value}}</mat-select-trigger>
+                        <mat-select-trigger>
+                            <span class="has-icon trigger">
+                                <img class="png-icon medium small-margin-right trigger-icon" src="assets/{{reductionPresetControl.value?.icon || 'icons/unknown_portrait'}}.png" alt="{{reductionPresetControl.value?.icon || 'icons/unknown_portrait'}} portrait">
+                                {{(reductionPresetControl.value?.id || 'manual') | translate:'reductionPreset':languageService.language.value}}
+                            </span>
+                        </mat-select-trigger>
                         <mat-optgroup *ngFor="let reductionPresetGroup of filteredReductionPresetGroups" [label]="reductionPresetGroup[0] | translate:'reductionPreset':languageService.language.value">
-                            <mat-option *ngFor="let reductionPreset of reductionPresetGroup[1]" [value]="reductionPreset">
+                            <mat-option *ngFor="let reductionPreset of reductionPresetGroup[1]" [value]="reductionPreset"class="has-icon indented">
+                                <img class="png-icon medium tiny-margin-right select-option-icon indented" src="assets/{{reductionPreset.icon || 'icons/unknown_portrait'}}.png" alt="{{reductionPreset.id || 'icons/unknown_portrait'}} portrait">
                                 <span class="flex-row neat-container">{{reductionPreset.id | translate:'reductionPreset':languageService.language.value}}<p *ngIf="reductionPreset.damageReduction || reductionPreset.damageTransfer" class="preset-hint"> {{reductionPreset.damageReduction || reductionPreset.damageTransfer}}%{{reductionPreset.defenseIncrease ? (' (+' + reductionPreset.defenseIncrease + '% Defense)') : ''}}</p></span>
                             </mat-option>
                         </mat-optgroup>

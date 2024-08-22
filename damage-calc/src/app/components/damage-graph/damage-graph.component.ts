@@ -211,7 +211,7 @@ export class DamageGraphComponent implements OnInit, OnDestroy, AfterViewInit {
   
   // Add/remove/update the oneshot line
   updateOneshotLine = () => {
-    // TODO: implement after queryparams
+    // TODO: remove this since queryparams are generated when clikcing the share button?
     if (this.oneshotHP) {
       debounce('updateDamageQueryParams', this.dataService.updateDamageQueryParams, [this.dataService.damageInputValues]);
     }

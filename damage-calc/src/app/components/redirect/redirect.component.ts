@@ -19,7 +19,7 @@ export class RedirectComponent implements OnInit, OnDestroy {
   redirectURL = '';
 
   private subscription: Subscription = new Subscription();
-  redirectTime = 10;
+  redirectTime = 8;
 
   constructor(private route: ActivatedRoute, public languageService: LanguageService) { }
 

@@ -1,0 +1,33 @@
+@import '../../../variables';
+
+.redirect-page {
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.link {
+    color: dodgerblue;
+}
+
+mat-card {
+    height: 10rem;
+    width: 70dvw;
+    padding: 0;
+
+    span.header {
+        height: 2rem;
+        width: calc(100% - 1.5rem);
+        padding: 0 0.75rem 0 0.75rem;
+        border-radius: 0.5rem 0.5rem 0 0;
+    }
+
+    span.content {
+        padding: 0.75rem;
+        height: calc(100% - 2rem);
+    }
+
+    background-color: $ui-medium-dark-color;
+}

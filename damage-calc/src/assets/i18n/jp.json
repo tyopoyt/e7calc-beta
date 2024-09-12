@@ -790,7 +790,12 @@
     "ml_kayron_flash_slash": "閃光の一撃",
     "sez_encroach": "侵入します",
     "zio_disappear": "消える",
-    "harsettiWarning": "ハルセティのスキル3の説明には、HPスケーリングがあると述べていますが、乗数にはまだ含まれていないようであるため、ここでのスキル3のダメージは、HPスケーリングがわかるまで不正確になるでしょう。"
+    "harsettiWarning": "ハルセティのスキル3の説明には、HPスケーリングがあると述べていますが、乗数にはまだ含まれていないようであるため、ここでのスキル3のダメージは、HPスケーリングがわかるまで不正確になるでしょう。",
+    "redirectHeader": "アクティブなベータ版はありません！",
+    "redirectText": "現在、E7CALCが利用できるアクティブなベータ版はありません！自動的にリダイレクトされます ",
+    "redirectCountdown1": "自動的にリダイレクトされていない場合",
+    "redirectCountdown2": "秒、クリックk",
+    "redirectCountdown3": "ここ"
   },
   "titles": {
     "epic_7": "エピックセブン",

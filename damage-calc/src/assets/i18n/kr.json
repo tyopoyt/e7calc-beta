@@ -788,7 +788,12 @@
         "ml_kayron_flash_slash": "섬광참",
         "sez_encroach": "잠식",
         "zio_disappear": "사라져라",
-        "harsettiWarning": "하르세티의 S3 설명에 따르면 HP 스케일링이 있지만 승수에는 아직 포함되지 않은 것처럼 보이므로 HP 스케일링을 알기 전까지는 그녀의 기술 3 피해가 잘못 될 수 있습니다."
+        "harsettiWarning": "하르세티의 S3 설명에 따르면 HP 스케일링이 있지만 승수에는 아직 포함되지 않은 것처럼 보이므로 HP 스케일링을 알기 전까지는 그녀의 기술 3 피해가 잘못 될 수 있습니다.",
+        "redirectHeader": "활성 베타를 사용할 수 없습니다!",
+        "redirectText": "현재 E7Calc에 사용할 수있는 활성 베타가 없습니다!자동으로 리디렉션됩니다 ",
+        "redirectCountdown1": "자동으로 리디렉션되지 않은 경우",
+        "redirectCountdown2": "초, 클릭하십시오",
+        "redirectCountdown3": "여기"
     },
     "titles": {
         "epic_7": "에픽세븐",

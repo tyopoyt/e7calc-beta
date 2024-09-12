@@ -5,6 +5,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { EffectivenessCheckerComponent } from './components/effectiveness-checker/effectiveness-checker.component';
 import { SpeedTunerComponent } from './components/speed-tuner/speed-tuner.component';
 import { EHPCalculatorComponent } from './components/ehp-calculator/ehp-calculator.component';
+import { RedirectComponent } from './components/redirect/redirect.component';
 
 const routes: Routes = [
   //TODO: handle old zh urls (zhCN => cn, zhTW => tw)
@@ -12,9 +13,14 @@ const routes: Routes = [
     path: '',
     component: DamageCalculatorComponent
   },
+  // TODO: update this if a beta becomes active
+  // {
+  //   path: ':lang/',
+  //   component: DamageCalculatorComponent
+  // },
   {
     path: ':lang/',
-    component: DamageCalculatorComponent
+    component: RedirectComponent
   },
   {
     path: ':lang/effectiveness',

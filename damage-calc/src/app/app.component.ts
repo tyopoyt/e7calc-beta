@@ -11,6 +11,7 @@ import { LanguageService } from './services/language.service';
 export class AppComponent implements OnInit {
   title = 'damage-calc';
   loadingFallback = true;
+  activeBeta = false;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<span class="redirect-page">
+    <mat-card>
+        <span class="header flex-centered bold-text">
+            {{'redirectHeader' | translate:'info':languageService.language.value}}
+        </span>
+        <span class="content flex-centered bold-text flex-column">
+            {{'redirectText' | translate:'info':languageService.language.value}} {{redirectURL}}
+            <br>
+            <p>
+                {{'redirectCountdown1' | translate:'info':languageService.language.value}} {{redirectTime}} {{'redirectCountdown2' | translate:'info':languageService.language.value}} <a class="link" href="{{redirectURL}}">{{'redirectCountdown3' | translate:'info':languageService.language.value}}</a>.
+            </p>
+        </span>
+    </mat-card>
+</span>

@@ -42,6 +42,7 @@ import { DamageGraphComponent } from './components/damage-graph/damage-graph.com
 import { MatRadioModule } from '@angular/material/radio';
 import { CompareSaveComponent } from './components/compare-save/compare-save.component';
 import { RemoveOldPipe } from './pipes/remove-old.pipe';
+import { RedirectComponent } from './components/redirect/redirect.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { RemoveOldPipe } from './pipes/remove-old.pipe';
     CompareComponent,
     DamageGraphComponent,
     CompareSaveComponent,
-    RemoveOldPipe
+    RemoveOldPipe,
+    RedirectComponent
   ],
   imports: [
     AppRoutingModule,

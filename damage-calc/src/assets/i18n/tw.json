@@ -789,7 +789,12 @@
         "ml_kayron_flash_slash": "閃光斬",
         "sez_encroach": "蠶食",
         "zio_disappear": "灰飛煙滅",
-        "harsettiWarning": "赫爾賽蒂的技能3描述說，它具有HP的擴展，但是乘數似乎還不包括它，因此她的技能3傷害可能是不正確的，直到我們知道她的HP縮放。"
+        "harsettiWarning": "赫爾賽蒂的技能3描述說，它具有HP的擴展，但是乘數似乎還不包括它，因此她的技能3傷害可能是不正確的，直到我們知道她的HP縮放。",
+        "redirectHeader": "沒有Active Beta可用！",
+        "redirectText": "E7CALC當前沒有活動的Beta！您將自動重定向到 ",
+        "redirectCountdown1": "如果您沒有自動重定向",
+        "redirectCountdown2": "秒，單擊",
+        "redirectCountdown3": "這裡"
 },
     "titles": {
         "epic_7": "第七史詩",

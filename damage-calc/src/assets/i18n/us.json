@@ -836,7 +836,12 @@
     "zio_disappear": "Disappear",
     "speed_tuner_instructions": "To use the speed tuner, input the current speed of your slower and/or faster unit, as well as any Combat Readiness increase that will be applied.\nThe tuner will calculate how the units' speeds need to be adjusted to guarantee turn order.\n\nIn Faster Unit Pushes mode, set the speed of the slower and/or faster unit and the CR push to calculate the speed needed for the slower unit to move next.",
     "damageCalculatorUpdates": "Sep 12 2024 Update: E7Calc 2.0 (finally) officially out of Beta! Also added Revna, Fenris, Harsetti, and Renewed Will, and updated Judge Kise with Balance Patch changes.\n\nPlease reach out to me if you find any bugs! @tyopoyt on Discord or Reddit.",
-    "harsettiWarning": "Harsetti's Skill 3 description says that it has HP scaling, but the multiplier does not yet seem to include it, so her Skill 3 damage here will probably be incorrect until we know her HP scaling."
+    "harsettiWarning": "Harsetti's Skill 3 description says that it has HP scaling, but the multiplier does not yet seem to include it, so her Skill 3 damage here will probably be incorrect until we know her HP scaling.",
+    "redirectHeader": "No active Beta is available!",
+    "redirectText": "There is not currently an active beta available for E7Calc!  You will be automatically redirected to ",
+    "redirectCountdown1": "If you are not automatically redirected in",
+    "redirectCountdown2": "seconds, click",
+    "redirectCountdown3": "here"
   },
   "titles": {
     "app_title": "E7Calc",

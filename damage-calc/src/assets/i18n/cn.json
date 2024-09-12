@@ -781,7 +781,12 @@
         "ml_kayron_flash_slash": "闪光斩",
         "sez_encroach": "蚕食",
         "zio_disappear": "灰飞烟灭",
-        "harsettiWarning": "Harsetti的技能3描述说，它具有HP的扩展，但是乘数似乎还不包括它，因此她的技能3伤害可能是不正确的，直到我们知道她的HP缩放。"
+        "harsettiWarning": "Harsetti的技能3描述说，它具有HP的扩展，但是乘数似乎还不包括它，因此她的技能3伤害可能是不正确的，直到我们知道她的HP缩放。",
+        "redirectHeader": "没有Active Beta可用！",
+        "redirectText": "E7CALC当前没有活动的Beta！您将自动重定向到 ",
+        "redirectCountdown1": "如果您没有自动重定向",
+        "redirectCountdown2": "秒，单击",
+        "redirectCountdown3": "这里"
 },
     "titles": {
         "epic_7": "第七史诗",

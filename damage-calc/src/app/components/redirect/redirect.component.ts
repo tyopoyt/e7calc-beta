@@ -26,11 +26,13 @@ export class RedirectComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // initialize language with param from url
     let langParam = this.route.snapshot.paramMap.get('lang') || 'us';
+  
     if (langParam.startsWith('zh')) {
       langParam = langParam.replace('zh', '').toLowerCase();
-    }else if (langParam.startsWith('pt')) {
+    } else if (langParam.startsWith('pt')) {
       langParam = langParam.replace('pt', '').toLowerCase();
     }
+  
     this.languageService.setLanguage(Languages[langParam]);
     this.redirectURL = `https://e7calc.xyz/${langParam === 'us' ? '' : langParam  + '/'}`;
     this.redirectText = `${this.redirectText}${this.redirectURL}`

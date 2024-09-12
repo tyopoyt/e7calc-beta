@@ -322,6 +322,12 @@ export const FormDefaults: Record<string, {max?: number, min?: number, defaultVa
         defaultValue: 0,
         step: 1
     },
+    casterPromotionStack: {
+        max: 6,
+        min: 0,
+        defaultValue: 0,
+        step: 1
+    },
     criticalHitStack: {
         max: 50,
         min: 0,
@@ -443,6 +449,7 @@ export class DamageFormData {
     casterDefenseUp: boolean;
     casterDefenseDown: boolean;
     casterElementalWisdomStack: number;
+    casterPromotionStack: number;
     casterEnraged: boolean;
     casterFocus: number;
     casterFullFightingSpirit: boolean;
@@ -579,6 +586,7 @@ export class DamageFormData {
         this.casterDefenseDown = _.get(data, 'casterDefenseDown', false);
         this.casterEnraged = _.get(data, 'casterEnraged', false);
         this.casterElementalWisdomStack = _.get(data, 'casterElementalWisdomStack', 0);
+        this.casterPromotionStack = _.get(data, 'casterPromotionStack', 0);
         this.casterFocus = _.get(data, 'casterFocus', 0);
         this.casterFullFightingSpirit = _.get(data, 'casterFullFightingSpirit', false);
         this.casterFightingSpirit = _.get(data, 'casterFightingSpirit', 0);

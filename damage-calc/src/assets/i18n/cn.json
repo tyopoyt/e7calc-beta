@@ -253,6 +253,7 @@
         "requiem_roana": "鎮魂的羅安納",
         "requiemroar": "雷奎姆洛",
         "researcher_carrot": "研究者卡萝",
+        "revna": "蕾芙娜",
         "righteous_thief_roozid": "义贼鲁兹德",
         "rikoris": "里科黎司",
         "rima": "黎玛",
@@ -382,6 +383,7 @@
         "sigurd_scythe": "席格勒赛斯",
         "spear_of_a_new_dawn": "开辟之枪",
         "spear_of_purification": "破邪之矛",
+        "special_strawberry_cake": "特別的草莓蛋糕",
         "star_of_the_deep_sea": "深海漂浮之星",
         "sword_of_cycling_seasons": "循環之劍",
         "sword_of_summer_twilight": "夏夜闪刀",
@@ -625,6 +627,7 @@
         "penetrationResistance": "穿透性抗性（％）",
         "casterBelow30PercentHP": "施法者低于30％HP",
         "casterElementalWisdomStack": "元素智慧堆栈",
+        "casterPromotionStack": "升级堆栈",
         "targetAttackUp": "目标增加了攻击",
         "targetAttackDown": "目标减少了攻击",
         "targetAttackUpGreat": "目标增加了攻击（伟大）",
@@ -777,8 +780,9 @@
         "s2_splash": "S2飞溅",
         "ml_kayron_flash_slash": "闪光斩",
         "sez_encroach": "蚕食",
-        "zio_disappear": "灰飞烟灭"
-    },
+        "zio_disappear": "灰飞烟灭",
+        "harsettiWarning": "Harsetti的技能3描述说，它具有HP的扩展，但是乘数似乎还不包括它，因此她的技能3伤害可能是不正确的，直到我们知道她的HP缩放。"
+},
     "titles": {
         "epic_7": "第七史诗",
         "damage_calculator": "伤害计算器",

@@ -69,7 +69,12 @@ export class DamageService {
     let mult = 0.0;
   
     this.dataService.attackModifiers.forEach((mod) => {
-      mult += this.damageForm[mod as keyof DamageFormData] ? BattleConstants[mod] - 1 : 0.0;
+      if (!mod.endsWith('Stack')) {
+        mult += this.damageForm[mod as keyof DamageFormData] ? BattleConstants[mod] - 1 : 0.0;
+      } else {
+        const attackModStack = this.damageForm[mod as keyof DamageFormData];
+        mult += attackModStack ? BattleConstants[mod] * (attackModStack as number) : 0.0;
+      }
     });
   
     return mult + (this.damageForm.attackIncreasePercent / 100);

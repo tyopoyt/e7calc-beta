@@ -6,7 +6,7 @@
         <!-- Hero/arti/preset selector row -->
         <div class="filter-select-container full-width neat-container" [ngClass]="!screenService.mediumSmallScreen.value ? 'column-3' : 'flex-column'">
             <mat-form-field class="neat-container has-icons-3">
-                <img class="png-icon medium tiny-margin-right select-icon" src="assets/heroes/{{dataService.currentHeroID.value}}-icon.png" alt="{{dataService.currentHeroID.value}} portrait">
+                <img class="png-icon medium tiny-margin-right select-icon" src="assets/heroes/{{heroID | removeOld}}-icon.png" alt="{{dataService.currentHeroID.value}} portrait">
                 <img class="png-icon medium tiny-margin-right select-icon-2" src="assets/elements/{{hero.element}}.png" alt="{{hero.element}}">
                 <img class="png-icon medium tiny-margin-right select-icon-3" src="assets/classes/{{hero.class}}.png" alt="{{hero.class}}">
                 <mat-select [formControl]="heroControl" placeholder="" #singleSelect (selectionChange)="selectHero($event.value)">
@@ -14,7 +14,7 @@
                         <ngx-mat-select-search spellcheck="false" [formControl]="heroFilterControl" placeholderLabel="Find hero..."></ngx-mat-select-search>
                     </mat-option>
                     <mat-option *ngFor="let hero of filteredHeroes" class="has-icons-3" [value]="hero[0]">
-                        <img class="png-icon medium tiny-margin-right select-option-icon" src="assets/heroes/{{hero[0]}}-icon.png" alt="{{hero[0]}} portrait">
+                        <img class="png-icon medium tiny-margin-right select-option-icon" src="assets/heroes/{{hero[0] | removeOld}}-icon.png" alt="{{hero[0]}} portrait">
                         <img class="png-icon medium tiny-margin-right select-option-icon-2" src="assets/elements/{{hero[1].element}}.png" alt="{{hero[1].element}}">
                         <img class="png-icon medium tiny-margin-right select-option-icon-3" src="assets/classes/{{hero[1].class}}.png" alt="{{hero[1].class}}">
                         {{hero[0] | translate:'heroes':languageService.language.value}}

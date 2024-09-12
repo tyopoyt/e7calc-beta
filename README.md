@@ -8,6 +8,9 @@ To test your translation locally, there is a hidden option to load a custom tran
 
 ## Changelog
 
+### <strong>Sep 12 2024 Update:</strong>
+- E7Calc 2.0 officially out of Beta! (finally...)
+- Also added Revna, Fenris, Harsetti, and Renewed Will, and updated Judge Kise with Balance Patch changes.
 ### <strong>Aug 17 2024 Update:</strong>
 - Added Frida.
 - Fixed some bugs with Penetration Resistance. Still need to do some testing in-game as it's probably not totally correct at the moment.

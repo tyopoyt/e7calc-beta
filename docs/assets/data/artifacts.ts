@@ -339,6 +339,13 @@ export const Artifacts: Record<string, Artifact> = {
     exclusive: HeroClass.ranger,
     applies: (skill: Skill, inputValues: DamageFormData) => skill.isAOE(inputValues)
   }),
+  renewed_will: new Artifact({
+    id: 'renewed_will',
+    name: 'Renewed Will',
+    type: ArtifactDamageType.attack,
+    exclusive: HeroClass.ranger,
+    scale: [0.05, 0.055, 0.06, 0.065, 0.07, 0.075, 0.08, 0.085, 0.09, 0.095, 0.1],
+  }),
   rocket_punch_gauntlet: new Artifact({
     id: 'rocket_punch_gauntlet',
     name: 'Rocket Punch Gauntlet',
@@ -385,6 +392,12 @@ export const Artifacts: Record<string, Artifact> = {
       if (inputValues.casterCurrentHPPercent < 75) return artiScale * 0.66;
       return artiScale * 0.5;
     }
+  }),
+  special_strawberry_cake: new Artifact({
+    id: 'special_strawberry_cake',
+    name: 'Special Strawberry Cake',
+    value: () => 0.2,
+    type: ArtifactDamageType.damage
   }),
   sigurd_scythe: new Artifact({
     id: 'sigurd_scythe',

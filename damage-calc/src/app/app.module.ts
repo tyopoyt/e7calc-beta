@@ -41,6 +41,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { DamageGraphComponent } from './components/damage-graph/damage-graph.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { CompareSaveComponent } from './components/compare-save/compare-save.component';
+import { RemoveOldPipe } from './pipes/remove-old.pipe';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { CompareSaveComponent } from './components/compare-save/compare-save.com
     TypeofPipe,
     CompareComponent,
     DamageGraphComponent,
-    CompareSaveComponent
+    CompareSaveComponent,
+    RemoveOldPipe
   ],
   imports: [
     AppRoutingModule,
